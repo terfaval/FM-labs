@@ -1,0 +1,236 @@
+# PORTFOLIO CONTENT PACK
+
+## META
+
+title: FM-Space
+role: researcher – toolmaker
+language: hu
+
+tagline:
+Kutatásból épített felfedező rendszerek.
+
+intro:
+Az FM-Space különböző területeken létrehozott digitális rendszerek gyűjteménye.
+Minden projekt egy személyes kutatás eredménye: egy téma feltérképezése, majd egy olyan eszközzé alakítása, amely nem csak információt ad vissza, hanem felfedezhetővé teszi azt.
+
+A projektek eltérő témákkal foglalkoznak, de hasonló módon épülnek fel: strukturált tartalom, átgondolt rendszer és egy felfedezésre épülő használat.
+
+about:
+Személyes érdeklődésekből indulok ki, és ezek köré építek rendszereket.
+Különböző témákat térképezek fel, majd ezekből használható eszközöket hozok létre.
+A cél minden esetben ugyanaz: az információ ne csak elérhető, hanem bejárható legyen.
+
+collaboration:
+Nyitott vagyok együttműködésekre meglévő projektek továbbfejlesztésében, illetve új rendszerek közös kialakításában.
+
+---
+
+## FEATURED PROJECTS
+
+---
+
+### lumira
+
+title: Lumira
+
+hero:
+Vezetett álomfeldolgozó rendszer, amely a nyers élményt egy strukturált, bejárható reflektív folyamattá alakítja.
+
+card:
+Személyes alkalmazás álom- és élményjegyzetek feldolgozására, vezetett session-alapú flow-val.
+
+what:
+A Lumira egy belső használatú rendszer, amely álomjegyzetek feldolgozását támogatja. A felhasználó nem egy üres felületen ír, hanem egy vezetett térben halad: a rendszer lépésről lépésre viszi végig a nyers bejegyzéstől a strukturált reflektálásig.
+A működés a keretezés, irányválasztás és feldolgozás egymásra épülő lépéseire épül.
+
+use:
+Akkor használható, amikor egy élményt nem csak rögzíteni, hanem megérteni és újra feldolgozni is szeretnél. Segít a nyers jegyzetből strukturált gondolatokat és visszatérhető mintákat kialakítani.
+
+features:
+
+* Keretező és irányajánló rendszer
+* Kártya-alapú, vezetett feldolgozási flow
+* Strukturált reflexiós lépések
+* Rövid esti gyakorlatok
+* Személyes álomszótár és mintakövetés
+
+unique:
+Nem naplóként működik, hanem feldolgozó térként. A hangsúly a lépésenként vezetett folyamaton van, amely a nyers élményt értelmezhető struktúrává alakítja. A használat ritmusa tudatosan lassabb, közelít egy rituális működéshez.
+
+status:
+Aktív, használatban lévő prototípus – A fő feldolgozási flow stabilan működik.
+
+direction:
+
+* A fő felhasználói flow további tisztítása és egyszerűsítése
+* Fortune journaling modul bevezetése az önismereti eszköztár bővítésére
+* Lucid dreaming coach rendszer kialakítása
+* A reflektív lépések finomhangolása mélyebb, visszatérhető feldolgozáshoz
+
+---
+
+### szarnyfeszito
+
+title: Szárnyfeszítő
+
+hero:
+Útikalauz szárnyaló kalandoroknak azoknak, akik szeretnének közelebb kerülni a madarak világához, de nem tudják, hol érdemes elindulni. 
+
+card:
+Madármegfigyelést segítő rendszer, amely egy bejárható térként mutatja meg a fajokat és helyszíneket.
+
+what:
+A Szárnyfeszítő egy publikus webes rendszer, amely madárfajokat és megfigyelési helyszíneket szervez egy könnyen bejárható struktúrába.
+Nem adatbázisként működik, hanem egy olyan térként, ahol a felhasználó felfedezheti, hogy egy adott helyen és időszakban milyen madarakkal találkozhat.
+
+use:
+Kirándulás vagy madárles előtt gyors tájékozódásra használható. Segít eldönteni, hova érdemes menni, és mire lehet számítani. Kezdőknek belépési pontot ad, haladóknak rendszerezett áttekintést.
+
+features:
+
+* Madárfajok részletes, kártya-alapú bemutatása
+* Megfigyelési helyszínek térképes nézetekkel
+* Szezonális ajánlások és kiemelések
+* Dashboard alapú felfedezés
+* Kurált, ellenőrzött tartalom
+
+unique:
+A rendszer mögött kontrollált szerkesztés áll, nem automatikus adatgyűjtés. A hangsúly a jó belépési pontokon és a felfedezhetőségen van, nem az adatmennyiségen.
+
+status:
+Aktív, publikus rendszer – A fő felületek működnek, a tartalom folyamatosan bővül.
+
+direction:
+
+* Szezonális vonulásokhoz kapcsolódó tartalmak bővítése
+* Aktív felhasználói bázis építése és valós természetfotók integrálása
+* Gamifikált, nem versengő „tollgyűjtő” rendszer kialakítása
+* Madárfigyelő live modul fejlesztése (megfigyelések rögzítése, helyszín + faj)
+* Távlati bővítés: további határozók (pl. gombahatározó)
+
+---
+
+## OTHER PROJECTS
+
+---
+
+### mirachai
+
+title: Mirachai
+
+hero:
+Hangulat-alapú teafelfedező rendszer, amely egy vizuális, navigálható térként szervezi a teák világát.
+
+card:
+Digitális teagyűjtemény, ahol az ízek, hatások és elkészítési módok összefüggő rendszerben jelennek meg.
+
+what:
+A Mirachai egy webes rendszer, amely egy strukturált tea-adatbázist alakít át felfedezhető térré.
+A felhasználó nem listákban keres, hanem egy többdimenziós térben navigál, ahol az ízprofilok, hatások és elkészítési módok egymással összefüggésben jelennek meg.
+
+use:
+Segít új teák felfedezésében és kiválasztásában hangulat, napszak vagy ízprofil alapján. Inspirációra és tudatos választásra egyaránt használható.
+
+features:
+
+* Strukturált tearecept-adatbázis
+* Hangulat és hatás alapú navigáció
+* Vizuális böngészés kapcsolatok mentén
+* Lépésről lépésre vezetett elkészítési módok
+* Többdimenziós szűrőrendszer
+
+unique:
+Nem katalógusként működik, hanem egy összefüggő felfedező térként, ahol a kapcsolatok legalább olyan fontosak, mint az egyes elemek.
+
+status:
+Fejlett prototípus – A fő logika és felületek működnek.
+
+direction:
+
+* Interaktív funkciók (kedvencek, mentés, összehasonlítás)
+* Dinamikusabb adatkezelés vagy admin felület
+* A vizuális tér további mélyítése (kapcsolatok, ajánlások finomítása)
+* Mobil élmény finomhangolása
+
+---
+
+### novira
+
+title: Novira
+
+hero:
+Webalapú irodalmi műhely, amely klasszikus szövegek modernizálását egy kontrollált, bejárható munkafolyamattá alakítja.
+
+card:
+Digitális szerkesztői rendszer, ahol az eredeti és a modernizált szöveg párhuzamosan kezelhető.
+
+what:
+A Novira egy blokk-alapú szerkesztői rendszer, amely klasszikus szövegek feldolgozását támogatja.
+A szöveg nem egyben jelenik meg, hanem feldolgozható egységekre bontva, ahol az eredeti és az átírt változat egymás mellett kezelhető. A felhasználó egy lépésről lépésre haladó folyamatban navigál végig a szövegen.
+
+use:
+Olyan helyzetekben használható, amikor klasszikus vagy nehezen olvasható szövegeket kell modernizálni úgy, hogy a jelentés és a stílus megmaradjon.
+
+features:
+
+* Könyvek importja
+* Blokk-alapú szerkesztő párhuzamos szövegkezeléssel
+* Lépéses validációs folyamat
+* Jegyzetek és kiemelések blokk-szinten
+* Végigvihető modernizálási workflow
+
+unique:
+Nem automatikus átírásra épít, hanem szerkesztői kontrollra. A folyamat átlátható, lineáris és visszakövethető.
+
+status:
+Korai működő demó
+
+direction:
+
+* Export funkciók befejezése és stabilizálása
+* Finomabb szerkesztői workflow és verziókezelés
+* Több felhasználós együttműködés
+* Jegyzetek és annotációk továbbfejlesztése
+* A validációs folyamat rugalmasabbá tétele
+
+---
+
+### kincstarto
+
+title: Kincstartó
+
+hero:
+Személyes rendszer, amely a könyvek, jóga és meditáció mentén egy egységes, bejárható belső teret hoz létre.
+
+card:
+Kurált tartalomrendszer a belső gyakorlás és önreflexió támogatására.
+
+what:
+A Kincstartó egy személyes, tartalom-alapú rendszer, amely különböző forrásokat és gyakorlatokat egy egységes struktúrába rendez.
+A könyvek, mozgásformák és meditációk nem különálló elemekként jelennek meg, hanem egy összefüggő rendszerként, amelyben a felhasználó visszatérhet, navigálhat és építkezhet.
+
+use:
+Önreflexióhoz és gyakorláshoz használható. Segít rendszerezni a tanultakat, visszatérni korábbi tartalmakhoz, és fenntartani egy következetes gyakorlási ritmust.
+
+features:
+
+* Könyvgyűjtemény kurált jegyzetekkel
+* Jóga gyakorlatok és videós tartalmak rendszere
+* Időzített, olvasható meditációs tér
+* Egységes struktúra különböző tartalomtípusokhoz
+* Folyamatosan bővíthető rendszer
+
+unique:
+Nem általános tartalomplatform, hanem egy személyes használatra épített rendszer, ahol a különböző területek egymást erősítik. A hangsúly a tudatos visszatérésen és használaton van.
+
+status:
+Folyamatosan formálódó rendszer
+
+direction:
+
+* Tartalom folyamatos bővítése (könyvek, jóga gyakorlatok, meditációk)
+* Új modulok lehetőségének nyitva tartása
+* A meglévő struktúra finomhangolása a jobb átláthatóság érdekében
+* A különböző tartalomtípusok közötti kapcsolatok erősítése
+
+---
