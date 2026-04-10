@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Roboto, Rubik } from "next/font/google";
 import "./globals.css";
 
-const kincstartoBody = localFont({
-  src: "./fonts/Roboto-VariableFont_wdth,wght.ttf",
+const kincstartoBody = Roboto({
+  subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
-  weight: "100 900",
-  style: "normal"
+  weight: ["100", "300", "400", "500", "700", "900"],
+  style: "normal",
 });
 
-const kincstartoDisplay = localFont({
-  src: "./fonts/Rubik-VariableFont_wght.ttf",
+const kincstartoDisplay = Rubik({
+  subsets: ["latin"],
   variable: "--font-heading",
   display: "swap",
-  weight: "600 900",
-  style: "normal"
+  weight: ["600", "700", "800", "900"],
+  style: "normal",
 });
 
 export const metadata: Metadata = {
