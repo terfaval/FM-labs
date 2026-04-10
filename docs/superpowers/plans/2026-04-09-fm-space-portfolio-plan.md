@@ -1,4 +1,4 @@
-# FM-Space Portfolio App v0 Implementation Plan
+ï»¿# FM-Space Portfolio App v0 Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -124,7 +124,8 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    environment: "node"
+    environment: ""node"",
+    passWithNoTests: true
   }
 });
 ```
@@ -137,12 +138,12 @@ Expected: packages installed, no errors.
 - [ ] **Step 7: Run test runner (no tests yet)**
 
 Run: `npm run test`
-Expected: PASS with 0 tests.
+Expected: PASS with 0 tests (via `passWithNoTests: true`).
 
 - [ ] **Step 8: Commit**
 
 ```bash
-git add package.json tsconfig.json next.config.mjs next-env.d.ts vitest.config.ts
+git add package.json package-lock.json tsconfig.json next.config.mjs next-env.d.ts vitest.config.ts
 
 git commit -m "chore: scaffold next.js app" 
 ```
@@ -818,7 +819,7 @@ export default function HomePage() {
     <main>
       <SiteHeader meta={content.meta} />
 
-      <SectionBlock title="Bemutatkozás">
+      <SectionBlock title="Bemutatkozï¿½s">
         <p>{content.meta.about}</p>
       </SectionBlock>
 
@@ -830,7 +831,7 @@ export default function HomePage() {
         </div>
       </SectionBlock>
 
-      <SectionBlock title="További projektek">
+      <SectionBlock title="Tovï¿½bbi projektek">
         <div className="project-grid">
           {kincstarto && (
             <ProjectCard project={kincstarto} full />
@@ -843,7 +844,7 @@ export default function HomePage() {
         </div>
       </SectionBlock>
 
-      <SectionBlock title="Együttmûködés">
+      <SectionBlock title="Egyï¿½ttmï¿½kï¿½dï¿½s">
         <CollaborationBlock meta={content.meta} />
       </SectionBlock>
     </main>
@@ -896,7 +897,7 @@ export default function ProjectPage({
   return (
     <main>
       <Link href="/" className="back-link">
-        Vissza a fõoldalra
+        Vissza a fï¿½oldalra
       </Link>
       <h1 className="hero-title">{project.title}</h1>
       <p>{project.hero}</p>
@@ -906,7 +907,7 @@ export default function ProjectPage({
         {renderParagraphs(project.what)}
       </SectionBlock>
 
-      <SectionBlock title="Mire való?">
+      <SectionBlock title="Mire valï¿½?">
         {renderParagraphs(project.use)}
       </SectionBlock>
 
@@ -922,11 +923,11 @@ export default function ProjectPage({
         {renderParagraphs(project.unique)}
       </SectionBlock>
 
-      <SectionBlock title="Állapot">
+      <SectionBlock title="ï¿½llapot">
         {renderParagraphs(project.status)}
       </SectionBlock>
 
-      <SectionBlock title="Fejlõdési irányok">
+      <SectionBlock title="Fejlï¿½dï¿½si irï¿½nyok">
         <ul>
           {project.direction.map((item) => (
             <li key={item}>{item}</li>

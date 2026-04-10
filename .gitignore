@@ -1,0 +1,8 @@
+.worktrees/
+node_modules
+.next/
+.merge-backup-20260409-201629
+.merge-backup-*
+app/fonts/
+next
+.merge-backup-*

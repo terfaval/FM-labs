@@ -2,7 +2,7 @@
 
 ## META
 
-title: FM-Space
+title: FM-Labs
 role: researcher – toolmaker
 language: hu
 
@@ -10,7 +10,7 @@ tagline:
 Kutatásból épített felfedező rendszerek.
 
 intro:
-Az FM-Space különböző területeken létrehozott digitális rendszerek gyűjteménye.
+Az FM-Labs különböző területeken létrehozott digitális rendszerek gyűjteménye.
 Minden projekt egy személyes kutatás eredménye: egy téma feltérképezése, majd egy olyan eszközzé alakítása, amely nem csak információt ad vissza, hanem felfedezhetővé teszi azt.
 
 A projektek eltérő témákkal foglalkoznak, de hasonló módon épülnek fel: strukturált tartalom, átgondolt rendszer és egy felfedezésre épülő használat.
@@ -74,7 +74,7 @@ direction:
 title: Szárnyfeszítő
 
 hero:
-Útikalauz szárnyaló kalandoroknak azoknak, akik szeretnének közelebb kerülni a madarak világához, de nem tudják, hol érdemes elindulni. 
+Útikalauz szárnyaló kalandoroknak, akik szeretnének közelebb kerülni a madarak világához, de nem tudják, hol érdemes elindulni. 
 
 card:
 Madármegfigyelést segítő rendszer, amely egy bejárható térként mutatja meg a fajokat és helyszíneket.
@@ -159,7 +159,7 @@ direction:
 title: Novira
 
 hero:
-Webalapú irodalmi műhely, amely klasszikus szövegek modernizálását egy kontrollált, bejárható munkafolyamattá alakítja.
+Webalapú irodalmi műhely, amely klasszikus szövegek modernizálását egy kontrollált munkafolyamattá alakítja.
 
 card:
 Digitális szerkesztői rendszer, ahol az eredeti és a modernizált szöveg párhuzamosan kezelhető.
