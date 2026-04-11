@@ -149,30 +149,49 @@ export function ProjectGallery({
   rest,
 }: ProjectGalleryProps) {
   const [selected, setSelected] = useState<Project | null>(null);
+  const lumira = topFeatured.find((project) => project.slug === "lumira");
+  const topFeaturedRest = topFeatured.filter(
+    (project) => project.slug !== "lumira"
+  );
 
   return (
     <>
       <SectionBlock title="Kiemelt projektek">
-        {topFeatured.length > 0 && (
-          <div className="project-grid two">
-            {topFeatured.map((project) => (
-              <ProjectCard
-                key={project.slug}
-                project={project}
-                featured
-                onSelect={setSelected}
-              />
-            ))}
+        {lumira ? (
+          <div className="project-grid">
+            <ProjectCard
+              key={lumira.slug}
+              project={lumira}
+              featured
+              full
+              featuredLayout
+              onSelect={setSelected}
+            />
           </div>
-        )}
-        {kincstarto && (
+        ) : null}
+        {kincstarto ? (
           <div className="project-grid">
             <ProjectCard
               project={kincstarto}
               featured
               full
+              featuredLayout
               onSelect={setSelected}
             />
+          </div>
+        ) : null}
+        {topFeaturedRest.length > 0 && (
+          <div className="project-grid">
+            {topFeaturedRest.map((project) => (
+              <ProjectCard
+                key={project.slug}
+                project={project}
+                featured
+                full
+                featuredLayout
+                onSelect={setSelected}
+              />
+            ))}
           </div>
         )}
         <div className="project-grid two">

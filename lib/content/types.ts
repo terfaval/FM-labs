@@ -5,6 +5,8 @@ export type Meta = {
   tagline: string;
   intro: string;
   about: string;
+  approach: string;
+  approachItems: string[];
   collaboration: string;
 };
 

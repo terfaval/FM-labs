@@ -8,11 +8,25 @@ function renderParagraphs(text: string) {
 
 export function SiteHeader({ meta }: { meta: Meta }) {
   return (
-    <section className="section">
-      <h1 className="hero-title">{meta.title}</h1>
-      <div className="hero-role">{meta.role}</div>
-      <p>{meta.tagline}</p>
-      {renderParagraphs(meta.intro)}
+    <section className="section site-header">
+      <div className="site-header__brand">
+        <img
+          className="site-header__photo"
+          src="/personal/Slide3.JPG"
+          alt="Portré"
+        />
+        <img
+          className="site-header__photo-mark"
+          src="/fm-labs_logo.svg"
+          alt=""
+          aria-hidden="true"
+        />
+      </div>
+      <div className="site-header__intro">
+        <div className="site-header__title">{meta.title}</div>
+        <p className="site-header__tagline">{meta.tagline}</p>
+        {renderParagraphs(meta.intro)}
+      </div>
     </section>
   );
 }

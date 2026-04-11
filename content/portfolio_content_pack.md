@@ -2,23 +2,28 @@
 
 ## META
 
-title: FM-Labs
-role: researcher – toolmaker
+title: Fatér Máté
+role: researcher - tool builder
 language: hu
 
 tagline:
-Kutatásból épített felfedező rendszerek.
+Digitális rendszerek tervezése és építése
 
 intro:
-Az FM-Labs különböző területeken létrehozott digitális rendszerek gyűjteménye.
-Minden projekt egy személyes kutatás eredménye: egy téma feltérképezése, majd egy olyan eszközzé alakítása, amely nem csak információt ad vissza, hanem felfedezhetővé teszi azt.
-
-A projektek eltérő témákkal foglalkoznak, de hasonló módon épülnek fel: strukturált tartalom, átgondolt rendszer és egy felfedezésre épülő használat.
+Komplex témákból olyan bejárható, felfedezhető digitális eszközöket hozok létre,  amelyek nem csak információt adnak vissza, hanem bejárhatóvá és felfedezhetővé teszik azt.
 
 about:
-Személyes érdeklődésekből indulok ki, és ezek köré építek rendszereket.
-Különböző témákat térképezek fel, majd ezekből használható eszközöket hozok létre.
-A cél minden esetben ugyanaz: az információ ne csak elérhető, hanem bejárható legyen.
+Személyes érdeklődésekből indulok ki, és ezek köré építek rendszereket. A cél nem pusztán az információ rendszerezése, hanem annak újraformálása olyan módon, hogy a felhasználó ne csak hozzáférjen, hanem aktívan felfedezze és értelmezze azt. Az AI a teljes folyamat része — az ötlettől a rendszertervezésen át a megvalósításig — lehetővé téve, hogy egy gondolat gyorsan működő digitális eszközzé alakuljon.
+
+approach:
+Minden projekt ugyanarra az alapstruktúrára épül:
+
+* Kutatás – a téma feltérképezése és rendszerezése
+* Strukturálás – a tartalom mikro és makro szintű tagolása
+* Téralkotás – az információ bejárható rendszerként való megjelenítése
+* Flow tervezés – a felhasználói felfedezés irányítása, de nem korlátozása
+
+Az eredmény nem egy statikus adatbázis, hanem egy dinamikus, felfedezésre épülő rendszer.
 
 collaboration:
 Nyitott vagyok együttműködésekre meglévő projektek továbbfejlesztésében, illetve új rendszerek közös kialakításában.
@@ -34,10 +39,10 @@ Nyitott vagyok együttműködésekre meglévő projektek továbbfejlesztésében
 title: Lumira
 
 hero:
-Vezetett álomfeldolgozó rendszer, amely a nyers élményt egy strukturált, bejárható reflektív folyamattá alakítja.
+A Lumira egy olyan felület, amely az álmok rögzítését és feldolgozását egyetlen folyamattá kapcsolja össze. A nyers jegyzettől az irányválasztáson át a kérdésalapú továbbhaladásig úgy épül fel, hogy az álom ne csak eltárolva legyen, hanem fokozatosan feltárhatóvá váljon.
 
 card:
-Személyes alkalmazás álom- és élményjegyzetek feldolgozására, vezetett session-alapú flow-val.
+Egy egyszerű eszköz álmaid rögzítéséhez és visszanézéséhez. Nem fejt meg helyetted semmit: inkább segít észrevenni, mi maradt meg, és ad egy kíméletes keretet, ha szeretnél továbbmenni. Használhatod reggel pár mondatra, vagy este rövid hangolásként — a saját tempódban.
 
 what:
 A Lumira egy belső használatú rendszer, amely álomjegyzetek feldolgozását támogatja. A felhasználó nem egy üres felületen ír, hanem egy vezetett térben halad: a rendszer lépésről lépésre viszi végig a nyers bejegyzéstől a strukturált reflektálásig.
@@ -58,7 +63,7 @@ unique:
 Nem naplóként működik, hanem feldolgozó térként. A hangsúly a lépésenként vezetett folyamaton van, amely a nyers élményt értelmezhető struktúrává alakítja. A használat ritmusa tudatosan lassabb, közelít egy rituális működéshez.
 
 status:
-Aktív, használatban lévő prototípus – A fő feldolgozási flow stabilan működik.
+Aktív, használatban lévő prototípus
 
 direction:
 
@@ -98,7 +103,7 @@ unique:
 A rendszer mögött kontrollált szerkesztés áll, nem automatikus adatgyűjtés. A hangsúly a jó belépési pontokon és a felfedezhetőségen van, nem az adatmennyiségen.
 
 status:
-Aktív, publikus rendszer – A fő felületek működnek, a tartalom folyamatosan bővül.
+Aktív, publikus rendszer
 
 direction:
 

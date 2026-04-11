@@ -7,6 +7,7 @@ const META_KEYS = [
   "tagline",
   "intro",
   "about",
+  "approach",
   "collaboration"
 ] as const;
 
@@ -50,8 +51,8 @@ function parseKeyValues(lines: string[]): Record<string, FieldValue> {
 
     while (i < lines.length && !isKeyLine(lines[i])) {
       const current = lines[i];
-      if (/^\s*\*\s+/.test(current)) {
-        listItems.push(current.replace(/^\s*\*\s+/, "").trim());
+      if (/^\s*\*\s*/.test(current)) {
+        listItems.push(current.replace(/^\s*\*\s*/, "").trim());
       } else {
         collected.push(current);
       }
@@ -72,6 +73,8 @@ function parseMetaBlock(lines: string[]): Meta {
   for (const key of META_KEYS) {
     meta[key] = values[key]?.value ?? "";
   }
+
+  meta.approachItems = values.approach?.list ?? [];
 
   return meta as Meta;
 }
