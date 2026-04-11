@@ -1,4 +1,6 @@
 import { loadContent } from "@/lib/content/loadContent";
+import { loadLumiraModalContent } from "@/lib/content/lumiraModal";
+import { buildLumiraModalModel } from "@/lib/content/lumiraModalModel";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SectionBlock } from "@/components/SectionBlock";
 import { CollaborationBlock } from "@/components/CollaborationBlock";
@@ -6,6 +8,7 @@ import { ProjectGallery } from "@/components/ProjectGallery";
 
 export default function HomePage() {
   const content = loadContent();
+  const lumiraModal = buildLumiraModalModel(loadLumiraModalContent());
 
   const featured = content.featuredProjects;
   const other = content.otherProjects;
@@ -25,7 +28,7 @@ export default function HomePage() {
     <main>
       <SiteHeader meta={content.meta} />
 
-      <SectionBlock title="BemutatkozÃ¡s">
+      <SectionBlock title="Bemutatkozás">
         <p>{content.meta.about}</p>
       </SectionBlock>
 
@@ -34,9 +37,10 @@ export default function HomePage() {
         kincstarto={kincstarto}
         featuredRest={featuredRest}
         rest={rest}
+        lumiraModal={lumiraModal}
       />
 
-      <SectionBlock title="EgyÃ¼ttmÅ±kÃ¶dÃ©s">
+      <SectionBlock title="Együttmûködés">
         <CollaborationBlock meta={content.meta} />
       </SectionBlock>
     </main>
