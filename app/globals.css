@@ -823,3 +823,153 @@ strong {
     font-size: 32px;
   }
 }
+
+/* Lumira narrative modal */
+.lumira-modal {
+  display: grid;
+  gap: 96px;
+  padding: 24px 0 32px;
+}
+
+.lumira-modal__brand {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+  display: grid;
+  gap: 12px;
+}
+
+.lumira-modal__brand img {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto;
+  filter: brightness(0) invert(1);
+}
+
+.lumira-modal__brand-name,
+.lumira-modal__brand-tagline {
+  font-family: var(--font-lumira), var(--font-heading), "Segoe UI", system-ui, sans-serif;
+  font-weight: 400;
+  color: rgba(245, 248, 252, 0.95);
+}
+
+.lumira-modal__brand-name {
+  font-size: 32px;
+  text-transform: lowercase;
+}
+
+.lumira-modal__brand-tagline {
+  font-size: 18px;
+}
+
+.lumira-modal__centered {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 1.7;
+}
+
+.lumira-modal__split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px;
+  align-items: center;
+}
+
+.lumira-modal__split-image img {
+  width: 100%;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(12, 18, 26, 0.25);
+  transform: scale(1.04);
+}
+
+.lumira-modal__split-text {
+  text-align: center;
+  display: grid;
+  gap: 12px;
+}
+
+.lumira-modal__overline {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: rgba(245, 248, 252, 0.65);
+}
+
+.lumira-modal__caption {
+  font-size: 14px;
+  color: rgba(245, 248, 252, 0.7);
+}
+
+.lumira-modal__mood {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 300;
+  color: rgba(245, 248, 252, 0.8);
+}
+
+.lumira-modal__icon-grid {
+  text-align: center;
+  display: grid;
+  gap: 24px;
+}
+
+.lumira-modal__icon-grid-items {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.lumira-modal__icon-card {
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+  color: rgba(245, 248, 252, 0.85);
+}
+
+.lumira-modal__icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.lumira-modal__next {
+  text-align: center;
+  display: grid;
+  gap: 24px;
+}
+
+.lumira-modal__next-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.lumira-modal__next-card {
+  border-radius: 16px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px rgba(12, 18, 26, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.lumira-modal__next-card:hover {
+  transform: translateY(-4px);
+}
+
+@media (max-width: 900px) {
+  .lumira-modal__split {
+    grid-template-columns: 1fr;
+  }
+
+  .lumira-modal__split-image {
+    order: -1;
+  }
+
+  .lumira-modal__icon-grid-items,
+  .lumira-modal__next-cards {
+    grid-template-columns: 1fr;
+  }
+}
