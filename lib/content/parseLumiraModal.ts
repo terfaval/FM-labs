@@ -2,18 +2,20 @@ import { LumiraModalContent } from "./lumiraModalTypes";
 
 type SectionMap = Record<string, string[]>;
 
+type BlockMap = Record<string, SectionMap>;
+
 function normalizeLines(input: string) {
   return input.replace(/\r\n/g, "\n").split("\n");
 }
 
-function collectSections(lines: string[]) {
-  const blocks: Record<string, SectionMap> = {};
+function collectSections(lines: string[]): BlockMap {
+  const blocks: BlockMap = {};
   let currentBlock = "";
   let currentKey = "";
 
   for (const raw of lines) {
     const line = raw.trimEnd();
-    const blockMatch = line.match(/^##\s+Block\s+\d+\s+–\s+(.+)$/);
+    const blockMatch = line.match(/^##\s+Block\s+(\d+)\s+(?:–|â€“|-)\s+(.+)$/);
     if (blockMatch) {
       currentBlock = blockMatch[1].trim();
       blocks[currentBlock] = {};
@@ -58,17 +60,17 @@ function parseIconItems(map: SectionMap, prefix: "Item" | "Card") {
 
 export function parseLumiraModal(input: string): LumiraModalContent {
   const blocks = collectSections(normalizeLines(input));
-  const hero = blocks["Hero"] ?? {};
-  const kiindulo = blocks["Kiinduló szöveg"] ?? {};
-  const rogzites = blocks["Flow / Rögzítés"] ?? {};
-  const keret = blocks["Flow / Keret és irány"] ?? {};
-  const feldolgozas = blocks["Flow / Feldolgozás"] ?? {};
-  const visszateres = blocks["Flow / Visszatérés"] ?? {};
-  const elokeszites = blocks["Flow / Elõkészítés"] ?? {};
-  const mood = blocks["Mood block"] ?? {};
-  const principles = blocks["Mûködési elv"] ?? {};
-  const nextDirections = blocks["Következõ irányok"] ?? {};
-  const closing = blocks["Záró szöveg"] ?? {};
+  const hero = blocks["1"] ?? {};
+  const kiindulo = blocks["2"] ?? {};
+  const rogzites = blocks["3"] ?? {};
+  const keret = blocks["4"] ?? {};
+  const mood = blocks["5"] ?? {};
+  const feldolgozas = blocks["6"] ?? {};
+  const principles = blocks["7"] ?? {};
+  const visszateres = blocks["8"] ?? {};
+  const elokeszites = blocks["9"] ?? {};
+  const nextDirections = blocks["10"] ?? {};
+  const closing = blocks["11"] ?? {};
 
   return {
     hero: {
@@ -114,7 +116,7 @@ export function parseLumiraModal(input: string): LumiraModalContent {
     },
     mood: {
       first: joinText(mood["Body"] ?? []),
-      second: joinText((blocks["Mood block #2"] ?? {})["Body"] ?? []),
+      second: "",
     },
     principles: {
       title: joinText(principles["Title"] ?? []),

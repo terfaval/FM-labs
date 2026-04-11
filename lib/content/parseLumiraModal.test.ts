@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { loadLumiraModalContent } from "./lumiraModal";
 import { parseLumiraModal } from "./parseLumiraModal";
 
 const SAMPLE = `
@@ -79,5 +80,13 @@ describe("parseLumiraModal", () => {
     expect(content.flow.rogzites.caption).toBe("Flow caption.");
     expect(content.principles.items).toHaveLength(3);
     expect(content.nextDirections.cards[0].title).toBe("Álomszótár");
+  });
+});
+
+describe("loadLumiraModalContent", () => {
+  it("loads the lumira modal content from disk", () => {
+    const content = loadLumiraModalContent();
+    expect(content.hero.eyebrow.length).toBeGreaterThan(0);
+    expect(content.kiindulo.body.length).toBeGreaterThan(0);
   });
 });
