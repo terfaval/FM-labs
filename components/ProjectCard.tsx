@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+﻿import type { CSSProperties } from "react";
 import { Project } from "@/lib/content/types";
 import { projectVisuals } from "@/lib/content/projectVisuals";
 
@@ -8,7 +8,7 @@ export function ProjectCard({
   full,
   panel,
   featuredLayout,
-  onSelect
+  onSelect,
 }: {
   project: Project;
   featured?: boolean;
@@ -29,6 +29,10 @@ export function ProjectCard({
 
   const panelClass =
     panel && project.slug === "lumira" ? " panel--lumira" : "";
+  const splitClass =
+    featuredLayout && project.slug === "kincstarto"
+      ? " project-card__split--reverse"
+      : "";
 
   return (
     <button
@@ -61,7 +65,7 @@ export function ProjectCard({
           </div>
         </div>
       ) : featuredLayout ? (
-        <div className="project-card__split">
+        <div className={`project-card__split${splitClass}`}>
           <div className="project-card__brand-col">
             {visual ? (
               <img

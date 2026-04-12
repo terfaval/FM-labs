@@ -1,4 +1,4 @@
-import { loadContent } from "@/lib/content/loadContent";
+ï»¿import { loadContent } from "@/lib/content/loadContent";
 import { loadLumiraModalContent } from "@/lib/content/lumiraModal";
 import { buildLumiraModalModel } from "@/lib/content/lumiraModalModel";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -73,7 +73,7 @@ export default function HomePage() {
         lumiraModal={lumiraModal}
       />
 
-      <SectionBlock title="Együttmûködés">
+      <SectionBlock title="EgyÃ¼ttmÅ±kÃ¶dÃ©s" id="egyuttmukodes">
         <CollaborationBlock meta={content.meta} />
       </SectionBlock>
     </main>

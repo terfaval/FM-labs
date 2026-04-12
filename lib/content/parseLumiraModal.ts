@@ -1,4 +1,4 @@
-import { LumiraModalContent } from "./lumiraModalTypes";
+﻿import { LumiraModalContent } from "./lumiraModalTypes";
 
 type SectionMap = Record<string, string[]>;
 
@@ -15,7 +15,7 @@ function collectSections(lines: string[]): BlockMap {
 
   for (const raw of lines) {
     const line = raw.trimEnd();
-    const blockMatch = line.match(/^##\s+Block\s+(\d+)\s+(?:�|–|-)\s+(.+)$/);
+    const blockMatch = line.match(/^##\s+Block\s+(\d+)\s+(?:–|â€“|-)\s+(.+)$/);
     if (blockMatch) {
       currentBlock = blockMatch[1].trim();
       blocks[currentBlock] = {};

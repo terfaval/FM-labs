@@ -1,4 +1,4 @@
-import React from "react";
+ï»¿import React from "react";
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
 import { LumiraModalNarrative } from "./LumiraModalNarrative";
@@ -7,13 +7,13 @@ import { loadLumiraModalContent } from "../../lib/content/lumiraModal";
 import { buildLumiraModalModel } from "../../lib/content/lumiraModalModel";
 
 const MODEL: LumiraModalModel = {
-  brand: { logo: "/lumira/logo.svg", name: "lumira", tagline: "Csendes technológia" },
+  brand: { logo: "/lumira/logo.svg", name: "lumira", tagline: "Csendes technolÃ³gia" },
   kiindulo: { title: "Honnan indult", body: "Kiindulo" },
   mood: { first: "Mood 1", second: "Mood 2" },
   flowSections: [
     {
-      overline: "01 · Rögzítés",
-      title: "Az elsõ lépés",
+      overline: "01 Â· RÃ¶gzÃ­tÃ©s",
+      title: "Az elsÅ‘ lÃ©pÃ©s",
       body: "Body",
       caption: "Caption",
       imageSrc: "/lumira/screens/raw input.PNG",
@@ -21,9 +21,9 @@ const MODEL: LumiraModalModel = {
       imageSide: "right",
     },
   ],
-  principles: { title: "Mûködési elv", intro: "Intro", items: [] },
-  nextDirections: { title: "Következõ irányok", intro: "Intro", cards: [] },
-  closing: { body: "Záró" },
+  principles: { title: "MÅ±kÃ¶dÃ©si elv", intro: "Intro", items: [] },
+  nextDirections: { title: "KÃ¶vetkezÅ‘ irÃ¡nyok", intro: "Intro", cards: [] },
+  closing: { body: "ZÃ¡rÃ³" },
 };
 
 describe("LumiraModalNarrative", () => {
@@ -31,7 +31,7 @@ describe("LumiraModalNarrative", () => {
     const html = renderToStaticMarkup(<LumiraModalNarrative model={MODEL} />);
     expect(html).toContain("lumira");
     expect(html).toContain("Honnan indult");
-    expect(html).toContain("Az elsõ lépés");
+    expect(html).toContain("Az elsÅ‘ lÃ©pÃ©s");
   });
 
   it("builds a model from the real content file", () => {

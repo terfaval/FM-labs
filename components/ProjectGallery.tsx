@@ -1,4 +1,4 @@
-"use client";
+ï»¿"use client";
 
 import type { CSSProperties } from "react";
 import { useEffect, useState } from "react";
@@ -74,9 +74,9 @@ function ProjectModal({
               className="project-modal__close"
               type="button"
               onClick={onClose}
-              aria-label="Bezárás"
+              aria-label="BezÃ¡rÃ¡s"
             >
-              ×
+              Ã—
             </button>
           </div>
 
@@ -106,7 +106,7 @@ function ProjectModal({
                 </div>
               </div>
 
-              <SectionBlock title="Mire való?">
+              <SectionBlock title="Mire valÃ³?">
                 {renderParagraphs(project.use)}
               </SectionBlock>
 
@@ -122,11 +122,11 @@ function ProjectModal({
                 {renderParagraphs(project.unique)}
               </SectionBlock>
 
-              <SectionBlock title="Állapot">
+              <SectionBlock title="Ãllapot">
                 {renderParagraphs(project.status)}
               </SectionBlock>
 
-              <SectionBlock title="Fejlõdési irányok">
+              <SectionBlock title="FejlÅ‘dÃ©si irÃ¡nyok">
                 <ul
                   className="project-modal__grid project-modal__grid--dynamic"
                   style={directionStyle}
@@ -164,39 +164,19 @@ export function ProjectGallery({
 }: ProjectGalleryProps) {
   const [selected, setSelected] = useState<Project | null>(null);
   const lumira = topFeatured.find((project) => project.slug === "lumira");
-  const topFeaturedRest = topFeatured.filter(
-    (project) => project.slug !== "lumira"
+  const szarnyfeszito = topFeatured.find(
+    (project) => project.slug === "szarnyfeszito"
   );
+  const featuredOrder = [lumira, kincstarto, szarnyfeszito].filter(
+    Boolean
+  ) as Project[];
 
   return (
     <>
-      <SectionBlock title="Kiemelt projektek">
-        {lumira ? (
-          <div className="project-grid">
-            <ProjectCard
-              key={lumira.slug}
-              project={lumira}
-              featured
-              full
-              featuredLayout
-              onSelect={setSelected}
-            />
-          </div>
-        ) : null}
-        {kincstarto ? (
-          <div className="project-grid">
-            <ProjectCard
-              project={kincstarto}
-              featured
-              full
-              featuredLayout
-              onSelect={setSelected}
-            />
-          </div>
-        ) : null}
-        {topFeaturedRest.length > 0 && (
-          <div className="project-grid">
-            {topFeaturedRest.map((project) => (
+      <SectionBlock title="Kiemelt projektek" id="kiemelt-projektek">
+        {featuredOrder.length > 0 && (
+          <div className="project-grid featured-stack">
+            {featuredOrder.map((project) => (
               <ProjectCard
                 key={project.slug}
                 project={project}
@@ -208,19 +188,21 @@ export function ProjectGallery({
             ))}
           </div>
         )}
-        <div className="project-grid two">
-          {featuredRest.map((project) => (
-            <ProjectCard
-              key={project.slug}
-              project={project}
-              featured
-              onSelect={setSelected}
-            />
-          ))}
-        </div>
+        {featuredRest.length > 0 && (
+          <div className="project-grid two">
+            {featuredRest.map((project) => (
+              <ProjectCard
+                key={project.slug}
+                project={project}
+                featured
+                onSelect={setSelected}
+              />
+            ))}
+          </div>
+        )}
       </SectionBlock>
 
-      <SectionBlock title="További projektek">
+      <SectionBlock title="TovÃ¡bbi projektek">
         <div className="project-grid two">
           {rest.map((project) => (
             <ProjectCard

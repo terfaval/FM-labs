@@ -1,4 +1,4 @@
-import { LumiraModalContent } from "./lumiraModalTypes";
+ï»¿import { LumiraModalContent } from "./lumiraModalTypes";
 
 export type ImageSide = "left" | "right";
 
@@ -27,31 +27,31 @@ export function buildLumiraModalModel(content: LumiraModalContent): LumiraModalM
     {
       ...content.flow.rogzites,
       imageSrc: "/lumira/screens/raw input.PNG",
-      imageAlt: "Rögzítés képernyõ",
+      imageAlt: "RÃ¶gzÃ­tÃ©s kÃ©pernyÅ‘",
       imageSide: "right",
     },
     {
       ...content.flow.keret,
       imageSrc: "/lumira/screens/direction.PNG",
-      imageAlt: "Keret és irány képernyõ",
+      imageAlt: "Keret Ã©s irÃ¡ny kÃ©pernyÅ‘",
       imageSide: "left",
     },
     {
       ...content.flow.feldolgozas,
       imageSrc: "/lumira/screens/question.PNG",
-      imageAlt: "Feldolgozás képernyõ",
+      imageAlt: "FeldolgozÃ¡s kÃ©pernyÅ‘",
       imageSide: "right",
     },
     {
       ...content.flow.visszateres,
       imageSrc: "/lumira/screens/dream list.PNG",
-      imageAlt: "Visszatérés képernyõ",
+      imageAlt: "VisszatÃ©rÃ©s kÃ©pernyÅ‘",
       imageSide: "left",
     },
     {
       ...content.flow.elokeszites,
       imageSrc: "/lumira/screens/exercises.PNG",
-      imageAlt: "Elõkészítés képernyõ",
+      imageAlt: "ElÅ‘kÃ©szÃ­tÃ©s kÃ©pernyÅ‘",
       imageSide: "right",
     },
   ];
