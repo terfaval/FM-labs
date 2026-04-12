@@ -50,7 +50,9 @@ export function loadKincstartoModalContent(): KincstartoModalContent {
     return { ...item, icon: icons.shift() ?? "bookmark" };
   });
 
-  const nextDirections = parseListItems(nextDirectionsBlock);
+  const nextDirections = parseListItems(nextDirectionsBlock).filter(
+    (card) => card.title !== "Jóga tudástér mélyítése"
+  );
 
   return {
     brand: { tagline },
