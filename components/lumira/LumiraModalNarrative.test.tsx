@@ -40,4 +40,15 @@ describe("LumiraModalNarrative", () => {
     expect(model.brand.tagline.length).toBeGreaterThan(0);
     expect(model.flowSections).toHaveLength(5);
   });
+
+  it("renders two Fedezd fel CTAs", () => {
+    const html = renderToStaticMarkup(<LumiraModalNarrative model={MODEL} />);
+    const matches = html.match(/Fedezd fel/g) ?? [];
+    expect(matches).toHaveLength(2);
+  });
+
+  it("adds image-right class when imageSide is right", () => {
+    const html = renderToStaticMarkup(<LumiraModalNarrative model={MODEL} />);
+    expect(html).toContain("lumira-modal__split--image-right");
+  });
 });
