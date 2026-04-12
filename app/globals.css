@@ -470,7 +470,7 @@ p {
   margin: 0;
   color: #008acc;
   font-weight: 700;
-  font-size: 26px;
+  font-size: 22px;
   line-height: 1.2;
 }
 
@@ -1136,6 +1136,33 @@ strong {
 .kincstarto-modal--dark-text .lumira-modal__brand-name,
 .kincstarto-modal--dark-text .lumira-modal__brand-tagline {
   font-family: var(--font-body), "Segoe UI", system-ui, sans-serif;
+}
+
+.kincstarto-modal__image-group {
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+  align-items: center;
+  align-self: center;
+}
+
+.kincstarto-modal__image {
+  width: 88%;
+  max-width: 420px;
+  border-radius: 16px;
+  box-shadow: 0 16px 32px rgba(12, 18, 26, 0.18);
+}
+
+.kincstarto-modal__image--secondary {
+  width: 76%;
+}
+
+.kincstarto-modal__pair--image-right .kincstarto-modal__image--secondary {
+  transform: translate(-28px, 22px);
+}
+
+.kincstarto-modal__pair--image-left .kincstarto-modal__image--secondary {
+  transform: translate(28px, 22px);
 }
 
 @media (max-width: 900px) {

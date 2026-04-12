@@ -55,12 +55,23 @@ export function KincstartoModalNarrative({ model }: { model: KincstartoModalMode
           key={section.title}
           className={cx(
             "lumira-modal__split",
-            section.imageSide === "right" && "lumira-modal__split--image-right"
+            section.imageSide === "right" && "lumira-modal__split--image-right",
+            section.imageSide === "right"
+              ? "kincstarto-modal__pair--image-right"
+              : "kincstarto-modal__pair--image-left"
           )}
         >
-          <div className="lumira-modal__split-image">
-            <img src={section.imageSrcs[0]} alt={section.imageAlt} />
-            <img src={section.imageSrcs[1]} alt={section.imageAlt} />
+          <div className="lumira-modal__split-image kincstarto-modal__image-group">
+            <img
+              className="kincstarto-modal__image kincstarto-modal__image--primary"
+              src={section.imageSrcs[0]}
+              alt={section.imageAlt}
+            />
+            <img
+              className="kincstarto-modal__image kincstarto-modal__image--secondary"
+              src={section.imageSrcs[1]}
+              alt={section.imageAlt}
+            />
           </div>
           <div className="lumira-modal__split-text">
             <h3>{section.title}</h3>
