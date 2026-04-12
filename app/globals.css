@@ -1163,7 +1163,7 @@ strong {
 }
 
 .kincstarto-modal__image--secondary {
-  width: 18%;
+  width: 33%;
   position: static;
   z-index: 0;
 }
@@ -1176,6 +1176,10 @@ strong {
 .kincstarto-modal__pair--image-left .kincstarto-modal__image--secondary {
   align-self: flex-end;
   transform: none;
+}
+
+.kincstarto-modal .lumira-modal__split {
+  gap: 56px;
 }
 
 .kincstarto-modal__section-icon {
