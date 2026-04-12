@@ -865,7 +865,7 @@ p {
   color: #fff;
   font-weight: 600;
   text-decoration: none;
-  box-shadow: 0 14px 28px rgba(58, 168, 154, 0.25);
+  box-shadow: 0 14px 28px color-mix(in srgb, var(--cta-from, #3aa89a) 55%, transparent);
 }
 
 .project-modal__cta {
