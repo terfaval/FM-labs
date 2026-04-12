@@ -25,7 +25,7 @@ export function KincstartoModalNarrative({ model }: { model: KincstartoModalMode
   );
 
   return (
-    <div className="lumira-modal kincstarto-modal">
+    <div className="lumira-modal kincstarto-modal kincstarto-modal--dark-text">
       <section className="lumira-modal__brand">
         <img src={model.brand.logo} alt="Kincstartó logo" />
         <div className="lumira-modal__brand-name">{model.brand.name}</div>

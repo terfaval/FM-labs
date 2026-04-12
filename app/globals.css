@@ -1118,6 +1118,26 @@ strong {
   transform: translateY(-4px);
 }
 
+.kincstarto-modal--dark-text,
+.kincstarto-modal--dark-text .lumira-modal__brand-name,
+.kincstarto-modal--dark-text .lumira-modal__brand-tagline,
+.kincstarto-modal--dark-text .lumira-modal__icon-card,
+.kincstarto-modal--dark-text .lumira-modal__icon,
+.kincstarto-modal--dark-text .lumira-modal__mood,
+.kincstarto-modal--dark-text h3,
+.kincstarto-modal--dark-text p {
+  color: #1f1c19;
+}
+
+.kincstarto-modal--dark-text .lumira-modal__brand img {
+  filter: none;
+}
+
+.kincstarto-modal--dark-text .lumira-modal__brand-name,
+.kincstarto-modal--dark-text .lumira-modal__brand-tagline {
+  font-family: var(--font-body), "Segoe UI", system-ui, sans-serif;
+}
+
 @media (max-width: 900px) {
   .lumira-modal__split {
     grid-template-columns: 1fr;
