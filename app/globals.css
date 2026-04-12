@@ -1147,22 +1147,22 @@ strong {
 }
 
 .kincstarto-modal__image {
-  width: 88%;
-  max-width: 420px;
+  width: 70%;
+  max-width: 380px;
   border-radius: 16px;
   box-shadow: 0 16px 32px rgba(12, 18, 26, 0.18);
 }
 
 .kincstarto-modal__image--secondary {
-  width: 76%;
+  width: 35%;
 }
 
 .kincstarto-modal__pair--image-right .kincstarto-modal__image--secondary {
-  transform: translate(-28px, 22px);
+  transform: translate(-40%, 30%);
 }
 
 .kincstarto-modal__pair--image-left .kincstarto-modal__image--secondary {
-  transform: translate(28px, 22px);
+  transform: translate(40%, 30%);
 }
 
 @media (max-width: 900px) {
