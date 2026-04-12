@@ -703,6 +703,7 @@ p {
 
 .project-modal--lumira {
   color: rgba(245, 248, 252, 0.92);
+  border: none;
 }
 
 .project-modal--lumira h1,
