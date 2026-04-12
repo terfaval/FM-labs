@@ -63,7 +63,11 @@ export function ProjectCard({
           </div>
         </div>
       ) : featuredLayout ? (
-        <div className="project-card__split">
+        <div
+          className={`project-card__split${
+            project.slug === "kincstarto" ? " project-card__split--reverse" : ""
+          }`}
+        >
           <div className="project-card__brand-col">
             {visual ? (
               <img

@@ -257,8 +257,12 @@ p {
   gap: 32px;
 }
 
-.project-card--kincstarto .project-card__split {
-  grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+.project-card__split--reverse .project-card__brand-col {
+  order: 2;
+}
+
+.project-card__split--reverse .project-card__content {
+  order: 1;
 }
 
 .project-card__split--reverse .project-card__brand-col {
@@ -687,7 +691,7 @@ p {
   background-image:
     linear-gradient(
       90deg,
-      rgba(18, 26, 38, 0.24) 0%,
+      rgba(18, 26, 38, 0.44) 0%,
       rgba(18, 26, 38, 0.3) 40%,
       rgba(18, 26, 38, 0.56) 70%,
       rgba(18, 26, 38, 0.78) 100%
