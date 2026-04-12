@@ -55,6 +55,12 @@ function ProjectModal({
         "--card-bg": 'url("/lumira/background.png")',
       } as CSSProperties)
     : style;
+  const kincstartoStyle = isKincstarto
+    ? ({
+        ...style,
+        "--card-bg": 'url("/kincstarto/modal_background.png")',
+      } as CSSProperties)
+    : style;
   const directionStyle = {
     gridTemplateColumns: `repeat(${project.direction.length}, minmax(0, 1fr))`,
   };
@@ -73,8 +79,8 @@ function ProjectModal({
   return (
     <div className="modal-backdrop" onClick={onClose} role="presentation">
       <div
-        className={`project-modal${isLumira ? " project-modal--lumira" : ""}`}
-        style={lumiraStyle}
+        className={`project-modal${isLumira ? " project-modal--lumira" : ""}${isKincstarto ? " project-modal--kincstarto" : ""}`}
+        style={isLumira ? lumiraStyle : isKincstarto ? kincstartoStyle : style}
         onClick={(event) => event.stopPropagation()}
         role="dialog"
         aria-modal="true"
