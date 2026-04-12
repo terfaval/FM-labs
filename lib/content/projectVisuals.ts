@@ -46,7 +46,7 @@ export const projectVisuals: Record<
     ctaTo: "#9fb3e4",
   },
   kincstarto: {
-    background: "/kincstarto/day_default.png",
+    background: "/kincstarto/card_background.png",
     logo: "/kincstarto/logo.svg",
     overlay:
       "linear-gradient(135deg, rgba(250, 236, 214, 0.9), rgba(219, 182, 130, 0.68))",
