@@ -28,7 +28,7 @@ export function buildLumiraModalModel(content: LumiraModalContent): LumiraModalM
       ...content.flow.rogzites,
       imageSrc: "/lumira/screens/raw input.PNG",
       imageAlt: "Rögzítés képernyő",
-      imageSide: "right",
+      imageSide: "left",
     },
     {
       ...content.flow.keret,
@@ -40,7 +40,7 @@ export function buildLumiraModalModel(content: LumiraModalContent): LumiraModalM
       ...content.flow.feldolgozas,
       imageSrc: "/lumira/screens/question.PNG",
       imageAlt: "Feldolgozás képernyő",
-      imageSide: "right",
+      imageSide: "left",
     },
     {
       ...content.flow.visszateres,
@@ -52,7 +52,7 @@ export function buildLumiraModalModel(content: LumiraModalContent): LumiraModalM
       ...content.flow.elokeszites,
       imageSrc: "/lumira/screens/exercises.PNG",
       imageAlt: "Előkészítés képernyő",
-      imageSide: "right",
+      imageSide: "left",
     },
   ];
 
