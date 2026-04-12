@@ -115,3 +115,11 @@ A task is complete when:
 Clarity over cleverness.  
 Structure over features.  
 Content over code.
+
+---
+
+## Agent Preferences (User-Requested)
+
+- Work directly on `main` (no git worktrees).
+- Do not use live coding URLs.
+- Do not use subagents.
