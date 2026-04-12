@@ -19,14 +19,16 @@ Improve the Lumira modal’s visual readability and consistency with the Lumira 
 - Modal background image: `public/lumira/background.png`.
 - Overlay: reuse the Lumira card overlay gradients (same as `.project-card--lumira-glass`).
 - Overlay sits above the background image and below content.
+- Make the overlay **~20–30% more transparent** (reduce opacity across both gradient layers) to let the background PNG show through.
 
 ### 2) Typography / Color
 - All text in the Lumira modal is white / near-white.  
 - Keep existing hierarchy (hero, captions, etc.), but ensure colors are white or off-white.
 
 ### 3) Split Sections (flow layout)
+- For blocks **01**, **03**, **05**: image on the left, text on the right (desktop).  
 - For blocks **02** and **04**: text on the left, image on the right.  
-- Keep the general alternation elsewhere unchanged.
+- Mobile: image first, text second for all split sections.
 
 ### 4) CTAs
 - Add a **“Fedezd fel”** CTA to:
@@ -38,6 +40,8 @@ Improve the Lumira modal’s visual readability and consistency with the Lumira 
 ## Acceptance Criteria
 - Lumira modal uses `public/lumira/background.png` and the Lumira card overlay gradients.
 - All Lumira modal text renders in white/near-white.
+- Flow blocks 01/03/05: image left, text right (desktop).
 - Flow blocks 02 and 04: text left, image right.
+- Mobile: image first.
 - CTAs appear in header and closing blocks, centered, with realistic spacing, and open the correct URL.
 - No changes to non-Lumira modals.
