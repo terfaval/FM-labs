@@ -19,7 +19,10 @@ Improve the Lumira modal’s visual readability and consistency with the Lumira 
 - Modal background image: `public/lumira/background.png`.
 - Overlay: reuse the Lumira card overlay gradients (same as `.project-card--lumira-glass`).
 - Overlay sits above the background image and below content.
-- Make the overlay **~20–30% more transparent** (reduce opacity across both gradient layers) to let the background PNG show through.
+- Make the overlay **~20–25% darker than the Lumira card** (increase opacity across both gradient layers), while still allowing the background PNG to show.
+
+### 1b) Modal Chrome
+- Remove the **white border** from the Lumira modal only.
 
 ### 2) Typography / Color
 - All text in the Lumira modal is white / near-white.  
@@ -43,5 +46,6 @@ Improve the Lumira modal’s visual readability and consistency with the Lumira 
 - Flow blocks 01/03/05: image left, text right (desktop).
 - Flow blocks 02 and 04: text left, image right.
 - Mobile: image first.
+- Lumira modal has **no white border**.
 - CTAs appear in header and closing blocks, centered, with realistic spacing, and open the correct URL.
 - No changes to non-Lumira modals.
