@@ -31,11 +31,10 @@ Refine Kincstartó modal typography, colors, image composition, and CTA glow whi
 
 ### 3) Image Pair Composition (Split Sections)
 - Two images are **grouped** and **vertically centered** in the split block.
-- Images slightly **smaller** than full width.
-- If image column is **right**: second image is **down-left** and **smaller**.
-- If image column is **left**: second image is **down-right** and **smaller**.
-- **Overlap amount:** ~60% (secondary overlaps primary by about 60%).
-- **Secondary size:** ~50% of the primary width.
+- Use a **main image + small thumbnail** layout to avoid visual clutter.
+- Primary image stays dominant; secondary becomes a small corner thumbnail.
+- If image column is **right**: thumbnail sits at **bottom-right** of the primary.
+- If image column is **left**: thumbnail sits at **bottom-left** of the primary.
 
 ### 3b) Project Card Proportions
 - Kincstartó featured card uses the **same split proportions as Lumira** (text column width matches Lumira).
