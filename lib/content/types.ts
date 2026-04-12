@@ -28,3 +28,4 @@ export type ContentPack = {
   featuredProjects: Project[];
   otherProjects: Project[];
 };
+export type KincstartoModalModel = import("./kincstartoModalModel").KincstartoModalModel;
