@@ -672,6 +672,51 @@ p {
   z-index: 0;
 }
 
+.project-modal--lumira::before {
+  background-image: var(--card-bg);
+}
+
+.project-modal--lumira::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(18, 26, 38, 0.28) 0%,
+      rgba(18, 26, 38, 0.32) 40%,
+      rgba(18, 26, 38, 0.6) 70%,
+      rgba(18, 26, 38, 0.85) 100%
+    ),
+    radial-gradient(
+      circle at 70% 55%,
+      rgba(140, 190, 235, 0.18) 0%,
+      rgba(140, 190, 235, 0.08) 40%,
+      rgba(140, 190, 235, 0) 70%
+    );
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.project-modal--lumira {
+  color: rgba(245, 248, 252, 0.92);
+}
+
+.project-modal--lumira h1,
+.project-modal--lumira h2,
+.project-modal--lumira h3 {
+  color: rgba(245, 248, 252, 0.95);
+}
+
+.project-modal--lumira .project-modal__close {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(12, 18, 26, 0.4);
+}
+
 .project-modal > * {
   position: relative;
   z-index: 1;
@@ -826,6 +871,11 @@ p {
   margin-bottom: 24px;
 }
 
+.lumira-modal__cta {
+  margin-top: 22px;
+  justify-self: center;
+}
+
 .project-card.panel .project-card__cta {
   margin: 8px 0 0;
   align-self: flex-start;
@@ -976,6 +1026,14 @@ strong {
   align-items: center;
 }
 
+.lumira-modal__split--image-right .lumira-modal__split-image {
+  order: 2;
+}
+
+.lumira-modal__split--image-right .lumira-modal__split-text {
+  order: 1;
+}
+
 .lumira-modal__split-image img {
   width: 100%;
   border-radius: 18px;
@@ -1066,6 +1124,11 @@ strong {
 
   .lumira-modal__split-image {
     order: -1;
+  }
+
+  .lumira-modal__split--image-right .lumira-modal__split-image,
+  .lumira-modal__split--image-right .lumira-modal__split-text {
+    order: 0;
   }
 
   .lumira-modal__icon-grid-items,

@@ -43,6 +43,12 @@ function ProjectModal({
         "--cta-to": visual.ctaTo,
       } as CSSProperties)
     : undefined;
+  const lumiraStyle = isLumira
+    ? ({
+        ...style,
+        "--card-bg": 'url("/lumira/background.png")',
+      } as CSSProperties)
+    : style;
   const directionStyle = {
     gridTemplateColumns: `repeat(${project.direction.length}, minmax(0, 1fr))`,
   };
@@ -61,8 +67,8 @@ function ProjectModal({
   return (
     <div className="modal-backdrop" onClick={onClose} role="presentation">
       <div
-        className="project-modal"
-        style={style}
+        className={`project-modal${isLumira ? " project-modal--lumira" : ""}`}
+        style={lumiraStyle}
         onClick={(event) => event.stopPropagation()}
         role="dialog"
         aria-modal="true"
