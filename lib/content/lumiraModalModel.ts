@@ -34,7 +34,7 @@ export function buildLumiraModalModel(content: LumiraModalContent): LumiraModalM
       ...content.flow.keret,
       imageSrc: "/lumira/screens/direction.PNG",
       imageAlt: "Keret és irány képernyő",
-      imageSide: "left",
+      imageSide: "right",
     },
     {
       ...content.flow.feldolgozas,
@@ -46,7 +46,7 @@ export function buildLumiraModalModel(content: LumiraModalContent): LumiraModalM
       ...content.flow.visszateres,
       imageSrc: "/lumira/screens/dream list.PNG",
       imageAlt: "Visszatérés képernyő",
-      imageSide: "left",
+      imageSide: "right",
     },
     {
       ...content.flow.elokeszites,
