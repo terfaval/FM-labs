@@ -1158,11 +1158,11 @@ strong {
 }
 
 .kincstarto-modal__pair--image-right .kincstarto-modal__image--secondary {
-  transform: translate(-40%, 30%);
+  transform: translate(-60%, 35%);
 }
 
 .kincstarto-modal__pair--image-left .kincstarto-modal__image--secondary {
-  transform: translate(40%, 30%);
+  transform: translate(60%, 35%);
 }
 
 @media (max-width: 900px) {
