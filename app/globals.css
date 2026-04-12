@@ -257,6 +257,10 @@ p {
   gap: 32px;
 }
 
+.project-card--kincstarto .project-card__split {
+  grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+}
+
 .project-card__split--reverse .project-card__brand-col {
   order: 2;
 }
@@ -1163,6 +1167,12 @@ strong {
 
 .kincstarto-modal__pair--image-left .kincstarto-modal__image--secondary {
   transform: translate(60%, 35%);
+}
+
+.kincstarto-modal__section-icon {
+  width: 28px;
+  height: 28px;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 900px) {

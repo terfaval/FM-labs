@@ -29,10 +29,6 @@ export function ProjectCard({
 
   const panelClass =
     panel && project.slug === "lumira" ? " panel--lumira" : "";
-  const splitClass =
-    featuredLayout && project.slug === "kincstarto"
-      ? " project-card__split--reverse"
-      : "";
 
   return (
     <button
@@ -40,7 +36,9 @@ export function ProjectCard({
         full ? " full" : ""
       }${panel ? " panel" : ""}${panelClass}${
         featuredLayout ? " project-card--split" : ""
-      }${project.slug === "lumira" ? " project-card--lumira-glass" : ""}`}
+      }${project.slug === "lumira" ? " project-card--lumira-glass" : ""}${
+        project.slug === "kincstarto" ? " project-card--kincstarto" : ""
+      }`}
       type="button"
       style={style}
       onClick={() => onSelect?.(project)}
@@ -65,7 +63,7 @@ export function ProjectCard({
           </div>
         </div>
       ) : featuredLayout ? (
-        <div className={`project-card__split${splitClass}`}>
+        <div className="project-card__split">
           <div className="project-card__brand-col">
             {visual ? (
               <img

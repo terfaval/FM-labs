@@ -12,6 +12,12 @@ const iconMap: Record<string, React.ReactNode> = {
   compass: <Compass />,
 };
 
+const sectionIcons: Record<string, string> = {
+  "Könyvtár": "/kincstarto/icons/library.svg",
+  "Meditáció": "/kincstarto/icons/meditations.svg",
+  "Jóga": "/kincstarto/icons/yoga.svg",
+};
+
 export function KincstartoModalNarrative({ model }: { model: KincstartoModalModel }) {
   const cta = (
     <a
@@ -50,37 +56,48 @@ export function KincstartoModalNarrative({ model }: { model: KincstartoModalMode
         </div>
       </section>
 
-      {model.flowSections.map((section) => (
-        <section
-          key={section.title}
-          className={cx(
-            "lumira-modal__split",
-            section.imageSide === "right" && "lumira-modal__split--image-right",
-            section.imageSide === "right"
-              ? "kincstarto-modal__pair--image-right"
-              : "kincstarto-modal__pair--image-left"
-          )}
-        >
-          <div className="lumira-modal__split-image kincstarto-modal__image-group">
-            <img
-              className="kincstarto-modal__image kincstarto-modal__image--primary"
-              src={section.imageSrcs[0]}
-              alt={section.imageAlt}
-            />
-            <img
-              className="kincstarto-modal__image kincstarto-modal__image--secondary"
-              src={section.imageSrcs[1]}
-              alt={section.imageAlt}
-            />
-          </div>
-          <div className="lumira-modal__split-text">
-            <h3>{section.title}</h3>
-            {section.body.split(/\n\s*\n/).map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
-        </section>
-      ))}
+      {model.flowSections.map((section) => {
+        const iconSrc = sectionIcons[section.title];
+        return (
+          <section
+            key={section.title}
+            className={cx(
+              "lumira-modal__split",
+              section.imageSide === "right" && "lumira-modal__split--image-right",
+              section.imageSide === "right"
+                ? "kincstarto-modal__pair--image-right"
+                : "kincstarto-modal__pair--image-left"
+            )}
+          >
+            <div className="lumira-modal__split-image kincstarto-modal__image-group">
+              <img
+                className="kincstarto-modal__image kincstarto-modal__image--primary"
+                src={section.imageSrcs[0]}
+                alt={section.imageAlt}
+              />
+              <img
+                className="kincstarto-modal__image kincstarto-modal__image--secondary"
+                src={section.imageSrcs[1]}
+                alt={section.imageAlt}
+              />
+            </div>
+            <div className="lumira-modal__split-text">
+              {iconSrc ? (
+                <img
+                  className="kincstarto-modal__section-icon"
+                  src={iconSrc}
+                  alt=""
+                  aria-hidden="true"
+                />
+              ) : null}
+              <h3>{section.title}</h3>
+              {section.body.split(/\n\s*\n/).map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+          </section>
+        );
+      })}
 
       <section className="lumira-modal__mood">
         {model.mood.text.split(/\n/).map((line) => (
