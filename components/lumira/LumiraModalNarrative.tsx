@@ -17,10 +17,15 @@ function cx(...xs: Array<string | false | undefined>) {
 }
 
 function SplitSection({ section }: { section: FlowSectionModel }) {
-  const imageFirst = section.imageSide === "left";
+  const imageRight = section.imageSide === "right";
   return (
-    <section className="lumira-modal__split">
-      <div className={cx("lumira-modal__split-image", imageFirst && "is-first")}>
+    <section
+      className={cx(
+        "lumira-modal__split",
+        imageRight && "lumira-modal__split--image-right"
+      )}
+    >
+      <div className="lumira-modal__split-image">
         <img src={section.imageSrc} alt={section.imageAlt} />
       </div>
       <div className="lumira-modal__split-text">
@@ -123,12 +128,24 @@ function NextCards({
 }
 
 export function LumiraModalNarrative({ model }: { model: LumiraModalModel }) {
+  const cta = (
+    <a
+      className="project-modal__cta lumira-modal__cta"
+      href="https://lumira-sage.vercel.app"
+      target="_blank"
+      rel="noreferrer"
+    >
+      Fedezd fel
+    </a>
+  );
+
   return (
     <div className="lumira-modal">
       <section className="lumira-modal__brand">
         <img src={model.brand.logo} alt="Lumira logo" />
         <div className="lumira-modal__brand-name">{model.brand.name}</div>
         <div className="lumira-modal__brand-tagline">{model.brand.tagline}</div>
+        {cta}
       </section>
 
       <CenteredTextBlock title={model.kiindulo.title} body={model.kiindulo.body} />
@@ -152,6 +169,7 @@ export function LumiraModalNarrative({ model }: { model: LumiraModalModel }) {
       <NextCards {...model.nextDirections} />
 
       <CenteredTextBlock body={model.closing.body} />
+      {cta}
     </div>
   );
 }
