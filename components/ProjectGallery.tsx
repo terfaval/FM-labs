@@ -7,7 +7,9 @@ import { projectVisuals } from "@/lib/content/projectVisuals";
 import { ProjectCard } from "@/components/ProjectCard";
 import { SectionBlock } from "@/components/SectionBlock";
 import { LumiraModalNarrative } from "@/components/lumira/LumiraModalNarrative";
+import { KincstartoModalNarrative } from "@/components/kincstarto/KincstartoModalNarrative";
 import { LumiraModalModel } from "@/lib/content/lumiraModalModel";
+import { KincstartoModalModel } from "@/lib/content/kincstartoModalModel";
 
 type ProjectGalleryProps = {
   topFeatured: Project[];
@@ -15,6 +17,7 @@ type ProjectGalleryProps = {
   featuredRest: Project[];
   rest: Project[];
   lumiraModal?: LumiraModalModel | null;
+  kincstartoModal?: KincstartoModalModel | null;
 };
 
 function renderParagraphs(text: string) {
@@ -27,14 +30,17 @@ function ProjectModal({
   project,
   onClose,
   lumiraModal,
+  kincstartoModal,
 }: {
   project: Project;
   onClose: () => void;
   lumiraModal?: LumiraModalModel | null;
+  kincstartoModal?: KincstartoModalModel | null;
 }) {
   const visual = projectVisuals[project.slug];
   const isSzarnyfeszito = project.slug === "szarnyfeszito";
   const isLumira = project.slug === "lumira";
+  const isKincstarto = project.slug === "kincstarto";
   const style = visual
     ? ({
         "--card-bg": `url("${visual.background}")`,
@@ -88,6 +94,8 @@ function ProjectModal({
 
           {isLumira && lumiraModal ? (
             <LumiraModalNarrative model={lumiraModal} />
+          ) : isKincstarto && kincstartoModal ? (
+            <KincstartoModalNarrative model={kincstartoModal} />
           ) : (
             <>
               <div className="project-modal__header-block project-card__header project-card__header--split">
@@ -167,6 +175,7 @@ export function ProjectGallery({
   featuredRest,
   rest,
   lumiraModal,
+  kincstartoModal,
 }: ProjectGalleryProps) {
   const [selected, setSelected] = useState<Project | null>(null);
   const lumira = topFeatured.find((project) => project.slug === "lumira");
@@ -225,6 +234,7 @@ export function ProjectGallery({
           project={selected}
           onClose={() => setSelected(null)}
           lumiraModal={lumiraModal}
+          kincstartoModal={kincstartoModal}
         />
       )}
     </>
