@@ -1148,12 +1148,12 @@ strong {
   justify-items: center;
   align-items: center;
   align-self: center;
-  padding-bottom: 18%;
+  padding-bottom: 12%;
 }
 
 .kincstarto-modal__image {
-  width: 70%;
-  max-width: 380px;
+  width: 55%;
+  max-width: 320px;
   border-radius: 16px;
   box-shadow: 0 16px 32px rgba(12, 18, 26, 0.18);
 }
@@ -1164,9 +1164,9 @@ strong {
 }
 
 .kincstarto-modal__image--secondary {
-  width: 35%;
+  width: 25%;
   position: absolute;
-  bottom: -8%;
+  bottom: -6%;
   z-index: 0;
 }
 
