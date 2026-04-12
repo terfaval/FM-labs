@@ -27,6 +27,8 @@ Refine Kincstartó modal typography, colors, image composition, and CTA glow whi
 - Images slightly **smaller** than full width.
 - If image column is **right**: second image is **down-left** and **smaller**.
 - If image column is **left**: second image is **down-right** and **smaller**.
+- **Overlap amount:** ~40% (secondary overlaps primary by about 40%).
+- **Secondary size:** ~50% of the primary width.
 
 ### 4) Next Directions Cards
 - Remove **“Jóga tudástér mélyítése”** card.
