@@ -205,7 +205,7 @@ direction:
 title: Kincstartó
 
 hero:
-Személyes rendszer, amely a könyvek, jóga és meditáció mentén egy egységes, bejárható belső teret hoz létre.
+A Kincstartó egy személyes gyűjteményből indult felület, amely az olvasást, a meditációt és a mozgást egy helyre rendezi. A tartalom úgy van kialakítva, hogy ne csak megőrizhető legyen, hanem visszatérően használható és fokozatosan bejárható.
 
 card:
 Kurált tartalomrendszer a belső gyakorlás és önreflexió támogatására.
