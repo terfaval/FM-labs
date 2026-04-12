@@ -1,6 +1,8 @@
 ﻿import { loadContent } from "@/lib/content/loadContent";
 import { loadLumiraModalContent } from "@/lib/content/lumiraModal";
 import { buildLumiraModalModel } from "@/lib/content/lumiraModalModel";
+import { loadKincstartoModalContent } from "@/lib/content/kincstartoModal";
+import { buildKincstartoModalModel } from "@/lib/content/kincstartoModalModel";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SectionBlock } from "@/components/SectionBlock";
 import { CollaborationBlock } from "@/components/CollaborationBlock";
@@ -11,6 +13,9 @@ import { AboutBlock } from "@/components/AboutBlock";
 export default function HomePage() {
   const content = loadContent();
   const lumiraModal = buildLumiraModalModel(loadLumiraModalContent());
+  const kincstartoModal = buildKincstartoModalModel(
+    loadKincstartoModalContent()
+  );
 
   const featured = content.featuredProjects;
   const other = content.otherProjects;
@@ -71,6 +76,7 @@ export default function HomePage() {
         featuredRest={featuredRest}
         rest={rest}
         lumiraModal={lumiraModal}
+        kincstartoModal={kincstartoModal}
       />
 
       <SectionBlock title="Együttműködés" id="egyuttmukodes">
