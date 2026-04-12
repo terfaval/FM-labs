@@ -252,17 +252,13 @@ p {
 
 .project-card__split {
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
   align-items: center;
   gap: 32px;
 }
 
-.project-card__split--reverse .project-card__brand-col {
-  order: 2;
-}
-
-.project-card__split--reverse .project-card__content {
-  order: 1;
+.project-card.featured .project-card__split {
+  grid-template-columns: 30% 70%;
 }
 
 .project-card__split--reverse .project-card__brand-col {
