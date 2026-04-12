@@ -1143,16 +1143,15 @@ strong {
 }
 
 .kincstarto-modal__image-group {
-  position: relative;
-  display: grid;
-  justify-items: center;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   align-self: center;
-  padding-bottom: 8%;
+  gap: 16px;
 }
 
 .kincstarto-modal__image {
-  width: 62%;
+  width: 60%;
   max-width: 360px;
   border-radius: 16px;
   box-shadow: 0 16px 32px rgba(12, 18, 26, 0.18);
@@ -1164,20 +1163,19 @@ strong {
 }
 
 .kincstarto-modal__image--secondary {
-  width: 22%;
-  position: absolute;
-  bottom: -4%;
+  width: 18%;
+  position: static;
   z-index: 0;
 }
 
 .kincstarto-modal__pair--image-right .kincstarto-modal__image--secondary {
-  right: 8%;
-  transform: translateX(0);
+  align-self: flex-start;
+  transform: none;
 }
 
 .kincstarto-modal__pair--image-left .kincstarto-modal__image--secondary {
-  left: 8%;
-  transform: translateX(0);
+  align-self: flex-end;
+  transform: none;
 }
 
 .kincstarto-modal__section-icon {
