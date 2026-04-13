@@ -8,6 +8,10 @@ export type Meta = {
   approach: string;
   approachItems: string[];
   collaboration: string;
+  contactTitle: string;
+  contactIntro: string;
+  contactHelper: string;
+  contactSubmitLabel: string;
 };
 
 export type Project = {

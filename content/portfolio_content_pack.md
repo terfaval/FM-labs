@@ -7,10 +7,14 @@ role: researcher - tool builder
 language: hu
 
 tagline:
-Digitális rendszerek tervezése és építése
+Komplex témákból felfedezhető rendszereket építek
 
 intro:
-Komplex témákból olyan bejárható, felfedezhető digitális eszközöket hozok létre,  amelyek nem csak információt adnak vissza, hanem bejárhatóvá és felfedezhetővé teszik azt.
+Olyan digitális eszközöket hozok létre,
+amelyek nem csak információt adnak vissza,
+hanem segítenek eligazodni benne.
+
+Így a használatuk kulcsa a felfedezés lesz.
 
 about:
 Személyes érdeklődésekből indulok ki, és ezek köré építek rendszereket. A cél nem pusztán az információ rendszerezése, hanem annak újraformálása olyan módon, hogy a felhasználó ne csak hozzáférjen, hanem aktívan felfedezze és értelmezze azt. Az AI a teljes folyamat része — az ötlettől a rendszertervezésen át a megvalósításig — lehetővé téve, hogy egy gondolat gyorsan működő digitális eszközzé alakuljon.
@@ -26,7 +30,24 @@ Minden projekt ugyanarra az alapstruktúrára épül:
 Az eredmény nem egy statikus adatbázis, hanem egy dinamikus, felfedezésre épülő rendszer.
 
 collaboration:
-Nyitott vagyok együttműködésekre meglévő projektek továbbfejlesztésében, illetve új rendszerek közös kialakításában.
+Szívesen dolgozom együtt másokkal —
+meglévő projektek továbbgondolásán vagy új ötleteken.
+
+Ha bármelyik munka érdekes számodra,
+vagy van egy elképzelésed, amiről beszélnél,
+keress bátran.
+
+contact_title:
+Írj nyugodtan
+
+contact_intro:
+Ha bármelyik projekt felkeltette az érdeklődésed, vagy van egy ötleted, amin együtt gondolkodnál, küldj üzenetet.
+
+contact_helper:
+Az üzeneted közvetlenül megkapom emailben. Ha megadsz email címet, válaszolni is tudok rá.
+
+contact_submit_label:
+Üzenet küldése
 
 ---
 

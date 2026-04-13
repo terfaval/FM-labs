@@ -8,10 +8,18 @@ const META_KEYS = [
   "intro",
   "about",
   "approach",
-  "collaboration"
+  "collaboration",
+  "contact_title",
+  "contact_intro",
+  "contact_helper",
+  "contact_submit_label"
 ] as const;
 
 type MetaKey = (typeof META_KEYS)[number];
+type BaseMetaKey = Exclude<
+  MetaKey,
+  "contact_title" | "contact_intro" | "contact_helper" | "contact_submit_label"
+>;
 
 type FieldValue = {
   value: string;
@@ -71,7 +79,23 @@ function parseMetaBlock(lines: string[]): Meta {
   const meta: Partial<Meta> = {};
 
   for (const key of META_KEYS) {
-    meta[key] = values[key]?.value ?? "";
+    const value = values[key]?.value ?? "";
+    switch (key) {
+      case "contact_title":
+        meta.contactTitle = value;
+        break;
+      case "contact_intro":
+        meta.contactIntro = value;
+        break;
+      case "contact_helper":
+        meta.contactHelper = value;
+        break;
+      case "contact_submit_label":
+        meta.contactSubmitLabel = value;
+        break;
+      default:
+        meta[key as BaseMetaKey] = value;
+    }
   }
 
   meta.approachItems = values.approach?.list ?? [];

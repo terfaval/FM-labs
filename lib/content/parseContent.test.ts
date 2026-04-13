@@ -19,8 +19,23 @@ Masodik bekezdes.
 about:
 About szoveg.
 
+approach:
+Approach szoveg.
+
 collaboration:
 Collab szoveg.
+
+contact_title:
+Irj nyugodtan
+
+contact_intro:
+Rovid intro.
+
+contact_helper:
+Helper szoveg.
+
+contact_submit_label:
+Uzenet kuldese
 
 ---
 
@@ -69,9 +84,13 @@ direction:
 
 describe("parseContent", () => {
   it("parses meta and projects", () => {
-    const content = parseContent(SAMPLE);
-    expect(content.meta.title).toBe("Test Title");
-    expect(content.featuredProjects).toHaveLength(1);
+  const content = parseContent(SAMPLE);
+  expect(content.meta.title).toBe("Test Title");
+  expect(content.meta.contactTitle).toBe("Irj nyugodtan");
+  expect(content.meta.contactIntro).toBe("Rovid intro.");
+  expect(content.meta.contactHelper).toBe("Helper szoveg.");
+  expect(content.meta.contactSubmitLabel).toBe("Uzenet kuldese");
+  expect(content.featuredProjects).toHaveLength(1);
     expect(content.featuredProjects[0].slug).toBe("demo");
     expect(content.featuredProjects[0].features).toEqual(["Elso", "Masodik"]);
   });
