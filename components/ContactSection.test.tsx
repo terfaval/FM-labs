@@ -22,4 +22,13 @@ describe("ContactSection", () => {
 
     expect(screen.getByRole("form")).toBeInTheDocument();
   });
+
+  it("renders a centered header group when centered layout is enabled", () => {
+    const { container } = render(
+      <ContactSection meta={meta} formEndpoint="https://example.com" centered />
+    );
+
+    const group = container.querySelector(".contact-header");
+    expect(group).not.toBeNull();
+  });
 });
