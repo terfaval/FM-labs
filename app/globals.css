@@ -261,11 +261,11 @@ p {
 }
 
 .project-card.featured .project-card__split {
-  grid-template-columns: 40% 60%;
+  grid-template-columns: 45% 55%;
 }
 
 .project-card.featured .project-card__split--reverse {
-  grid-template-columns: 60% 40%;
+  grid-template-columns: 55% 45%;
 }
 .project-card__split--reverse .project-card__brand-col {
   order: 2;
@@ -388,6 +388,106 @@ p {
 .approach-card__text {
   margin: 0;
   color: var(--muted);
+}
+
+.contact-card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 24px;
+  background: var(--card);
+  display: grid;
+  gap: 20px;
+}
+
+.contact-intro {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.contact-form {
+  display: grid;
+  gap: 16px;
+}
+
+.contact-row {
+  display: grid;
+  gap: 6px;
+}
+
+.contact-row label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.contact-row input,
+.contact-row textarea {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  padding: 12px 14px;
+  font: inherit;
+  color: var(--text);
+  background: #fff;
+}
+
+.contact-row textarea {
+  resize: vertical;
+  min-height: 160px;
+}
+
+.contact-row input:focus-visible,
+.contact-row textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.contact-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.contact-submit {
+  justify-self: start;
+  border-radius: 999px;
+  padding: 10px 22px;
+  border: 1px solid var(--line);
+  background: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.contact-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.contact-helper {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.contact-feedback {
+  margin: 0;
+  font-size: 14px;
+  min-height: 20px;
+}
+
+.contact-feedback.is-success {
+  color: var(--accent);
+}
+
+.contact-feedback.is-error {
+  color: #b63b3b;
+}
+
+.contact-error {
+  font-size: 13px;
+  color: #b63b3b;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -949,6 +1049,10 @@ p {
 }
 
 @media (max-width: 600px) {
+  .contact-card {
+    padding: 20px;
+  }
+
   .project-card__panel {
     padding: 32px 28px;
   }
