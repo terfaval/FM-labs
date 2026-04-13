@@ -1,6 +1,7 @@
 ﻿import React from "react";
 import { Bookmark, RotateCcw, Compass } from "lucide-react";
 import { KincstartoModalModel } from "@/lib/content/kincstartoModalModel";
+import { ProjectFeedbackForm } from "@/components/ProjectFeedbackForm";
 
 function cx(...xs: Array<string | false | undefined>) {
   return xs.filter(Boolean).join(" ");
@@ -19,15 +20,22 @@ const sectionIcons: Record<string, string> = {
 };
 
 export function KincstartoModalNarrative({ model }: { model: KincstartoModalModel }) {
+  const formEndpoint = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT ?? "";
   const cta = (
-    <a
-      className="project-modal__cta lumira-modal__cta"
-      href="https://kincstarto.vercel.app"
-      target="_blank"
-      rel="noreferrer"
-    >
-      Fedezd fel
-    </a>
+    <div className="project-modal__cta-group">
+      <a
+        className="project-modal__cta lumira-modal__cta"
+        href="https://kincstarto.vercel.app"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Fedezd fel
+      </a>
+      <ProjectFeedbackForm
+        projectTitle={model.brand.name}
+        formEndpoint={formEndpoint}
+      />
+    </div>
   );
 
   return (
