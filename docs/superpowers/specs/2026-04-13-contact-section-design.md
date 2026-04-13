@@ -3,10 +3,11 @@
 Date: 2026-04-13
 
 ## Summary
-Add a minimalist contact section after the “Együttműködés” block. The form submits directly to a free external form endpoint (Formspree or equivalent), avoiding domain verification and keeping the Vercel Hobby deployment simple. The content remains the source of truth in the markdown content pack.
+Add a minimalist contact experience embedded inside the existing “Együttműködés” block. The block becomes a two-column layout: the left column shows the collaboration copy plus direct contact links; the right column contains the contact form. The form submits directly to a free external form endpoint (Formspree or equivalent), avoiding domain verification and keeping the Vercel Hobby deployment simple. The content remains the source of truth in the markdown content pack.
 
 ## Goals
-- Provide a clean, calm contact module that fits the current portfolio style.
+- Provide a calm, readable contact module that fits the current portfolio style.
+- Keep the contact UI inside the existing Collaboration section (no separate section title).
 - Allow visitors to send a message that arrives at the owner’s email.
 - If the visitor provides an email, reply-to should use that address.
 - Keep deployment compatible with Vercel Hobby and avoid databases.
@@ -18,17 +19,26 @@ Add a minimalist contact section after the “Együttműködés” block. The fo
 - No complex anti-spam tooling beyond lightweight measures.
 
 ## Architecture
-- Add a new `ContactSection` component rendered after the Collaboration section on the homepage.
-- The form submits directly to an external endpoint (Formspree or similar) to forward emails.
+- Keep the `SectionBlock` for “Együttműködés”, but do not render a section title.
+- Replace the current `CollaborationBlock` content with a two-column layout:
+  - Left: collaboration text + 3 contact rows with icons (phone, email, LinkedIn)
+  - Right: contact form
+- The form submits directly to an external endpoint (Formspree or similar).
 - No new Next.js API routes in the initial version (simplifies hosting and avoids domain constraints).
 
 ## Content Source of Truth
-- Extend `content/portfolio_content_pack.md` META section with contact section copy:
-  - contactTitle
+- The collaboration copy continues to come from `content/portfolio_content_pack.md`.
+- Contact links (phone/email/linkedin) are fixed values (not content-driven).
+- Contact form copy uses contact-related meta fields:
+  - contactTitle (unused in UI, but may remain for future)
   - contactIntro
   - contactHelper
   - contactSubmitLabel
-- The copy is rendered verbatim; no re-writing or implicit changes.
+
+## Contact Rows (Left Column)
+- Phone: `+36308269351` (tel: link)
+- Email: `mate.fater@gmail.com` (mailto: link)
+- LinkedIn: `https://www.linkedin.com/in/matefater/` (opens in new tab)
 
 ## Form Fields
 - Name (optional)
@@ -68,6 +78,12 @@ Add a minimalist contact section after the “Együttműködés” block. The fo
 - Keyboard navigation supported.
 - Textarea size and spacing to support comfortable reading and editing.
 
+## Styling
+- Two-column grid layout for the Collaboration block.
+- Left column text centered; contact rows below with icons and subtle color.
+- Right column uses the existing contact card form styling.
+- Mobile: stack columns vertically, form below text.
+
 ## Testing & Verification
 - Manual testing:
   - Fill and submit with/without optional fields
@@ -77,6 +93,6 @@ Add a minimalist contact section after the “Együttműködés” block. The fo
 
 ## Rollout Notes
 - External endpoint configured with the target email.
-- No public email address shown in UI.
+- Public email + phone intentionally displayed as requested.
 - Confirm the form endpoint and any required hidden fields once provider is selected.
 
