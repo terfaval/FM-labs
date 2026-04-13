@@ -1,0 +1,108 @@
+@media (max-width: 900px) {
+  main {
+    padding: 28px 20px 64px;
+  }
+
+  .site-header {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .site-header__title {
+    font-size: 48px;
+  }
+
+  .site-header__tagline {
+    font-size: 18px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .about-block {
+    grid-template-columns: 1fr;
+  }
+
+  .about-block__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-grid.two {
+    grid-template-columns: 1fr;
+  }
+
+  .approach-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .approach-intro,
+  .approach-outro {
+    font-size: 16px;
+  }
+
+  .project-card {
+    padding: 22px;
+  }
+
+  .project-card--split {
+    padding: 28px;
+  }
+
+  .project-card.featured.project-card--split {
+    padding: 32px;
+  }
+
+  .project-card__split,
+  .project-card.featured .project-card__split,
+  .project-card.featured .project-card__split--reverse,
+  .project-card__panel {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+
+  .project-card__brand-col,
+  .project-card__panel-brand {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .project-card__panel {
+    padding: 32px 24px;
+  }
+
+  .project-card__logo--panel {
+    width: 96px;
+    height: 96px;
+  }
+
+  .modal-backdrop {
+    padding: 24px 16px;
+  }
+
+  .project-modal {
+    width: min(96vw, 960px);
+  }
+
+  .project-modal__body {
+    padding: 12px 20px 24px;
+  }
+
+  .project-modal__grid--five {
+    grid-template-columns: 1fr;
+  }
+
+  .lumira-modal {
+    gap: 48px;
+  }
+
+  .lumira-modal__split,
+  .lumira-modal__next-cards,
+  .lumira-modal__icon-grid-items {
+    grid-template-columns: 1fr;
+  }
+
+  .lumira-modal__mood {
+    font-size: 18px;
+  }
+}
