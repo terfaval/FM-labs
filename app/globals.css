@@ -250,6 +250,9 @@ p {
   padding: 40px;
 }
 
+.project-card.featured.project-card--split {
+  padding: 64px;
+}
 .project-card__split {
   display: grid;
   grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
@@ -258,11 +261,11 @@ p {
 }
 
 .project-card.featured .project-card__split {
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 40% 60%;
 }
 
 .project-card.featured .project-card__split--reverse {
-  grid-template-columns: 70% 30%;
+  grid-template-columns: 60% 40%;
 }
 .project-card__split--reverse .project-card__brand-col {
   order: 2;
