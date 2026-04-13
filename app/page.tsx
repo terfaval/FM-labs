@@ -6,6 +6,7 @@ import { buildKincstartoModalModel } from "@/lib/content/kincstartoModalModel";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SectionBlock } from "@/components/SectionBlock";
 import { CollaborationBlock } from "@/components/CollaborationBlock";
+import { ContactSection } from "@/components/ContactSection";
 import { ProjectGallery } from "@/components/ProjectGallery";
 import { ApproachBlock } from "@/components/ApproachBlock";
 import { AboutBlock } from "@/components/AboutBlock";
@@ -81,6 +82,13 @@ export default function HomePage() {
 
       <SectionBlock title="Együttműködés" id="egyuttmukodes">
         <CollaborationBlock meta={content.meta} />
+      </SectionBlock>
+
+      <SectionBlock title={content.meta.contactTitle} id="kontakt">
+        <ContactSection
+          meta={content.meta}
+          formEndpoint={process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT ?? ""}
+        />
       </SectionBlock>
     </main>
   );
