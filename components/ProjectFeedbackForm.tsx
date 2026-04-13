@@ -8,11 +8,13 @@ type Status = "idle" | "loading" | "success" | "error";
 type ProjectFeedbackFormProps = {
   projectTitle: string;
   formEndpoint: string;
+  variant?: "default" | "inverse";
 };
 
 export function ProjectFeedbackForm({
   projectTitle,
   formEndpoint,
+  variant = "default",
 }: ProjectFeedbackFormProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<{ message?: string; email?: string }>(
@@ -36,6 +38,12 @@ export function ProjectFeedbackForm({
     }),
     [formId]
   );
+  const ctaClassName = [
+    "project-feedback__cta",
+    variant === "inverse" ? "project-feedback__cta--inverse" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -97,7 +105,7 @@ export function ProjectFeedbackForm({
     <div className="project-feedback">
       <button
         type="button"
-        className="project-feedback__cta"
+        className={ctaClassName}
         aria-expanded={isOpen}
         aria-controls={labels.panel}
         onClick={() => setIsOpen((prev) => !prev)}

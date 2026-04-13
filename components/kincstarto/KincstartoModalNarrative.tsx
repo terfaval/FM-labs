@@ -21,8 +21,20 @@ const sectionIcons: Record<string, string> = {
 
 export function KincstartoModalNarrative({ model }: { model: KincstartoModalModel }) {
   const formEndpoint = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT ?? "";
-  const cta = (
+  const ctaHeader = (
     <div className="project-modal__cta-group">
+      <a
+        className="project-modal__cta lumira-modal__cta"
+        href="https://kincstarto.vercel.app"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Fedezd fel
+      </a>
+    </div>
+  );
+  const ctaFooter = (
+    <div className="project-modal__cta-group project-modal__cta-group--footer">
       <a
         className="project-modal__cta lumira-modal__cta"
         href="https://kincstarto.vercel.app"
@@ -34,6 +46,7 @@ export function KincstartoModalNarrative({ model }: { model: KincstartoModalMode
       <ProjectFeedbackForm
         projectTitle={model.brand.name}
         formEndpoint={formEndpoint}
+        variant="inverse"
       />
     </div>
   );
@@ -44,7 +57,7 @@ export function KincstartoModalNarrative({ model }: { model: KincstartoModalMode
         <img src={model.brand.logo} alt="Kincstartó logo" />
         <div className="lumira-modal__brand-name">{model.brand.name}</div>
         <div className="lumira-modal__brand-tagline">{model.brand.tagline}</div>
-        {cta}
+        {ctaHeader}
       </section>
 
       <section className="lumira-modal__centered">
@@ -129,7 +142,7 @@ export function KincstartoModalNarrative({ model }: { model: KincstartoModalMode
         <p>{model.closing.body}</p>
       </section>
 
-      {cta}
+      {ctaFooter}
     </div>
   );
 }

@@ -130,8 +130,20 @@ function NextCards({
 
 export function LumiraModalNarrative({ model }: { model: LumiraModalModel }) {
   const formEndpoint = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT ?? "";
-  const cta = (
+  const ctaHeader = (
     <div className="project-modal__cta-group">
+      <a
+        className="project-modal__cta lumira-modal__cta"
+        href="https://lumira-sage.vercel.app"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Fedezd fel
+      </a>
+    </div>
+  );
+  const ctaFooter = (
+    <div className="project-modal__cta-group project-modal__cta-group--footer">
       <a
         className="project-modal__cta lumira-modal__cta"
         href="https://lumira-sage.vercel.app"
@@ -143,6 +155,7 @@ export function LumiraModalNarrative({ model }: { model: LumiraModalModel }) {
       <ProjectFeedbackForm
         projectTitle={model.brand.name}
         formEndpoint={formEndpoint}
+        variant="inverse"
       />
     </div>
   );
@@ -153,7 +166,7 @@ export function LumiraModalNarrative({ model }: { model: LumiraModalModel }) {
         <img src={model.brand.logo} alt="Lumira logo" />
         <div className="lumira-modal__brand-name">{model.brand.name}</div>
         <div className="lumira-modal__brand-tagline">{model.brand.tagline}</div>
-        {cta}
+        {ctaHeader}
       </section>
 
       <CenteredTextBlock title={model.kiindulo.title} body={model.kiindulo.body} />
@@ -177,7 +190,7 @@ export function LumiraModalNarrative({ model }: { model: LumiraModalModel }) {
       <NextCards {...model.nextDirections} />
 
       <CenteredTextBlock body={model.closing.body} />
-      {cta}
+      {ctaFooter}
     </div>
   );
 }
