@@ -11,6 +11,7 @@ import {
   MoonStar,
 } from "lucide-react";
 import { LumiraModalModel, FlowSectionModel } from "@/lib/content/lumiraModalModel";
+import { ProjectFeedbackForm } from "@/components/ProjectFeedbackForm";
 
 function cx(...xs: Array<string | false | undefined>) {
   return xs.filter(Boolean).join(" ");
@@ -128,15 +129,22 @@ function NextCards({
 }
 
 export function LumiraModalNarrative({ model }: { model: LumiraModalModel }) {
+  const formEndpoint = process.env.NEXT_PUBLIC_CONTACT_FORM_ENDPOINT ?? "";
   const cta = (
-    <a
-      className="project-modal__cta lumira-modal__cta"
-      href="https://lumira-sage.vercel.app"
-      target="_blank"
-      rel="noreferrer"
-    >
-      Fedezd fel
-    </a>
+    <div className="project-modal__cta-group">
+      <a
+        className="project-modal__cta lumira-modal__cta"
+        href="https://lumira-sage.vercel.app"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Fedezd fel
+      </a>
+      <ProjectFeedbackForm
+        projectTitle={model.brand.name}
+        formEndpoint={formEndpoint}
+      />
+    </div>
   );
 
   return (
