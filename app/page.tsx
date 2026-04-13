@@ -79,7 +79,7 @@ export default function HomePage() {
         kincstartoModal={kincstartoModal}
       />
 
-      <SectionBlock title="Együttműködés" id="egyuttmukodes">
+      <SectionBlock id="egyuttmukodes">
         <CollaborationBlock meta={content.meta} />
       </SectionBlock>
     </main>

@@ -37,12 +37,6 @@ Ha bármelyik munka érdekes számodra,
 vagy van egy elképzelésed, amiről beszélnél,
 keress bátran.
 
-contact_title:
-Írj nyugodtan
-
-contact_intro:
-Ha bármelyik projekt felkeltette az érdeklődésed, vagy van egy ötleted, amin együtt gondolkodnál, küldj üzenetet.
-
 contact_helper:
 Az üzeneted közvetlenül megkapom emailben. Ha megadsz email címet, válaszolni is tudok rá.
 

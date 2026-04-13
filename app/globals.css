@@ -434,14 +434,15 @@ p {
 }
 
 .contact-cta {
-  justify-self: start;
+  justify-self: center;
   border-radius: 999px;
-  padding: 10px 22px;
+  padding: 16px 22px;
   border: 1px solid transparent;
   background: var(--cta-warm);
   color: #fff;
   font-weight: 600;
   cursor: pointer;
+  margin-top: 16px;
 }
 
 .contact-cta:hover {
@@ -456,6 +457,14 @@ p {
 .contact-section.is-centered .contact-card {
   text-align: left;
   align-self: stretch;
+}
+
+.collaboration-block {
+  text-align: center;
+}
+
+.collaboration-block .contact-card {
+  text-align: left;
 }
 
 .contact-card {

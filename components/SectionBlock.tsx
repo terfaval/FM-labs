@@ -3,13 +3,13 @@ export function SectionBlock({
   id,
   children
 }: {
-  title: string;
+  title?: string;
   id?: string;
   children: React.ReactNode;
 }) {
   return (
     <section className="section" id={id}>
-      <h2 className="section-title">{title}</h2>
+      {title ? <h2 className="section-title">{title}</h2> : null}
       {children}
     </section>
   );
