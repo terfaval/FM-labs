@@ -1,14 +1,14 @@
-# Contact Section CTA Reveal (Inline)
+# Contact Section Inside Együttmûködés (Centered CTA)
 
 Date: 2026-04-13
 
 ## Summary
-Replace the always-visible contact form with a CTA-triggered inline reveal. The contact experience stays inside the existing **Kontakt** section (do not remove it). The section becomes a single-column flow: contact copy, fixed contact rows, CTA button, and a contact form card that appears inline when the CTA is toggled.
+Move the contact experience into the existing “Együttmûködés” section and remove the separate Kontakt section entirely. The block becomes a single-column flow: collaboration copy, fixed contact rows, a centered CTA button, and an inline contact form card that toggles open. The text/contact/CTA group is centered; the form remains left-aligned in its card. The CTA uses a new warm terracotta tone.
 
 ## Goals
-- Keep the contact UI calm, readable, and consistent with current typography.
-- Preserve the existing Kontakt section (no removal, no merging into another section).
-- Allow visitors to send a message to the owner’s email via an external form endpoint.
+- Keep the contact UI calm, readable, and consistent with existing typography.
+- Keep the contact UI inside the existing “Együttmûködés” section (no separate Kontakt section).
+- Allow visitors to send a message that arrives at the owner’s email.
 - If the visitor provides an email, reply-to should use that address.
 - Keep deployment compatible with Vercel Hobby and avoid databases.
 - Keep UI minimal, accessible, and consistent with existing styles.
@@ -20,25 +20,26 @@ Replace the always-visible contact form with a CTA-triggered inline reveal. The 
 - No modal or overlay UX.
 
 ## Architecture
-- Keep the `SectionBlock` for **Kontakt** and render the contact UI there.
-- Do not remove the existing “Együttmûködés” section.
-- Replace the current always-visible form with:
-  - Collaboration/contact copy (existing contact intro/helper text)
+- Keep the `SectionBlock` for “Együttmûködés” and render the contact UI there.
+- Remove the separate “Kontakt” section entirely.
+- Replace the current Collaboration block content with:
+  - Collaboration text (from content pack)
   - 3 fixed contact rows (phone, email, LinkedIn)
-  - CTA button that toggles the form card inline
-  - Contact form card that is hidden by default, shown after CTA click
+  - Centered CTA button that toggles the form card inline
+  - Contact form card hidden by default, shown after CTA click
 - The form submits directly to an external endpoint (Formspree or similar).
 - No new Next.js API routes.
 
 ## Content Source of Truth
-- Contact form copy uses the contact-related meta fields:
-  - `contactTitle` (still used for the section title)
+- Collaboration copy continues to come from `content/portfolio_content_pack.md`.
+- Contact links (phone/email/linkedin) are fixed values (not content-driven).
+- Contact form copy uses contact-related meta fields:
+  - `contactTitle` (no longer used in UI)
   - `contactIntro`
   - `contactHelper`
   - `contactSubmitLabel`
-- Contact links (phone/email/linkedin) are fixed values (not content-driven).
 
-## Contact Rows (above CTA)
+## Contact Rows (Centered Group)
 - Phone: `+36308269351` (tel: link)
 - Email: `mate.fater@gmail.com` (mailto: link)
 - LinkedIn: `https://www.linkedin.com/in/matefater/` (opens in new tab)
@@ -88,9 +89,10 @@ Replace the always-visible contact form with a CTA-triggered inline reveal. The 
 - Textarea size and spacing to support comfortable reading and editing.
 
 ## Styling
-- Single-column layout in the Kontakt section.
-- Contact rows and CTA above the form card.
-- The contact form uses the existing contact card styling.
+- Single-column layout inside the Együttmûködés section.
+- Collaboration text, contact rows, and CTA button centered.
+- Contact form card remains left-aligned and uses existing `contact-card` styling.
+- CTA uses a new warm terracotta tone (new CSS variable).
 - No new animations introduced.
 - Mobile: stack everything vertically (default behavior).
 
