@@ -390,6 +390,44 @@ p {
   color: var(--muted);
 }
 
+.contact-section {
+  display: grid;
+  gap: 16px;
+}
+
+.contact-links {
+  display: grid;
+  gap: 10px;
+}
+
+.contact-link {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  align-items: baseline;
+  color: var(--muted);
+}
+
+.contact-link__label {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.contact-cta {
+  justify-self: start;
+  border-radius: 999px;
+  padding: 10px 22px;
+  border: 1px solid var(--line);
+  background: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.contact-cta:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 .contact-card {
   border: 1px solid var(--line);
   border-radius: 16px;

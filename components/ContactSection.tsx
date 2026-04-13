@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useId, useMemo, useState } from "react";
 import { Meta } from "@/lib/content/types";
@@ -11,12 +11,27 @@ type ContactSectionProps = {
   formEndpoint: string;
 };
 
+const CONTACT_LINKS = [
+  { label: "Telefon", value: "+36308269351", href: "tel:+36308269351" },
+  {
+    label: "Email",
+    value: "mate.fater@gmail.com",
+    href: "mailto:mate.fater@gmail.com"
+  },
+  {
+    label: "LinkedIn",
+    value: "linkedin.com/in/matefater",
+    href: "https://www.linkedin.com/in/matefater/"
+  }
+] as const;
+
 export function ContactSection({ meta, formEndpoint }: ContactSectionProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<{ message?: string; email?: string }>(
     {}
   );
   const [feedback, setFeedback] = useState<string>("");
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const formId = useId();
 
   const isBusy = status === "loading";
@@ -29,7 +44,8 @@ export function ContactSection({ meta, formEndpoint }: ContactSectionProps) {
       email: `contact-email-${formId}`,
       subject: `contact-subject-${formId}`,
       message: `contact-message-${formId}`,
-      honeypot: `contact-company-${formId}`
+      honeypot: `contact-company-${formId}`,
+      panel: `contact-panel-${formId}`
     }),
     [formId]
   );
@@ -89,69 +105,98 @@ export function ContactSection({ meta, formEndpoint }: ContactSectionProps) {
   }
 
   return (
-    <div className="contact-card">
+    <div className="contact-section">
       <p className="contact-intro">{meta.contactIntro}</p>
 
-      <form className="contact-form" onSubmit={handleSubmit}>
-        <div className="contact-row">
-          <label htmlFor={labels.name}>Név</label>
-          <input id={labels.name} name="name" type="text" autoComplete="name" />
+      <div className="contact-links">
+        {CONTACT_LINKS.map((link) => (
+          <div className="contact-link" key={link.label}>
+            <span className="contact-link__label">{link.label}</span>
+            <a
+              href={link.href}
+              target={link.label === "LinkedIn" ? "_blank" : undefined}
+              rel={link.label === "LinkedIn" ? "noreferrer" : undefined}
+            >
+              {link.value}
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <button
+        type="button"
+        className="contact-cta"
+        aria-expanded={isOpen}
+        aria-controls={labels.panel}
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
+        {isOpen ? "Bezárás" : "Lépjünk kapcsolatba"}
+      </button>
+
+      {isOpen ? (
+        <div className="contact-card" id={labels.panel}>
+          <form className="contact-form" onSubmit={handleSubmit} role="form">
+            <div className="contact-row">
+              <label htmlFor={labels.name}>Név</label>
+              <input id={labels.name} name="name" type="text" autoComplete="name" />
+            </div>
+
+            <div className="contact-row">
+              <label htmlFor={labels.email}>Email cím</label>
+              <input
+                id={labels.email}
+                name="email"
+                type="email"
+                autoComplete="email"
+                aria-invalid={Boolean(errors.email)}
+              />
+              {errors.email ? (
+                <span className="contact-error">{errors.email}</span>
+              ) : null}
+            </div>
+
+            <div className="contact-row">
+              <label htmlFor={labels.subject}>Tárgy</label>
+              <input id={labels.subject} name="subject" type="text" />
+            </div>
+
+            <div className="contact-row">
+              <label htmlFor={labels.message}>Üzenet</label>
+              <textarea
+                id={labels.message}
+                name="message"
+                required
+                rows={6}
+                aria-invalid={Boolean(errors.message)}
+              />
+              {errors.message ? (
+                <span className="contact-error">{errors.message}</span>
+              ) : null}
+            </div>
+
+            <div className="contact-honeypot" aria-hidden="true">
+              <label htmlFor={labels.honeypot}>Cég</label>
+              <input id={labels.honeypot} name="company" type="text" tabIndex={-1} />
+            </div>
+
+            <button className="contact-submit" type="submit" disabled={isBusy}>
+              {isBusy ? "Küldés..." : meta.contactSubmitLabel}
+            </button>
+
+            <p className="contact-helper">{meta.contactHelper}</p>
+
+            <p
+              className={`contact-feedback ${hasSuccess ? "is-success" : ""} ${
+                hasError ? "is-error" : ""
+              }`}
+              role="status"
+              aria-live="polite"
+            >
+              {feedback}
+            </p>
+          </form>
         </div>
-
-        <div className="contact-row">
-          <label htmlFor={labels.email}>Email cím</label>
-          <input
-            id={labels.email}
-            name="email"
-            type="email"
-            autoComplete="email"
-            aria-invalid={Boolean(errors.email)}
-          />
-          {errors.email ? (
-            <span className="contact-error">{errors.email}</span>
-          ) : null}
-        </div>
-
-        <div className="contact-row">
-          <label htmlFor={labels.subject}>Tárgy</label>
-          <input id={labels.subject} name="subject" type="text" />
-        </div>
-
-        <div className="contact-row">
-          <label htmlFor={labels.message}>Üzenet</label>
-          <textarea
-            id={labels.message}
-            name="message"
-            required
-            rows={6}
-            aria-invalid={Boolean(errors.message)}
-          />
-          {errors.message ? (
-            <span className="contact-error">{errors.message}</span>
-          ) : null}
-        </div>
-
-        <div className="contact-honeypot" aria-hidden="true">
-          <label htmlFor={labels.honeypot}>Cég</label>
-          <input id={labels.honeypot} name="company" type="text" tabIndex={-1} />
-        </div>
-
-        <button className="contact-submit" type="submit" disabled={isBusy}>
-          {isBusy ? "Küldés..." : meta.contactSubmitLabel}
-        </button>
-
-        <p className="contact-helper">{meta.contactHelper}</p>
-
-        <p
-          className={`contact-feedback ${hasSuccess ? "is-success" : ""} ${
-            hasError ? "is-error" : ""
-          }`}
-          role="status"
-          aria-live="polite"
-        >
-          {feedback}
-        </p>
-      </form>
+      ) : null}
     </div>
   );
 }
