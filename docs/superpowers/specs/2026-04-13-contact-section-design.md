@@ -1,44 +1,53 @@
-Ôªø# Contact Section + Email Forwarding (External Form Endpoint)
+# Contact Section CTA Reveal (Inline)
 
 Date: 2026-04-13
 
 ## Summary
-Add a minimalist contact experience embedded inside the existing ‚ÄúEgy√ºttm≈±k√∂d√©s‚Äù block. The block becomes a two-column layout: the left column shows the collaboration copy plus direct contact links; the right column contains the contact form. The form submits directly to a free external form endpoint (Formspree or equivalent), avoiding domain verification and keeping the Vercel Hobby deployment simple. The content remains the source of truth in the markdown content pack.
+Replace the always-visible contact form with a CTA-triggered inline reveal. The contact experience stays inside the existing **Kontakt** section (do not remove it). The section becomes a single-column flow: contact copy, fixed contact rows, CTA button, and a contact form card that appears inline when the CTA is toggled.
 
 ## Goals
-- Provide a calm, readable contact module that fits the current portfolio style.
-- Keep the contact UI inside the existing Collaboration section (no separate section title).
-- Allow visitors to send a message that arrives at the owner‚Äôs email.
+- Keep the contact UI calm, readable, and consistent with current typography.
+- Preserve the existing Kontakt section (no removal, no merging into another section).
+- Allow visitors to send a message to the ownerís email via an external form endpoint.
 - If the visitor provides an email, reply-to should use that address.
 - Keep deployment compatible with Vercel Hobby and avoid databases.
-- Keep UI minimal, accessible, and consistent with existing typography.
+- Keep UI minimal, accessible, and consistent with existing styles.
 
 ## Non-Goals
 - No CRM, inbox, or admin UI.
 - No database or persistent storage.
 - No complex anti-spam tooling beyond lightweight measures.
+- No modal or overlay UX.
 
 ## Architecture
-- Keep the `SectionBlock` for ‚ÄúEgy√ºttm≈±k√∂d√©s‚Äù, but do not render a section title.
-- Replace the current `CollaborationBlock` content with a two-column layout:
-  - Left: collaboration text + 3 contact rows with icons (phone, email, LinkedIn)
-  - Right: contact form
+- Keep the `SectionBlock` for **Kontakt** and render the contact UI there.
+- Do not remove the existing ìEgy¸ttm˚kˆdÈsî section.
+- Replace the current always-visible form with:
+  - Collaboration/contact copy (existing contact intro/helper text)
+  - 3 fixed contact rows (phone, email, LinkedIn)
+  - CTA button that toggles the form card inline
+  - Contact form card that is hidden by default, shown after CTA click
 - The form submits directly to an external endpoint (Formspree or similar).
-- No new Next.js API routes in the initial version (simplifies hosting and avoids domain constraints).
+- No new Next.js API routes.
 
 ## Content Source of Truth
-- The collaboration copy continues to come from `content/portfolio_content_pack.md`.
+- Contact form copy uses the contact-related meta fields:
+  - `contactTitle` (still used for the section title)
+  - `contactIntro`
+  - `contactHelper`
+  - `contactSubmitLabel`
 - Contact links (phone/email/linkedin) are fixed values (not content-driven).
-- Contact form copy uses contact-related meta fields:
-  - contactTitle (unused in UI, but may remain for future)
-  - contactIntro
-  - contactHelper
-  - contactSubmitLabel
 
-## Contact Rows (Left Column)
+## Contact Rows (above CTA)
 - Phone: `+36308269351` (tel: link)
 - Email: `mate.fater@gmail.com` (mailto: link)
 - LinkedIn: `https://www.linkedin.com/in/matefater/` (opens in new tab)
+
+## CTA Behavior
+- Button label:
+  - Closed: ìLÈpj¸nk kapcsolatbaî
+  - Open: ìBez·r·sî
+- Toggling is client-side; no page navigation.
 
 ## Form Fields
 - Name (optional)
@@ -62,7 +71,7 @@ Add a minimalist contact experience embedded inside the existing ‚ÄúEgy√ºttm≈±k√
 - Optional lightweight rate-limiting only if needed later; not in this version.
 
 ## Email Behavior (Provider Side)
-- Subject template: `[Portfolio kapcsolat] {subject or ‚Äú√úzenet‚Äù}`
+- Subject template: `[Portfolio kapcsolat] {subject or ì‹zenetî}`
 - Body includes:
   - Name
   - Email
@@ -79,14 +88,16 @@ Add a minimalist contact experience embedded inside the existing ‚ÄúEgy√ºttm≈±k√
 - Textarea size and spacing to support comfortable reading and editing.
 
 ## Styling
-- Two-column grid layout for the Collaboration block.
-- Left column text centered; contact rows below with icons and subtle color.
-- Right column uses the existing contact card form styling.
-- Mobile: stack columns vertically, form below text.
+- Single-column layout in the Kontakt section.
+- Contact rows and CTA above the form card.
+- The contact form uses the existing contact card styling.
+- No new animations introduced.
+- Mobile: stack everything vertically (default behavior).
 
 ## Testing & Verification
 - Manual testing:
-  - Fill and submit with/without optional fields
+  - Toggle CTA open/close
+  - Submit with/without optional fields
   - Validate loading, success, error states
   - Confirm honeypot blocks submission
   - Verify reply-to behavior via provider
@@ -95,4 +106,3 @@ Add a minimalist contact experience embedded inside the existing ‚ÄúEgy√ºttm≈±k√
 - External endpoint configured with the target email.
 - Public email + phone intentionally displayed as requested.
 - Confirm the form endpoint and any required hidden fields once provider is selected.
-
