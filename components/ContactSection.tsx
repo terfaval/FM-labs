@@ -9,6 +9,7 @@ type Status = "idle" | "loading" | "success" | "error";
 type ContactSectionProps = {
   meta: Meta;
   formEndpoint: string;
+  centered?: boolean;
 };
 
 const CONTACT_LINKS = [
@@ -25,7 +26,11 @@ const CONTACT_LINKS = [
   }
 ] as const;
 
-export function ContactSection({ meta, formEndpoint }: ContactSectionProps) {
+export function ContactSection({
+  meta,
+  formEndpoint,
+  centered,
+}: ContactSectionProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<{ message?: string; email?: string }>(
     {}
@@ -105,33 +110,35 @@ export function ContactSection({ meta, formEndpoint }: ContactSectionProps) {
   }
 
   return (
-    <div className="contact-section">
-      <p className="contact-intro">{meta.contactIntro}</p>
+    <div className={centered ? "contact-section is-centered" : "contact-section"}>
+      <div className={centered ? "contact-header" : undefined}>
+        <p className="contact-intro">{meta.contactIntro}</p>
 
-      <div className="contact-links">
-        {CONTACT_LINKS.map((link) => (
-          <div className="contact-link" key={link.label}>
-            <span className="contact-link__label">{link.label}</span>
-            <a
-              href={link.href}
-              target={link.label === "LinkedIn" ? "_blank" : undefined}
-              rel={link.label === "LinkedIn" ? "noreferrer" : undefined}
-            >
-              {link.value}
-            </a>
-          </div>
-        ))}
+        <div className="contact-links">
+          {CONTACT_LINKS.map((link) => (
+            <div className="contact-link" key={link.label}>
+              <span className="contact-link__label">{link.label}</span>
+              <a
+                href={link.href}
+                target={link.label === "LinkedIn" ? "_blank" : undefined}
+                rel={link.label === "LinkedIn" ? "noreferrer" : undefined}
+              >
+                {link.value}
+              </a>
+            </div>
+          ))}
+        </div>
+
+        <button
+          type="button"
+          className="contact-cta"
+          aria-expanded={isOpen}
+          aria-controls={labels.panel}
+          onClick={() => setIsOpen((prev) => !prev)}
+        >
+          {isOpen ? "Bezárás" : "Lépjünk kapcsolatba"}
+        </button>
       </div>
-
-      <button
-        type="button"
-        className="contact-cta"
-        aria-expanded={isOpen}
-        aria-controls={labels.panel}
-        onClick={() => setIsOpen((prev) => !prev)}
-      >
-        {isOpen ? "Bezárás" : "Lépjünk kapcsolatba"}
-      </button>
 
       {isOpen ? (
         <div className="contact-card" id={labels.panel}>

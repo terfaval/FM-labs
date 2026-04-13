@@ -5,6 +5,7 @@
   --line: #e6e0d8;
   --card: #ffffff;
   --accent: #2f6f5e;
+  --cta-warm: #d96a43;
 }
 
 * {
@@ -395,9 +396,24 @@ p {
   gap: 16px;
 }
 
+.contact-section.is-centered {
+  align-items: center;
+  text-align: center;
+}
+
+.contact-header {
+  display: grid;
+  gap: 16px;
+  justify-items: center;
+}
+
 .contact-links {
   display: grid;
   gap: 10px;
+}
+
+.contact-section.is-centered .contact-links {
+  justify-items: center;
 }
 
 .contact-link {
@@ -406,6 +422,10 @@ p {
   gap: 8px 12px;
   align-items: baseline;
   color: var(--muted);
+}
+
+.contact-section.is-centered .contact-link {
+  justify-content: center;
 }
 
 .contact-link__label {
@@ -417,15 +437,25 @@ p {
   justify-self: start;
   border-radius: 999px;
   padding: 10px 22px;
-  border: 1px solid var(--line);
-  background: #fff;
+  border: 1px solid transparent;
+  background: var(--cta-warm);
+  color: #fff;
   font-weight: 600;
   cursor: pointer;
+}
+
+.contact-cta:hover {
+  background: color-mix(in srgb, var(--cta-warm) 88%, #ffffff 12%);
 }
 
 .contact-cta:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+.contact-section.is-centered .contact-card {
+  text-align: left;
+  align-self: stretch;
 }
 
 .contact-card {
