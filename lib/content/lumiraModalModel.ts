@@ -28,31 +28,31 @@ export function buildLumiraModalModel(content: LumiraModalContent): LumiraModalM
       ...content.flow.rogzites,
       imageSrc: "/lumira/screens/raw input.PNG",
       imageAlt: "Rögzítés képernyő",
-      imageSide: "left",
+      imageSide: "right",
     },
     {
       ...content.flow.keret,
       imageSrc: "/lumira/screens/direction.PNG",
       imageAlt: "Keret és irány képernyő",
-      imageSide: "right",
+      imageSide: "left",
     },
     {
       ...content.flow.feldolgozas,
       imageSrc: "/lumira/screens/question.PNG",
       imageAlt: "Feldolgozás képernyő",
-      imageSide: "left",
+      imageSide: "right",
     },
     {
       ...content.flow.visszateres,
       imageSrc: "/lumira/screens/dream list.PNG",
       imageAlt: "Visszatérés képernyő",
-      imageSide: "right",
+      imageSide: "left",
     },
     {
       ...content.flow.elokeszites,
       imageSrc: "/lumira/screens/exercises.PNG",
       imageAlt: "Előkészítés képernyő",
-      imageSide: "left",
+      imageSide: "right",
     },
   ];
 
