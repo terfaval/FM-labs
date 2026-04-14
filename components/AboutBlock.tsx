@@ -8,21 +8,12 @@ function renderParagraphs(text: string) {
   ));
 }
 
-const ABOUT_IMAGES = [
-  "/about/Slide1.PNG",
-  "/about/Slide2.PNG",
-  "/about/Slide3.PNG",
-  "/about/Slide4.PNG",
-];
-
 export function AboutBlock({ meta }: { meta: Meta }) {
   return (
     <section className="section about-block">
       <div className="about-block__text">{renderParagraphs(meta.about)}</div>
       <div className="about-block__grid">
-        {ABOUT_IMAGES.map((src) => (
-          <img className="about-block__image" key={src} src={src} alt="" />
-        ))}
+        <img className="about-block__image" src="/about/ABOUT.png" alt="" />
       </div>
     </section>
   );

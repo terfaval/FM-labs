@@ -6,3 +6,4 @@ node_modules
 app/fonts/
 next
 .merge-backup-*
+.env.local
