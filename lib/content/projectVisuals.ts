@@ -54,4 +54,12 @@ export const projectVisuals: Record<
     ctaFrom: "#d9a24c",
     ctaTo: "#e6c17a",
   },
+  derengo: {
+    background: "/derengo/backgrounds/card_background.PNG",
+    logo: "/derengo/logo.svg",
+    overlay: "linear-gradient(135deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0))",
+    appUrl: "",
+    ctaFrom: "#738a6e",
+    ctaTo: "#97aa8d",
+  },
 };

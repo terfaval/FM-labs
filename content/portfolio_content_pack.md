@@ -12,12 +12,12 @@ Komplex témákból felfedezhető rendszereket építek
 intro:
 Olyan digitális eszközöket hozok létre,
 amelyek nem csak információt adnak vissza,
-hanem segítenek eligazodni benne.
-
-Így a használatuk kulcsa a felfedezés lesz.
+hanem segítenek eligazodni benne, így a használatuk kulcsa a felfedezés lesz. A legtöbb ilyen rendszert egyedül indítom el,
+de a fejlesztésükben mindig nyitott vagyok az együttműködésre.
 
 about:
 Személyes érdeklődésekből indulok ki, és ezek köré építek rendszereket. A cél nem pusztán az információ rendszerezése, hanem annak újraformálása olyan módon, hogy a felhasználó ne csak hozzáférjen, hanem aktívan felfedezze és értelmezze azt. Az AI a teljes folyamat része — az ötlettől a rendszertervezésen át a megvalósításig — lehetővé téve, hogy egy gondolat gyorsan működő digitális eszközzé alakuljon.
+A projektek általában digitális rendszerek, de ugyanazzal a szemlélettel tervezek fizikai és közösségi tereket is.
 
 approach:
 Minden projekt ugyanarra az alapstruktúrára épül:
@@ -30,11 +30,15 @@ Minden projekt ugyanarra az alapstruktúrára épül:
 Az eredmény nem egy statikus adatbázis, hanem egy dinamikus, felfedezésre épülő rendszer.
 
 collaboration:
-Szívesen dolgozom együtt másokkal —
-meglévő projektek továbbgondolásán vagy új ötleteken.
+A projekteket jelenleg jellemzően egyedül építem,
+de szívesen dolgozom együtt másokkal is. Legyen ez az együttműködés akár egy meglévő projekt továbbgondolása, egy részterülethez való becsatlakozás, vagy egy teljesen új ötlet közös kibontása.
 
-Ha bármelyik munka érdekes számodra,
-vagy van egy elképzelésed, amiről beszélnél,
+Nyitott vagyok koncepcióalkotásra, designra, fejlesztésre,
+tesztelésre és olyan együttműködésekre is,
+amelyek egy beszélgetésből indulnak el.
+
+Ha valamelyik munka érdekes számodra,
+vagy van egy irány, amin érdemes lenne együtt gondolkodni,
 keress bátran.
 
 contact_helper:

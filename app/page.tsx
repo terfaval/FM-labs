@@ -3,6 +3,8 @@ import { loadLumiraModalContent } from "@/lib/content/lumiraModal";
 import { buildLumiraModalModel } from "@/lib/content/lumiraModalModel";
 import { loadKincstartoModalContent } from "@/lib/content/kincstartoModal";
 import { buildKincstartoModalModel } from "@/lib/content/kincstartoModalModel";
+import { loadDerengoModalContent } from "@/lib/content/derengoModal";
+import { buildDerengoModalModel } from "@/lib/content/derengoModalModel";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SectionBlock } from "@/components/SectionBlock";
 import { CollaborationBlock } from "@/components/CollaborationBlock";
@@ -16,6 +18,7 @@ export default function HomePage() {
   const kincstartoModal = buildKincstartoModalModel(
     loadKincstartoModalContent()
   );
+  const derengoModal = buildDerengoModalModel(loadDerengoModalContent());
 
   const featured = content.featuredProjects;
   const other = content.otherProjects;
@@ -29,6 +32,7 @@ export default function HomePage() {
     (project) =>
       !topFeaturedSlugs.has(project.slug) && project.slug !== "kincstarto"
   );
+  const featuredWithDerengo = [...featuredRest, derengoModal.project];
   const rest = other.filter((project) => project.slug !== "kincstarto");
   const approachItems = content.meta.approachItems.map((item) => {
     const match = item.match(/\s+(—|–|-)\s+/);
@@ -73,10 +77,11 @@ export default function HomePage() {
       <ProjectGallery
         topFeatured={topFeatured}
         kincstarto={kincstarto}
-        featuredRest={featuredRest}
+        featuredRest={featuredWithDerengo}
         rest={rest}
         lumiraModal={lumiraModal}
         kincstartoModal={kincstartoModal}
+        derengoModal={derengoModal}
       />
 
       <SectionBlock id="egyuttmukodes">

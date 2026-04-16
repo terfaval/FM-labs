@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Roboto, Rubik, Space_Grotesk } from "next/font/google";
+import { Outfit, Roboto, Rubik, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import "./mobile.css";
 
@@ -27,6 +27,14 @@ const lumiraDisplay = Space_Grotesk({
   style: "normal",
 });
 
+const derengoDisplay = Outfit({
+  subsets: ["latin"],
+  variable: "--font-derengo",
+  display: "swap",
+  weight: ["800"],
+  style: "normal",
+});
+
 export const metadata: Metadata = {
   title: "FM-Space",
   description: "FM-Space portfolio",
@@ -43,7 +51,7 @@ export default function RootLayout({
   return (
     <html
       lang="hu"
-      className={`${kincstartoBody.variable} ${kincstartoDisplay.variable} ${lumiraDisplay.variable}`}
+      className={`${kincstartoBody.variable} ${kincstartoDisplay.variable} ${lumiraDisplay.variable} ${derengoDisplay.variable}`}
     >
       <body>{children}</body>
     </html>

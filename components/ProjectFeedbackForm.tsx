@@ -9,12 +9,16 @@ type ProjectFeedbackFormProps = {
   projectTitle: string;
   formEndpoint: string;
   variant?: "default" | "inverse";
+  alwaysOpen?: boolean;
+  introText?: string;
 };
 
 export function ProjectFeedbackForm({
   projectTitle,
   formEndpoint,
   variant = "default",
+  alwaysOpen = false,
+  introText,
 }: ProjectFeedbackFormProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<{ message?: string; email?: string }>(
@@ -44,6 +48,9 @@ export function ProjectFeedbackForm({
   ]
     .filter(Boolean)
     .join(" ");
+  const resolvedIntro =
+    introText ??
+    "Ha hibát találtál vagy van egy észrevételed, itt gyorsan jelezheted.";
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -103,21 +110,23 @@ export function ProjectFeedbackForm({
 
   return (
     <div className="project-feedback">
-      <button
-        type="button"
-        className={ctaClassName}
-        aria-expanded={isOpen}
-        aria-controls={labels.panel}
-        onClick={() => setIsOpen((prev) => !prev)}
-      >
-        {isOpen ? "Bezárás" : "Írd meg"}
-      </button>
+      {!alwaysOpen ? (
+        <button
+          type="button"
+          className={ctaClassName}
+          aria-expanded={isOpen}
+          aria-controls={labels.panel}
+          onClick={() => setIsOpen((prev) => !prev)}
+        >
+          {isOpen ? "Bezárás" : "Írd meg"}
+        </button>
+      ) : null}
 
-      {isOpen ? (
+      {isOpen || alwaysOpen ? (
         <div className="project-feedback__card" id={labels.panel}>
-          <p className="project-feedback__intro">
-            Ha hibát találtál vagy van egy észrevételed, itt gyorsan jelezheted.
-          </p>
+          {resolvedIntro ? (
+            <p className="project-feedback__intro">{resolvedIntro}</p>
+          ) : null}
 
           <form className="contact-form" onSubmit={handleSubmit} role="form">
             <div className="contact-row">

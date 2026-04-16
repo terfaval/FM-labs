@@ -10,19 +10,30 @@ type ContactSectionProps = {
   meta: Meta;
   formEndpoint: string;
   centered?: boolean;
+  afterLinks?: React.ReactNode;
 };
 
 const CONTACT_LINKS = [
-  { label: "Telefon", value: "+36308269351", href: "tel:+36308269351" },
+  {
+    label: "Telefon",
+    value: "+36-30-826-9351",
+    href: "tel:+36308269351",
+    iconSrc: "/contacts/telephone.svg",
+    newTab: false,
+  },
   {
     label: "Email",
     value: "mate.fater@gmail.com",
-    href: "mailto:mate.fater@gmail.com"
+    href: "mailto:mate.fater@gmail.com",
+    iconSrc: "/contacts/email.svg",
+    newTab: false,
   },
   {
     label: "LinkedIn",
-    value: "linkedin.com/in/matefater",
-    href: "https://www.linkedin.com/in/matefater/"
+    value: "matefater",
+    href: "https://www.linkedin.com/in/matefater/",
+    iconSrc: "/contacts/linkedin.svg",
+    newTab: true,
   }
 ] as const;
 
@@ -30,6 +41,7 @@ export function ContactSection({
   meta,
   formEndpoint,
   centered,
+  afterLinks,
 }: ContactSectionProps) {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<{ message?: string; email?: string }>(
@@ -116,18 +128,26 @@ export function ContactSection({
 
         <div className="contact-links">
           {CONTACT_LINKS.map((link) => (
-            <div className="contact-link" key={link.label}>
-              <span className="contact-link__label">{link.label}</span>
-              <a
-                href={link.href}
-                target={link.label === "LinkedIn" ? "_blank" : undefined}
-                rel={link.label === "LinkedIn" ? "noreferrer" : undefined}
-              >
-                {link.value}
-              </a>
-            </div>
+            <a
+              className="contact-link"
+              key={link.label}
+              href={link.href}
+              aria-label={`${link.label}: ${link.value}`}
+              target={link.newTab ? "_blank" : undefined}
+              rel={link.newTab ? "noreferrer" : undefined}
+            >
+              <img
+                className="contact-link__icon"
+                src={link.iconSrc}
+                alt=""
+                aria-hidden="true"
+              />
+              <span className="contact-link__value">{link.value}</span>
+            </a>
           ))}
         </div>
+
+        {afterLinks}
 
         <button
           type="button"

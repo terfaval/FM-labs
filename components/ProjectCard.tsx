@@ -38,6 +38,7 @@ export function ProjectCard({
         featuredLayout ? " project-card--split" : ""
       }${project.slug === "lumira" ? " project-card--lumira-glass" : ""}${
         project.slug === "kincstarto" ? " project-card--kincstarto" : ""
+      }${project.slug === "derengo" ? " project-card--derengo" : ""
       }`}
       type="button"
       style={style}
@@ -96,7 +97,9 @@ export function ProjectCard({
           </div>
           <div className="project-card__content">
             <p className="project-card__hero">{project.hero}</p>
-            <div className="project-meta">{project.status}</div>
+            {project.status ? (
+              <div className="project-meta">{project.status}</div>
+            ) : null}
             <span className="project-modal__cta project-card__cta">
               Ismerd meg
             </span>
@@ -115,7 +118,7 @@ export function ProjectCard({
             <h3 className="project-card__title">{project.title}</h3>
           </div>
           <p>{project.hero}</p>
-          <div className="project-meta">{project.status}</div>
+          {project.status ? <div className="project-meta">{project.status}</div> : null}
         </>
       )}
     </button>

@@ -8,8 +8,10 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { SectionBlock } from "@/components/SectionBlock";
 import { LumiraModalNarrative } from "@/components/lumira/LumiraModalNarrative";
 import { KincstartoModalNarrative } from "@/components/kincstarto/KincstartoModalNarrative";
+import { DerengoModalNarrative } from "@/components/derengo/DerengoModalNarrative";
 import { LumiraModalModel } from "@/lib/content/lumiraModalModel";
 import { KincstartoModalModel } from "@/lib/content/kincstartoModalModel";
+import { DerengoModalModel } from "@/lib/content/derengoModalModel";
 
 type ProjectGalleryProps = {
   topFeatured: Project[];
@@ -18,6 +20,7 @@ type ProjectGalleryProps = {
   rest: Project[];
   lumiraModal?: LumiraModalModel | null;
   kincstartoModal?: KincstartoModalModel | null;
+  derengoModal?: DerengoModalModel | null;
 };
 
 function renderParagraphs(text: string) {
@@ -31,16 +34,19 @@ function ProjectModal({
   onClose,
   lumiraModal,
   kincstartoModal,
+  derengoModal,
 }: {
   project: Project;
   onClose: () => void;
   lumiraModal?: LumiraModalModel | null;
   kincstartoModal?: KincstartoModalModel | null;
+  derengoModal?: DerengoModalModel | null;
 }) {
   const visual = projectVisuals[project.slug];
   const isSzarnyfeszito = project.slug === "szarnyfeszito";
   const isLumira = project.slug === "lumira";
   const isKincstarto = project.slug === "kincstarto";
+  const isDerengo = project.slug === "derengo";
   const style = visual
     ? ({
         "--card-bg": `url("${visual.background}")`,
@@ -66,6 +72,10 @@ function ProjectModal({
   };
 
   useEffect(() => {
+    if (isDerengo) {
+      return;
+    }
+
     function handleKey(event: KeyboardEvent) {
       if (event.key === "Escape") {
         onClose();
@@ -74,12 +84,12 @@ function ProjectModal({
 
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [onClose]);
+  }, [isDerengo, onClose]);
 
   return (
     <div className="modal-backdrop" onClick={onClose} role="presentation">
       <div
-        className={`project-modal${isLumira ? " project-modal--lumira" : ""}${isKincstarto ? " project-modal--kincstarto" : ""}`}
+        className={`project-modal${isLumira ? " project-modal--lumira" : ""}${isKincstarto ? " project-modal--kincstarto" : ""}${isDerengo ? " project-modal--derengo" : ""}`}
         style={isLumira ? lumiraStyle : isKincstarto ? kincstartoStyle : style}
         onClick={(event) => event.stopPropagation()}
         role="dialog"
@@ -102,6 +112,8 @@ function ProjectModal({
             <LumiraModalNarrative model={lumiraModal} />
           ) : isKincstarto && kincstartoModal ? (
             <KincstartoModalNarrative model={kincstartoModal} />
+          ) : isDerengo && derengoModal ? (
+            <DerengoModalNarrative model={derengoModal} onRequestClose={onClose} />
           ) : (
             <>
               <div className="project-modal__header-block project-card__header project-card__header--split">
@@ -182,13 +194,18 @@ export function ProjectGallery({
   rest,
   lumiraModal,
   kincstartoModal,
+  derengoModal,
 }: ProjectGalleryProps) {
   const [selected, setSelected] = useState<Project | null>(null);
   const lumira = topFeatured.find((project) => project.slug === "lumira");
   const szarnyfeszito = topFeatured.find(
     (project) => project.slug === "szarnyfeszito"
   );
-  const featuredOrder = [lumira, kincstarto, szarnyfeszito].filter(
+  const derengo = featuredRest.find((project) => project.slug === "derengo");
+  const otherFeaturedRest = featuredRest.filter(
+    (project) => project.slug !== "derengo"
+  );
+  const featuredOrder = [lumira, kincstarto, derengo, szarnyfeszito].filter(
     Boolean
   ) as Project[];
 
@@ -209,9 +226,9 @@ export function ProjectGallery({
             ))}
           </div>
         )}
-        {featuredRest.length > 0 && (
+        {otherFeaturedRest.length > 0 && (
           <div className="project-grid two">
-            {featuredRest.map((project) => (
+            {otherFeaturedRest.map((project) => (
               <ProjectCard
                 key={project.slug}
                 project={project}
@@ -241,6 +258,7 @@ export function ProjectGallery({
           onClose={() => setSelected(null)}
           lumiraModal={lumiraModal}
           kincstartoModal={kincstartoModal}
+          derengoModal={derengoModal}
         />
       )}
     </>

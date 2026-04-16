@@ -409,28 +409,40 @@ p {
 
 .contact-links {
   display: grid;
-  gap: 10px;
-}
-
-.contact-section.is-centered .contact-links {
-  justify-items: center;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  width: min(640px, 100%);
 }
 
 .contact-link {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 12px;
-  align-items: baseline;
-  color: var(--muted);
-}
-
-.contact-section.is-centered .contact-link {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
+  gap: 10px;
+  padding: 4px 0;
+  color: var(--text);
 }
 
-.contact-link__label {
+.contact-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.contact-link:hover {
+  opacity: 0.85;
+}
+
+.contact-link__icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.contact-link__value {
+  font-size: 15px;
   font-weight: 600;
-  color: var(--text);
+  text-align: center;
+  word-break: break-word;
 }
 
 .contact-cta {
@@ -441,6 +453,7 @@ p {
   background: var(--cta-warm);
   color: #fff;
   font-weight: 600;
+  font-size: 17px;
   cursor: pointer;
   margin-top: 16px;
 }
@@ -461,6 +474,12 @@ p {
 
 .collaboration-block {
   text-align: center;
+}
+
+.collaboration-copy p {
+  font-size: 24px;
+  line-height: 1.7;
+  margin-top: 15px;
 }
 
 .collaboration-block .contact-card {
@@ -531,10 +550,20 @@ p {
   justify-self: start;
   border-radius: 999px;
   padding: 10px 22px;
-  border: 1px solid var(--line);
-  background: #fff;
+  border: 1px solid transparent;
+  background: var(--cta-warm);
+  color: #fff;
   font-weight: 600;
   cursor: pointer;
+}
+
+.contact-submit:hover {
+  background: color-mix(in srgb, var(--cta-warm) 88%, #ffffff 12%);
+}
+
+.contact-submit:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .contact-submit:disabled {
@@ -801,8 +830,8 @@ p {
 }
 
 .project-card__logo--huge {
-  width: 120px;
-  height: 120px;
+  width: 152px;
+  height: 152px;
 }
 
 .project-card__logo--xxlarge {
@@ -814,6 +843,21 @@ p {
   margin: 0;
   font-size: 22px;
   font-weight: 700;
+}
+
+.project-card.featured.project-card--split .project-card__title {
+  font-size: 30px;
+  line-height: 1.05;
+}
+
+.project-card.featured.project-card--split .project-card__logo--huge {
+  width: 172px;
+  height: 172px;
+}
+
+.project-card.featured.project-card--split .project-card__logo--xxlarge {
+  width: 188px;
+  height: 188px;
 }
 
 .project-card__hero {
@@ -1203,6 +1247,10 @@ p {
     padding: 20px;
   }
 
+  .collaboration-copy p {
+    font-size: 22px;
+  }
+
   .project-card__panel {
     padding: 32px 28px;
   }
@@ -1449,7 +1497,716 @@ strong {
   display: block;
 }
 
+.project-card--derengo {
+  color: #f5f8f1;
+}
+
+.project-card--derengo::before {
+  background-image: var(--card-bg);
+}
+
+.project-card--derengo .project-card__title,
+.project-card--derengo .project-card__hero,
+.project-card--derengo .project-meta {
+  color: #f5f8f1;
+  text-shadow: 0 8px 24px rgba(8, 14, 10, 0.42);
+}
+
+.project-card.featured.project-card--split.project-card--derengo .project-card__title {
+  font-family: var(--font-derengo), var(--font-heading), "Segoe UI", system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.project-card--derengo .project-card__logo {
+  filter: brightness(0) invert(1);
+}
+
+.project-modal--derengo {
+  border: none;
+  color: #f5f8f1;
+  background: #0f1712;
+}
+
+.project-modal--derengo .project-modal__body {
+  padding: 16px 68px 36px;
+  --derengo-body-pad-x: 68px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.project-modal--derengo::before {
+  background-image: none;
+}
+
+.project-modal--derengo h1,
+.project-modal--derengo h2,
+.project-modal--derengo h3,
+.project-modal--derengo p,
+.project-modal--derengo label,
+.project-modal--derengo .project-feedback__intro,
+.project-modal--derengo .contact-helper,
+.project-modal--derengo .contact-feedback,
+.project-modal--derengo .lumira-modal__icon-title,
+.project-modal--derengo .project-feedback__cta {
+  color: #f5f8f1;
+}
+
+.project-modal--derengo .project-modal__close {
+  color: #f5f8f1;
+  border-color: rgba(245, 248, 241, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.project-modal--derengo .project-modal__cta {
+  border-color: rgba(245, 248, 241, 0.2);
+  box-shadow: none;
+}
+
+.derengo-modal {
+  display: grid;
+  gap: 0;
+  padding: 0;
+}
+
+.derengo-panel {
+  position: relative;
+  width: 100%;
+  isolation: isolate;
+  overflow: hidden;
+  --derengo-panel-overlap: 56px;
+}
+
+.project-modal--derengo .derengo-panel {
+  margin-left: calc(-1 * var(--derengo-body-pad-x, 0px));
+  margin-right: calc(-1 * var(--derengo-body-pad-x, 0px));
+  width: calc(
+    100% + var(--derengo-body-pad-x, 0px) + var(--derengo-body-pad-x, 0px)
+  );
+}
+
+.derengo-panel--overlap {
+  margin-top: calc(-1 * var(--derengo-panel-overlap));
+  padding-top: var(--derengo-panel-overlap);
+}
+
+.derengo-panel__bg,
+.derengo-panel__overlay {
+  position: absolute;
+  top: calc(-2px - var(--derengo-panel-bg-shift-y, 0px));
+  bottom: calc(-2px + var(--derengo-panel-bg-shift-y, 0px));
+  left: -2px;
+  right: -2px;
+  clip-path: var(--derengo-panel-clip);
+  transform: translateY(var(--derengo-panel-bg-shift-y, 0px));
+  will-change: transform;
+}
+
+.derengo-panel__bg {
+  background: #0f1712;
+  z-index: 0;
+}
+
+.derengo-panel__bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--derengo-panel-image-position, center);
+  transform: scale(var(--derengo-panel-image-zoom, 1.06));
+  transform-origin: center;
+  filter: saturate(0.98) contrast(0.98) brightness(1);
+}
+
+.derengo-panel__overlay {
+  background: var(--derengo-panel-overlay-color);
+  opacity: var(--derengo-panel-overlay-strength);
+  z-index: 1;
+}
+
+.derengo-panel__content {
+  position: relative;
+  z-index: 2;
+  padding: 56px var(--derengo-body-pad-x, 0px);
+}
+
+.derengo-panel--hero .derengo-panel__content {
+  padding-top: 52px;
+  padding-bottom: 60px;
+  min-height: 440px;
+}
+
+.derengo-panel--inspirations .derengo-panel__content {
+  padding-top: 36px;
+  padding-bottom: 36px;
+}
+
+.derengo-panel--clip-a {
+  --derengo-panel-clip: polygon(0 6%, 100% 0%, 100% 94%, 0% 100%);
+}
+
+.derengo-panel--clip-b {
+  --derengo-panel-clip: polygon(0 0%, 100% 9%, 100% 100%, 0% 91%);
+}
+
+.derengo-panel--clip-c {
+  --derengo-panel-clip: polygon(0 10%, 100% 0%, 100% 100%, 0% 90%);
+}
+
+.derengo-panel--clip-d {
+  --derengo-panel-clip: polygon(0 0%, 100% 12%, 100% 92%, 0% 100%);
+}
+
+.derengo-modal__brand {
+  max-width: 720px;
+  margin: 0 auto;
+  gap: 6px;
+  padding: 58px 0 58px;
+}
+
+.derengo-modal__brand img {
+  filter: brightness(0) invert(1);
+  width: 132px;
+  height: 132px;
+}
+
+.project-modal--derengo .lumira-modal__brand-name {
+  font-size: 48px;
+  line-height: 1.02;
+  font-family: var(--font-derengo), var(--font-heading), "Segoe UI", system-ui, sans-serif;
+  font-weight: 800;
+}
+
+.project-modal--derengo .lumira-modal__brand-tagline {
+  font-size: 20px;
+  line-height: 1.2;
+  margin-top: -2px;
+}
+
+.derengo-modal__scene {
+  display: grid;
+  gap: 32px;
+}
+
+.derengo-modal__scene--split {
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+  align-items: center;
+  gap: 32px;
+}
+
+.derengo-modal__scene-copy {
+  display: grid;
+  gap: 18px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #edf3ea;
+}
+
+.derengo-modal__centered {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.9;
+  color: #edf3ea;
+  padding: 38px 0 38px;
+}
+
+.derengo-modal__mood {
+  font-size: 22px;
+  line-height: 1.85;
+  color: rgba(245, 248, 241, 0.92);
+}
+
+.derengo-modal__reveal-line {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.derengo-modal__reveal.is-visible .derengo-modal__reveal-line {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.derengo-modal__carousel {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+}
+
+.derengo-modal__carousel-button {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 248, 241, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+  color: #f5f8f1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.derengo-modal__carousel-card {
+  min-height: 320px;
+  height: 340px;
+  padding: 32px 24px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 20px;
+  text-align: center;
+  transition:
+    opacity 0.42s ease,
+    transform 0.42s ease;
+  overflow: hidden;
+}
+
+.derengo-modal__carousel-card.is-hidden {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.derengo-modal__carousel-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.derengo-modal__carousel-card h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.derengo-modal__carousel-card p {
+  margin: 0;
+  color: rgba(237, 243, 234, 0.82);
+}
+
+.derengo-modal__carousel-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+}
+
+.derengo-modal__plain-icon,
+.derengo-modal__image-fallback svg {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.derengo-modal__carousel-icon img {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+}
+
+.derengo-modal__sensory-card .derengo-modal__plain-icon,
+.derengo-modal__community-icon .derengo-modal__plain-icon {
+  width: 96px;
+  height: 96px;
+}
+
+.derengo-modal__future-icon {
+  width: 96px;
+  height: 96px;
+}
+
+.derengo-modal__flow {
+  display: grid;
+  gap: 40px;
+}
+
+.derengo-modal__flow-item {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 36px;
+  align-items: center;
+}
+
+.derengo-modal__flow-item--image-right .derengo-modal__flow-visual {
+  order: 2;
+}
+
+.derengo-modal__flow-item--image-right .derengo-modal__flow-copy {
+  order: 1;
+}
+
+.derengo-modal__flow-visual img {
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+  display: block;
+  border-radius: 22px;
+  box-shadow: none;
+}
+
+.derengo-modal__flow-copy {
+  display: grid;
+  gap: 16px;
+}
+
+.derengo-modal__flow-copy h3 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.derengo-modal__flow-copy p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.85;
+  color: rgba(237, 243, 234, 0.8);
+}
+
+.derengo-modal__sensory-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.derengo-modal__sensory-card {
+  padding: 0;
+  text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+}
+
+.derengo-modal__sensory-card:nth-child(-n + 3) {
+  grid-column: span 2;
+}
+
+.derengo-modal__sensory-card:nth-child(4) {
+  grid-column: 2 / span 2;
+}
+
+.derengo-modal__sensory-card:nth-child(5) {
+  grid-column: 4 / span 2;
+}
+
+.derengo-modal__community-card h3,
+.derengo-modal__inspiration-copy h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.derengo-modal__sensory-text,
+.derengo-modal__community-card p,
+.derengo-modal__inspiration-copy p {
+  margin: 0;
+  color: rgba(237, 243, 234, 0.82);
+}
+
+.derengo-modal__community-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.derengo-modal__community-card {
+  padding: 22px 20px;
+  border-radius: 18px;
+  border: 1px solid rgba(245, 248, 241, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+  text-align: center;
+}
+
+.derengo-modal__community-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.derengo-modal__future {
+  gap: 28px;
+}
+
+.derengo-modal__future .lumira-modal__next-card {
+  background: rgba(255, 255, 255, 0.05);
+  color: #f5f8f1;
+  box-shadow: none;
+}
+
+.derengo-modal__future-card {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.derengo-modal__inspiration-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.derengo-modal__inspiration-card {
+  border: 1px solid rgba(245, 248, 241, 0.14);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  text-align: left;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+.derengo-modal__inspiration-image {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(167, 184, 158, 0.24), rgba(204, 214, 198, 0.18)),
+    linear-gradient(180deg, rgba(49, 60, 48, 0.18), rgba(49, 60, 48, 0.06));
+}
+
+.derengo-modal__inspiration-image img,
+.derengo-modal__popup-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.derengo-modal__image-fallback {
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(245, 248, 241, 0.42);
+}
+
+.derengo-modal__image-fallback--large {
+  min-height: 260px;
+}
+
+.derengo-modal__inspiration-copy {
+  padding: 18px 18px 20px;
+  display: grid;
+  gap: 10px;
+}
+
+.derengo-modal__closing p {
+  font-size: 20px;
+}
+
+.derengo-modal__contact {
+  display: grid;
+  gap: 24px;
+  margin-top: 12px;
+  padding: 24px 0 8px;
+}
+
+.derengo-modal__popup-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(18, 24, 19, 0.52);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 56px;
+  z-index: 1200;
+}
+
+.derengo-modal__popup {
+  position: relative;
+  width: min(960px, 96vw);
+  max-height: 95vh;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  gap: 0;
+  border-radius: 24px;
+  background: #111a14;
+  box-shadow: 0 28px 70px rgba(16, 22, 17, 0.24);
+}
+
+.derengo-modal__popup-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 248, 241, 0.16);
+  background: rgba(255, 255, 255, 0.06);
+  color: #f5f8f1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.derengo-modal__popup-image {
+  position: relative;
+  min-height: 520px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(167, 184, 158, 0.24), rgba(204, 214, 198, 0.18)),
+    linear-gradient(180deg, rgba(49, 60, 48, 0.18), rgba(49, 60, 48, 0.06));
+}
+
+.derengo-modal__popup-image-asset {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.65s ease;
+  pointer-events: none;
+}
+
+.derengo-modal__popup-image-asset.is-hidden {
+  opacity: 0;
+}
+
+.derengo-modal__popup-image-asset.is-visible {
+  opacity: 1;
+}
+
+.derengo-modal__popup-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 248, 241, 0.18);
+  background: rgba(10, 14, 11, 0.35);
+  color: #f5f8f1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.derengo-modal__popup-nav--prev {
+  left: 14px;
+}
+
+.derengo-modal__popup-nav--next {
+  right: 14px;
+}
+
+.derengo-modal__popup-copy {
+  padding: 48px 32px 36px;
+  display: grid;
+  align-content: center;
+  gap: 16px;
+}
+
+.derengo-modal__popup-location {
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(237, 243, 234, 0.62);
+}
+
+.derengo-modal__popup-copy p {
+  color: rgba(237, 243, 234, 0.82);
+}
+
+.derengo-modal__popup-link {
+  margin: 8px 0 0;
+}
+
+.derengo-modal__popup-thumbnails {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  gap: 10px;
+}
+
+.derengo-modal__thumbnail {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(245, 248, 241, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0;
+  cursor: pointer;
+}
+
+.derengo-modal__thumbnail.is-active {
+  border-color: rgba(245, 248, 241, 0.7);
+}
+
+.derengo-modal__thumbnail img,
+.derengo-modal__thumbnail-fallback {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.project-modal--derengo .project-feedback__card {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(245, 248, 241, 0.14);
+}
+
+.project-modal--derengo .contact-row input,
+.project-modal--derengo .contact-row textarea {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(245, 248, 241, 0.16);
+  color: #f5f8f1;
+}
+
+.project-modal--derengo .contact-submit {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(245, 248, 241, 0.16);
+  color: #f5f8f1;
+}
+
+.project-modal--derengo .contact-error {
+  color: #f6b3b3;
+}
+
 @media (max-width: 900px) {
+  .derengo-panel {
+    --derengo-panel-overlap: 44px;
+  }
+
+  .derengo-panel__content {
+    padding: 44px var(--derengo-body-pad-x, 0px);
+  }
+
+  .derengo-panel--hero .derengo-panel__content {
+    min-height: 380px;
+  }
+
+  .derengo-panel--clip-a {
+    --derengo-panel-clip: polygon(0 3%, 100% 0%, 100% 97%, 0% 100%);
+  }
+
+  .derengo-panel--clip-b {
+    --derengo-panel-clip: polygon(0 0%, 100% 4%, 100% 100%, 0% 96%);
+  }
+
+  .derengo-panel--clip-c {
+    --derengo-panel-clip: polygon(0 4%, 100% 0%, 100% 100%, 0% 96%);
+  }
+
+  .derengo-panel--clip-d {
+    --derengo-panel-clip: polygon(0 0%, 100% 6%, 100% 96%, 0% 100%);
+  }
+
   .lumira-modal__split {
     grid-template-columns: 1fr;
   }
@@ -1466,5 +2223,102 @@ strong {
   .lumira-modal__icon-grid-items,
   .lumira-modal__next-cards {
     grid-template-columns: 1fr;
+  }
+
+  .project-modal--derengo .project-modal__body {
+    padding: 12px 32px 30px;
+    --derengo-body-pad-x: 32px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .derengo-modal {
+    gap: 0;
+  }
+
+  .derengo-modal__brand {
+    padding: 24px 0 32px;
+  }
+
+  .derengo-modal__brand img {
+    width: 112px;
+    height: 112px;
+  }
+
+  .derengo-modal__scene--split,
+  .derengo-modal__flow-item,
+  .derengo-modal__popup {
+    grid-template-columns: 1fr;
+  }
+
+  .derengo-modal__popup-image {
+    min-height: 420px;
+  }
+
+  .derengo-modal__flow-item--image-right .derengo-modal__flow-visual,
+  .derengo-modal__flow-item--image-right .derengo-modal__flow-copy {
+    order: 0;
+  }
+
+  .derengo-modal__community-grid,
+  .derengo-modal__inspiration-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .derengo-modal__sensory-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .derengo-modal__sensory-card:nth-child(-n + 3),
+  .derengo-modal__sensory-card:nth-child(4),
+  .derengo-modal__sensory-card:nth-child(5) {
+    grid-column: span 3;
+  }
+
+  .derengo-modal__popup-thumbnails {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .derengo-modal__popup-backdrop {
+    padding: 32px 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .derengo-modal__inspiration-grid,
+  .derengo-modal__community-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .derengo-modal__brand {
+    padding: 16px 0 24px;
+  }
+
+  .derengo-modal__brand img {
+    width: 96px;
+    height: 96px;
+  }
+
+  .derengo-modal__sensory-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .derengo-modal__sensory-card:nth-child(-n + 3),
+  .derengo-modal__sensory-card:nth-child(4),
+  .derengo-modal__sensory-card:nth-child(5) {
+    grid-column: auto;
+  }
+
+  .derengo-modal__mood {
+    font-size: 20px;
+  }
+
+  .derengo-modal__popup-backdrop {
+    padding: 32px 16px;
+  }
+
+  .derengo-modal__popup-image {
+    min-height: 320px;
   }
 }
