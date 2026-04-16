@@ -748,7 +748,7 @@ p {
 
 .about-block {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
   gap: 20px;
   align-items: start;
 }
@@ -759,6 +759,8 @@ p {
 
 .about-block__grid {
   display: block;
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .about-block__image {
@@ -767,6 +769,8 @@ p {
   border-radius: 12px;
   display: block;
   object-fit: cover;
+  transform: scale(1.08);
+  transform-origin: center;
 }
 
 .hero-role {

@@ -36,8 +36,8 @@ const derengoDisplay = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "FM-Space",
-  description: "FM-Space portfolio",
+  title: "Térszövő",
+  description: "Felfedezhető, bejárható digitális rendszereket építek komplex témákból. Ismerd meg mindet, merülj el bármelyikben!",
   icons: {
     icon: "/fm-labs_logo.svg"
   }
