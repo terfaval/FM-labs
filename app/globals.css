@@ -677,14 +677,14 @@ p {
   font-weight: 800;
   font-size: 82px;
   margin: 0;
-  color: #e0902d;
+  color: #68844C;
   text-transform: uppercase;
   line-height: 1;
 }
 
 .site-header__tagline {
   margin: 0;
-  color: #008acc;
+  color: #5C8DA7;
   font-weight: 700;
   font-size: 22px;
   line-height: 1.2;
@@ -731,19 +731,19 @@ p {
   justify-content: center;
   padding: 10px 20px;
   border-radius: 999px;
-  border: 1px solid #008acc;
+  border: 1px solid #5C8DA7;
   font-weight: 600;
   text-decoration: none;
 }
 
 .site-header__cta--primary {
-  background: #008acc;
+  background: #5C8DA7;
   color: #ffffff;
 }
 
 .site-header__cta--inverse {
   background: #ffffff;
-  color: #008acc;
+  color: #5C8DA7;
 }
 
 .about-block {
