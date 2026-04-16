@@ -2,7 +2,7 @@
 
 ## META
 
-title: Fatér Máté
+title: Térszövő
 role: researcher - tool builder
 language: hu
 
@@ -10,8 +10,7 @@ tagline:
 Komplex témákból felfedezhető rendszereket építek
 
 intro:
-Olyan digitális eszközöket hozok létre,
-amelyek nem csak információt adnak vissza,
+Szia! Fatér Máté vagyok és olyan digitális eszközöket hozok létre, amelyek nem csak információt adnak vissza,
 hanem segítenek eligazodni benne, így a használatuk kulcsa a felfedezés lesz. A legtöbb ilyen rendszert egyedül indítom el,
 de a fejlesztésükben mindig nyitott vagyok az együttműködésre.
 
