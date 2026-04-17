@@ -185,9 +185,9 @@ export function SzarnyfeszitoModalNarrative({ model }: { model: SzarnyfeszitoMod
         </div>
       </section>
 
+      <SingleImageBlock {...model.terkepCore} />
       <SingleImageBlock {...model.madarKatalogus} />
       <TwoImageBlock {...model.madarMegfigyeles} />
-      <SingleImageBlock {...model.terkepCore} />
 
       <section className="lumira-modal__mood">
         {model.mood.text.split(/\n/).map((line) => (
