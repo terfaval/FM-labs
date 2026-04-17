@@ -24,19 +24,29 @@ export function SiteHeader({ meta }: { meta: Meta }) {
       </div>
       <div className="site-header__intro">
         <div className="site-header__content">
-          <div className="site-header__heading">
-            <div className="site-header__title">{meta.title}</div>
-            <p className="site-header__tagline">{meta.tagline}</p>
+          <div className="site-header__content-main">
+            <div className="site-header__heading">
+              <div className="site-header__title">{meta.title}</div>
+              <p className="site-header__tagline">{meta.tagline}</p>
+            </div>
+            <div className="site-header__body">
+              {renderParagraphs(meta.intro)}
+            </div>
           </div>
-          <div className="site-header__body">{renderParagraphs(meta.intro)}</div>
-        </div>
-        <div className="site-header__cta-group">
-          <a className="site-header__cta site-header__cta--primary" href="#kiemelt-projektek">
-            Projektek
-          </a>
-          <a className="site-header__cta site-header__cta--inverse" href="#egyuttmukodes">
-            Kapcsolat
-          </a>
+          <div className="site-header__cta-group">
+            <a
+              className="site-header__cta site-header__cta--primary"
+              href="#kiemelt-projektek"
+            >
+              Projektek
+            </a>
+            <a
+              className="site-header__cta site-header__cta--inverse"
+              href="#egyuttmukodes"
+            >
+              Kapcsolat
+            </a>
+          </div>
         </div>
       </div>
     </section>

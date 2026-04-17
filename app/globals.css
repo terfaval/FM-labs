@@ -132,9 +132,25 @@ p {
   inset: 0;
   background-image: var(--card-overlay), var(--card-bg);
   background-size: cover;
-  background-position: center;
+  background-position: var(--card-bg-position, center);
   background-repeat: no-repeat;
   z-index: 0;
+}
+
+.project-card--lumira-glass {
+  --card-bg-position: left center;
+}
+
+.project-card--kincstarto {
+  --card-bg-position: right center;
+}
+
+.project-card--derengo {
+  --card-bg-position: center;
+}
+
+.project-card--szarnyfeszito {
+  --card-bg-position: right center;
 }
 
 .project-card--lumira-glass::before {
@@ -699,9 +715,15 @@ p {
 .site-header__content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   gap: 16px;
   flex: 1;
+}
+
+.site-header__content-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .site-header__heading {
@@ -900,9 +922,21 @@ p {
   inset: 0;
   background-image: var(--card-overlay), var(--card-bg);
   background-size: cover;
-  background-position: center;
+  background-position: var(--card-bg-position, center);
   background-repeat: no-repeat;
   z-index: 0;
+}
+
+.project-modal--lumira {
+  --card-bg-position: left center;
+}
+
+.project-modal--kincstarto {
+  --card-bg-position: right center;
+}
+
+.project-modal--derengo {
+  --card-bg-position: center;
 }
 
 .project-modal--lumira::before {

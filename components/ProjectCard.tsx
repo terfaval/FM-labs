@@ -39,6 +39,7 @@ export function ProjectCard({
       }${project.slug === "lumira" ? " project-card--lumira-glass" : ""}${
         project.slug === "kincstarto" ? " project-card--kincstarto" : ""
       }${project.slug === "derengo" ? " project-card--derengo" : ""
+      }${project.slug === "szarnyfeszito" ? " project-card--szarnyfeszito" : ""
       }`}
       type="button"
       style={style}
