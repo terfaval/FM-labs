@@ -5,6 +5,7 @@ import { loadKincstartoModalContent } from "@/lib/content/kincstartoModal";
 import { buildKincstartoModalModel } from "@/lib/content/kincstartoModalModel";
 import { loadDerengoModalContent } from "@/lib/content/derengoModal";
 import { buildDerengoModalModel } from "@/lib/content/derengoModalModel";
+import { buildSzarnyfeszitoModalModel } from "@/lib/content/szarnyfeszitoModalModel";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SectionBlock } from "@/components/SectionBlock";
 import { CollaborationBlock } from "@/components/CollaborationBlock";
@@ -22,6 +23,12 @@ export default function HomePage() {
 
   const featured = content.featuredProjects;
   const other = content.otherProjects;
+  const szarnyfeszitoProject = featured.find(
+    (project) => project.slug === "szarnyfeszito"
+  );
+  const szarnyfeszitoModal = szarnyfeszitoProject
+    ? buildSzarnyfeszitoModalModel(szarnyfeszitoProject)
+    : null;
 
   const kincstarto = other.find((project) => project.slug === "kincstarto");
   const topFeaturedSlugs = new Set(["lumira", "szarnyfeszito"]);
@@ -82,6 +89,7 @@ export default function HomePage() {
         lumiraModal={lumiraModal}
         kincstartoModal={kincstartoModal}
         derengoModal={derengoModal}
+        szarnyfeszitoModal={szarnyfeszitoModal}
       />
 
       <SectionBlock id="egyuttmukodes">

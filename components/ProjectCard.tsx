@@ -67,7 +67,9 @@ export function ProjectCard({
       ) : featuredLayout ? (
         <div
           className={`project-card__split${
-            project.slug === "kincstarto" ? " project-card__split--reverse" : ""
+            project.slug === "kincstarto" || project.slug === "szarnyfeszito"
+              ? " project-card__split--reverse"
+              : ""
           }`}
         >
           <div className="project-card__brand-col">
@@ -97,7 +99,9 @@ export function ProjectCard({
             ) : null}
           </div>
           <div className="project-card__content">
-            <p className="project-card__hero">{project.hero}</p>
+            <p className="project-card__hero">
+              {project.slug === "szarnyfeszito" ? project.card : project.hero}
+            </p>
             {project.status ? (
               <div className="project-meta">{project.status}</div>
             ) : null}

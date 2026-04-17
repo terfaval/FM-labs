@@ -100,7 +100,7 @@ hero:
 Útikalauz szárnyaló kalandoroknak, akik szeretnének közelebb kerülni a madarak világához, de nem tudják, hol érdemes elindulni. 
 
 card:
-Madármegfigyelést segítő rendszer, amely egy bejárható térként mutatja meg a fajokat és helyszíneket.
+A Szárnyfeszítő egy tér-alapú felület, amely a madármegfigyelést a helyszínek felől közelíti meg. A fajok és élőhelyek összekapcsolása révén nem egy teljes adatbázist ad, hanem irányokat, amelyek mentén a megfigyelés fokozatosan mélyülhet.
 
 what:
 A Szárnyfeszítő egy publikus webes rendszer, amely madárfajokat és megfigyelési helyszíneket szervez egy könnyen bejárható struktúrába.

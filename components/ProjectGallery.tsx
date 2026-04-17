@@ -9,9 +9,11 @@ import { SectionBlock } from "@/components/SectionBlock";
 import { LumiraModalNarrative } from "@/components/lumira/LumiraModalNarrative";
 import { KincstartoModalNarrative } from "@/components/kincstarto/KincstartoModalNarrative";
 import { DerengoModalNarrative } from "@/components/derengo/DerengoModalNarrative";
+import { SzarnyfeszitoModalNarrative } from "@/components/szarnyfeszito/SzarnyfeszitoModalNarrative";
 import { LumiraModalModel } from "@/lib/content/lumiraModalModel";
 import { KincstartoModalModel } from "@/lib/content/kincstartoModalModel";
 import { DerengoModalModel } from "@/lib/content/derengoModalModel";
+import { SzarnyfeszitoModalModel } from "@/lib/content/szarnyfeszitoModalModel";
 
 type ProjectGalleryProps = {
   topFeatured: Project[];
@@ -21,6 +23,7 @@ type ProjectGalleryProps = {
   lumiraModal?: LumiraModalModel | null;
   kincstartoModal?: KincstartoModalModel | null;
   derengoModal?: DerengoModalModel | null;
+  szarnyfeszitoModal?: SzarnyfeszitoModalModel | null;
 };
 
 function renderParagraphs(text: string) {
@@ -35,12 +38,14 @@ function ProjectModal({
   lumiraModal,
   kincstartoModal,
   derengoModal,
+  szarnyfeszitoModal,
 }: {
   project: Project;
   onClose: () => void;
   lumiraModal?: LumiraModalModel | null;
   kincstartoModal?: KincstartoModalModel | null;
   derengoModal?: DerengoModalModel | null;
+  szarnyfeszitoModal?: SzarnyfeszitoModalModel | null;
 }) {
   const visual = projectVisuals[project.slug];
   const isSzarnyfeszito = project.slug === "szarnyfeszito";
@@ -67,6 +72,12 @@ function ProjectModal({
         "--card-bg": 'url("/kincstarto/modal_background.png")',
       } as CSSProperties)
     : style;
+  const szarnyfeszitoStyle = isSzarnyfeszito
+    ? ({
+        ...style,
+        "--card-bg": 'url("/szarnyfeszito/modal_background.png")',
+      } as CSSProperties)
+    : style;
   const directionStyle = {
     gridTemplateColumns: `repeat(${project.direction.length}, minmax(0, 1fr))`,
   };
@@ -89,8 +100,16 @@ function ProjectModal({
   return (
     <div className="modal-backdrop" onClick={onClose} role="presentation">
       <div
-        className={`project-modal${isLumira ? " project-modal--lumira" : ""}${isKincstarto ? " project-modal--kincstarto" : ""}${isDerengo ? " project-modal--derengo" : ""}`}
-        style={isLumira ? lumiraStyle : isKincstarto ? kincstartoStyle : style}
+        className={`project-modal${isLumira ? " project-modal--lumira" : ""}${isKincstarto ? " project-modal--kincstarto" : ""}${isDerengo ? " project-modal--derengo" : ""}${isSzarnyfeszito ? " project-modal--szarnyfeszito" : ""}`}
+        style={
+          isLumira
+            ? lumiraStyle
+            : isKincstarto
+              ? kincstartoStyle
+              : isSzarnyfeszito
+                ? szarnyfeszitoStyle
+                : style
+        }
         onClick={(event) => event.stopPropagation()}
         role="dialog"
         aria-modal="true"
@@ -112,6 +131,8 @@ function ProjectModal({
             <LumiraModalNarrative model={lumiraModal} />
           ) : isKincstarto && kincstartoModal ? (
             <KincstartoModalNarrative model={kincstartoModal} />
+          ) : isSzarnyfeszito && szarnyfeszitoModal ? (
+            <SzarnyfeszitoModalNarrative model={szarnyfeszitoModal} />
           ) : isDerengo && derengoModal ? (
             <DerengoModalNarrative model={derengoModal} onRequestClose={onClose} />
           ) : (
@@ -195,6 +216,7 @@ export function ProjectGallery({
   lumiraModal,
   kincstartoModal,
   derengoModal,
+  szarnyfeszitoModal,
 }: ProjectGalleryProps) {
   const [selected, setSelected] = useState<Project | null>(null);
   const lumira = topFeatured.find((project) => project.slug === "lumira");
@@ -259,6 +281,7 @@ export function ProjectGallery({
           lumiraModal={lumiraModal}
           kincstartoModal={kincstartoModal}
           derengoModal={derengoModal}
+          szarnyfeszitoModal={szarnyfeszitoModal}
         />
       )}
     </>
