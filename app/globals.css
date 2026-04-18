@@ -32,7 +32,7 @@ a:hover {
 main {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 64px 108px 96px;
+  padding: 64px 108px 0;
 }
 
 h1,
@@ -73,6 +73,10 @@ p {
 
 .project-grid.two {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.project-grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .project-grid.panel {
@@ -357,6 +361,47 @@ p {
   align-self: flex-start;
 }
 
+#tovabbi-projektek .project-card {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  text-align: center;
+  padding: 28px 20px;
+  transition: transform 0.15s ease;
+}
+
+#tovabbi-projektek .project-card::before {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #tovabbi-projektek .project-card:hover {
+    transform: scale(1.03);
+    box-shadow: none;
+  }
+}
+
+#tovabbi-projektek .project-card__header {
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+#tovabbi-projektek .project-card__logo {
+  width: 96px;
+  height: 96px;
+}
+
+#tovabbi-projektek .project-card__summary {
+  font-size: 16px;
+}
+
+#tovabbi-projektek .project-meta {
+  margin-top: 18px;
+  text-align: center;
+}
+
 .approach-block {
   margin: 32px 0 8px;
   display: grid;
@@ -382,19 +427,19 @@ p {
 }
 
 .approach-card {
-  border: 1px solid var(--line);
   background: #fff;
   border-radius: 16px;
   padding: 20px;
   display: grid;
   gap: 10px;
-  transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+  justify-items: center;
+  text-align: center;
 }
 
 .approach-card__icon {
-  width: 28px;
-  height: 28px;
-  color: var(--accent);
+  width: 46px;
+  height: 46px;
+  color: #2A9DAF;
 }
 
 .approach-card__title {
@@ -492,10 +537,44 @@ p {
   text-align: center;
 }
 
+.section#egyuttmukodes {
+  padding-bottom: 0;
+}
+
+.collaboration-block .contact-header {
+  position: relative;
+  padding: 56px 0 48px;
+}
+
+.collaboration-block .contact-section.is-centered {
+  position: relative;
+}
+
+.collaboration-block .contact-section.is-centered::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 50vw);
+  width: 100vw;
+  background: rgba(217, 217, 217, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.collaboration-block .contact-links {
+  padding-bottom: 16px;
+}
+
+.collaboration-block .contact-section.is-centered > * {
+  position: relative;
+  z-index: 1;
+}
+
 .collaboration-copy p {
   font-size: 24px;
   line-height: 1.7;
-  margin-top: 15px;
+  padding-bottom: 40px;
 }
 
 .collaboration-block .contact-card {
@@ -612,26 +691,6 @@ p {
   color: #b63b3b;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .approach-card__text {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-height 0.22s ease, opacity 0.22s ease;
-  }
-
-  .approach-card:hover {
-    background: #f2f7fb;
-    border-color: #cfe3f3;
-    transform: scale(1.03);
-  }
-
-  .approach-card:hover .approach-card__text {
-    max-height: 200px;
-    opacity: 1;
-  }
-}
-
 .project-card.full {
   grid-column: 1 / -1;
 }
@@ -693,14 +752,14 @@ p {
   font-weight: 800;
   font-size: 82px;
   margin: 0;
-  color: #68844C;
+  color: #EFAA11;
   text-transform: uppercase;
   line-height: 1;
 }
 
 .site-header__tagline {
   margin: 0;
-  color: #5C8DA7;
+  color: #2A9DAF;
   font-weight: 700;
   font-size: 22px;
   line-height: 1.2;
@@ -753,19 +812,19 @@ p {
   justify-content: center;
   padding: 10px 20px;
   border-radius: 999px;
-  border: 1px solid #5C8DA7;
+  border: 1px solid #2A9DAF;
   font-weight: 600;
   text-decoration: none;
 }
 
 .site-header__cta--primary {
-  background: #5C8DA7;
+  background: #2A9DAF;
   color: #ffffff;
 }
 
 .site-header__cta--inverse {
   background: #ffffff;
-  color: #5C8DA7;
+  color: #2A9DAF;
 }
 
 .about-block {
@@ -1301,6 +1360,10 @@ p {
     padding: 20px;
   }
 
+  .collaboration-block .contact-header {
+    padding: 40px 0 36px;
+  }
+
   .collaboration-copy p {
     font-size: 22px;
   }
@@ -1347,6 +1410,10 @@ strong {
 
 @media (max-width: 820px) {
   .project-grid.two {
+    grid-template-columns: 1fr;
+  }
+
+  .project-grid.three {
     grid-template-columns: 1fr;
   }
 
@@ -2494,5 +2561,524 @@ strong {
 
   .derengo-modal__popup-image {
     min-height: 320px;
+  }
+}
+
+/* Urban Eco Learning Lab modal */
+.urbanecolab-modal {
+  font-family: var(--font-urbanecolab), var(--font-body), "Segoe UI", system-ui, sans-serif;
+  padding: 24px 10px 32px;
+}
+
+.urbanecolab-modal--dark-text {
+  color: var(--text);
+}
+
+.urbanecolab-modal--dark-text .lumira-modal__brand img {
+  filter: none;
+}
+
+.urbanecolab-modal--dark-text .lumira-modal__brand-name,
+.urbanecolab-modal--dark-text .lumira-modal__brand-tagline {
+  font-family: var(--font-urbanecolab), var(--font-heading), "Segoe UI", system-ui, sans-serif;
+  color: var(--text);
+  text-transform: none;
+}
+
+.urbanecolab-modal--dark-text .lumira-modal__brand-name {
+  font-weight: 900;
+  font-size: 34px;
+}
+
+.urbanecolab-modal--dark-text .lumira-modal__brand-tagline {
+  font-weight: 500;
+}
+
+.urbanecolab-modal--dark-text .lumira-modal__mood {
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.urbanecolab-modal--dark-text .lumira-modal__icon-card {
+  color: var(--text);
+}
+
+.urbanecolab-modal--dark-text .lumira-modal__icon-card p {
+  color: var(--muted);
+  margin: 0;
+}
+
+.urbanecolab-modal--dark-text .lumira-modal__icon-title {
+  font-weight: 800;
+}
+
+.urbanecolab-modal__principles .lumira-modal__icon img,
+.urbanecolab-modal__learning .lumira-modal__icon img {
+  width: 72px;
+  height: 72px;
+}
+
+.urbanecolab-modal__principles .lumira-modal__icon svg,
+.urbanecolab-modal__learning .lumira-modal__icon svg {
+  width: 72px;
+  height: 72px;
+}
+
+.urbanecolab-modal__logo {
+  width: 190px;
+  height: 190px;
+}
+
+.urbanecolab-modal .lumira-modal__brand {
+  padding: 42px 0 54px;
+}
+
+.urbanecolab-modal__section-title {
+  font-size: 24px;
+  margin: 0 0 36px;
+  text-align: center;
+  font-weight: 900;
+}
+
+.urbanecolab-modal__section-intro,
+.urbanecolab-modal__section-outro {
+  max-width: 760px;
+  margin: 0 auto 18px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.urbanecolab-modal__section-outro {
+  margin-top: 18px;
+  margin-bottom: 0;
+}
+
+.urbanecolab-modal__competencies {
+  display: grid;
+  gap: 18px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.urbanecolab-modal__competency-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px 22px;
+  align-items: start;
+}
+
+.urbanecolab-modal__competency-card {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.urbanecolab-modal__competency-media {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: transparent;
+  display: grid;
+  place-items: center;
+}
+
+.urbanecolab-modal__competency-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.urbanecolab-modal__competency-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.urbanecolab-modal__competency-text p {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.urbanecolab-modal__age-flow {
+  display: grid;
+  gap: 56px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.urbanecolab-modal__age-flow-item {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  align-items: center;
+}
+
+.urbanecolab-modal__age-flow-item--image-right .urbanecolab-modal__age-visual {
+  order: 2;
+}
+
+.urbanecolab-modal__age-flow-item--image-right .urbanecolab-modal__age-copy {
+  order: 1;
+}
+
+.urbanecolab-modal__age-visual img {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 22px;
+}
+
+.urbanecolab-modal__age-copy {
+  display: grid;
+  gap: 12px;
+}
+
+.urbanecolab-modal__age-copy h4 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.urbanecolab-modal__age-copy p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.85;
+  font-weight: 500;
+}
+
+.urbanecolab-modal__age-details {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.85;
+  font-weight: 400;
+}
+
+.urbanecolab-modal__more {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.urbanecolab-modal__more:hover {
+  opacity: 0.92;
+}
+
+.urbanecolab-modal__modules {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: grid;
+  gap: 18px;
+}
+
+.urbanecolab-modal__modules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.urbanecolab-modal__module-card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 18px;
+  background: #fff;
+  display: grid;
+  gap: 10px;
+  text-align: center;
+}
+
+.urbanecolab-modal__module-icon img {
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  display: block;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+.urbanecolab-modal__module-title {
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.urbanecolab-modal__module-text {
+  margin: 0;
+  color: var(--muted);
+}
+
+.urbanecolab-modal__school {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: grid;
+  gap: 18px;
+}
+
+.urbanecolab-modal__carousel {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.urbanecolab-modal__carousel-nav {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 12px;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.urbanecolab-modal__carousel-nav:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.urbanecolab-modal__carousel-card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 18px;
+  background: #fff;
+}
+
+.urbanecolab-modal__carousel-card h4 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.urbanecolab-modal__carousel-card p {
+  color: var(--muted);
+}
+
+.urbanecolab-modal__carousel-indicator {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.urbanecolab-modal__list {
+  margin: 10px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+.urbanecolab-modal__note {
+  max-width: 760px;
+  margin: 0 auto;
+  color: var(--muted);
+  text-align: center;
+}
+
+.urbanecolab-modal__roadmap {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: grid;
+  gap: 18px;
+}
+
+.urbanecolab-modal__roadmap-grid {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.urbanecolab-modal__roadmap-grid.is-compact {
+  overflow-x: auto;
+}
+
+.urbanecolab-modal__roadmap-node {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px;
+  background: #fff;
+  display: grid;
+  gap: 10px;
+  min-width: 260px;
+  position: relative;
+  scroll-snap-align: start;
+}
+
+.urbanecolab-modal__roadmap-grid {
+  scroll-snap-type: x proximity;
+}
+
+.urbanecolab-modal__roadmap-node:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: -16px;
+  top: 50%;
+  width: 16px;
+  height: 1px;
+  background: var(--line);
+}
+
+.urbanecolab-modal__roadmap-node:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  right: -16px;
+  top: calc(50% - 5px);
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 7px solid var(--line);
+}
+
+.urbanecolab-modal__roadmap-title {
+  font-weight: 900;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.urbanecolab-modal__roadmap-sub {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.urbanecolab-modal__goal {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--muted);
+}
+
+.urbanecolab-modal__open-call {
+  max-width: 860px;
+  margin: 0 auto;
+  display: grid;
+  gap: 18px;
+}
+
+.urbanecolab-modal__open-call-copy {
+  text-align: center;
+  color: var(--muted);
+}
+
+.urbanecolab-modal__popup-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: grid;
+  place-items: center;
+  padding: 40px 20px;
+  z-index: 60;
+}
+
+.urbanecolab-modal__age-groups .urbanecolab-modal__more {
+  justify-self: start;
+  width: fit-content;
+  border-color: rgba(47, 111, 94, 0.22);
+  background: rgba(47, 111, 94, 0.12);
+  color: #1c4f3f;
+}
+
+.urbanecolab-modal__popup {
+  width: min(860px, 92vw);
+  max-height: 80vh;
+  background: #fff;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: auto;
+}
+
+.urbanecolab-modal__popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fff;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.urbanecolab-modal__popup-image {
+  width: 100%;
+  background: #fff;
+}
+
+.urbanecolab-modal__popup-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.urbanecolab-modal__closing p {
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.urbanecolab-modal__image-fallback {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .urbanecolab-modal__competency-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .urbanecolab-modal__modules-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .urbanecolab-modal__roadmap-grid {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+}
+
+@media (max-width: 600px) {
+  .urbanecolab-modal__logo {
+    width: 150px;
+    height: 150px;
+  }
+
+  .urbanecolab-modal__age-flow-item {
+    grid-template-columns: 1fr;
+  }
+
+  .urbanecolab-modal__age-visual img {
+    max-width: 260px;
+  }
+
+  .urbanecolab-modal__modules-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .urbanecolab-modal__carousel {
+    grid-template-columns: 1fr;
+  }
+
+  .urbanecolab-modal__carousel-nav {
+    display: none;
+  }
+
+  .urbanecolab-modal__popup {
+    max-height: 82vh;
+  }
+
+  .urbanecolab-modal__competency-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }

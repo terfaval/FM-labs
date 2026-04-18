@@ -142,7 +142,7 @@ direction:
 title: Mirachai
 
 hero:
-Hangulat-alapú teafelfedező rendszer, amely egy vizuális, navigálható térként szervezi a teák világát.
+Hangulat-alapú teafelfedező rendszer egy vizuális, navigálható térben.
 
 card:
 Digitális teagyűjtemény, ahol az ízek, hatások és elkészítési módok összefüggő rendszerben jelennek meg.
@@ -166,7 +166,7 @@ unique:
 Nem katalógusként működik, hanem egy összefüggő felfedező térként, ahol a kapcsolatok legalább olyan fontosak, mint az egyes elemek.
 
 status:
-Fejlett prototípus – A fő logika és felületek működnek.
+Fejlett prototípus
 
 direction:
 
@@ -182,7 +182,7 @@ direction:
 title: Novira
 
 hero:
-Webalapú irodalmi műhely, amely klasszikus szövegek modernizálását egy kontrollált munkafolyamattá alakítja.
+Irodalmi műhely, amely klasszikus szövegek modernizálását egy kontrollált folyamattá alakítja.
 
 card:
 Digitális szerkesztői rendszer, ahol az eredeti és a modernizált szöveg párhuzamosan kezelhető.

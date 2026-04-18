@@ -62,4 +62,12 @@ export const projectVisuals: Record<
     ctaFrom: "#738a6e",
     ctaTo: "#97aa8d",
   },
+  urbanecolab: {
+    background: "none",
+    logo: "/urbanecolab/logo.svg",
+    overlay: "linear-gradient(135deg, rgba(245, 245, 245, 0.6), rgba(245, 245, 245, 0.6))",
+    appUrl: "",
+    ctaFrom: "#2f6f5e",
+    ctaTo: "#2f6f5e",
+  },
 };

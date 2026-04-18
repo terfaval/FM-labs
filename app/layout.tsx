@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Outfit, Roboto, Rubik, Space_Grotesk } from "next/font/google";
+import { Montserrat, Outfit, Roboto, Rubik, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import "./mobile.css";
 
@@ -35,6 +35,14 @@ const derengoDisplay = Outfit({
   style: "normal",
 });
 
+const urbanEcoLabDisplay = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-urbanecolab",
+  display: "swap",
+  weight: ["400", "500", "600", "700", "900"],
+  style: "normal",
+});
+
 export const metadata: Metadata = {
   title: "Térszövő",
   description: "Felfedezhető, bejárható digitális rendszereket építek komplex témákból. Ismerd meg mindet, merülj el bármelyikben!",
@@ -51,7 +59,7 @@ export default function RootLayout({
   return (
     <html
       lang="hu"
-      className={`${kincstartoBody.variable} ${kincstartoDisplay.variable} ${lumiraDisplay.variable} ${derengoDisplay.variable}`}
+      className={`${kincstartoBody.variable} ${kincstartoDisplay.variable} ${lumiraDisplay.variable} ${derengoDisplay.variable} ${urbanEcoLabDisplay.variable}`}
     >
       <body>{children}</body>
     </html>

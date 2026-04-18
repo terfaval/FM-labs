@@ -31,7 +31,11 @@ export function ApproachBlock({ intro, outro, items }: ApproachBlockProps) {
             const Icon = ICONS[index % ICONS.length];
             return (
               <div className="approach-card" key={`${item.title}-${index}`}>
-                <Icon className="approach-card__icon" aria-hidden="true" />
+                <Icon
+                  className="approach-card__icon"
+                  strokeWidth={1.1}
+                  aria-hidden="true"
+                />
                 <div className="approach-card__title">{item.title}</div>
                 <p className="approach-card__text">{item.text}</p>
               </div>

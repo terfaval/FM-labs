@@ -122,7 +122,7 @@ export function ProjectCard({
             ) : null}
             <h3 className="project-card__title">{project.title}</h3>
           </div>
-          <p>{project.hero}</p>
+          <p className="project-card__summary">{project.hero}</p>
           {project.status ? <div className="project-meta">{project.status}</div> : null}
         </>
       )}
