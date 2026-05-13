@@ -16,6 +16,8 @@ import { DerengoModalModel } from "@/lib/content/derengoModalModel";
 import { SzarnyfeszitoModalModel } from "@/lib/content/szarnyfeszitoModalModel";
 import { UrbanEcoLabModalNarrative } from "@/components/urbanecolab/UrbanEcoLabModalNarrative";
 import type { UrbanEcoLabModalModel } from "@/lib/content/urbanEcoLabModalModel";
+import { NoviraModalNarrative } from "@/components/novira/NoviraModalNarrative";
+import type { NoviraModalModel } from "@/lib/content/noviraModalModel";
 
 type ProjectGalleryProps = {
   topFeatured: Project[];
@@ -27,6 +29,7 @@ type ProjectGalleryProps = {
   derengoModal?: DerengoModalModel | null;
   szarnyfeszitoModal?: SzarnyfeszitoModalModel | null;
   urbanEcoLabModal?: UrbanEcoLabModalModel | null;
+  noviraModal?: NoviraModalModel | null;
 };
 
 function renderParagraphs(text: string) {
@@ -43,6 +46,7 @@ function ProjectModal({
   derengoModal,
   szarnyfeszitoModal,
   urbanEcoLabModal,
+  noviraModal,
 }: {
   project: Project;
   onClose: () => void;
@@ -51,6 +55,7 @@ function ProjectModal({
   derengoModal?: DerengoModalModel | null;
   szarnyfeszitoModal?: SzarnyfeszitoModalModel | null;
   urbanEcoLabModal?: UrbanEcoLabModalModel | null;
+  noviraModal?: NoviraModalModel | null;
 }) {
   const visual = projectVisuals[project.slug];
   const isSzarnyfeszito = project.slug === "szarnyfeszito";
@@ -58,6 +63,7 @@ function ProjectModal({
   const isKincstarto = project.slug === "kincstarto";
   const isDerengo = project.slug === "derengo";
   const isUrbanEcoLab = project.slug === "urbanecolab";
+  const isNovira = project.slug === "novira";
   const style = visual
     ? ({
         "--card-bg": `url("${visual.background}")`,
@@ -106,7 +112,7 @@ function ProjectModal({
   return (
     <div className="modal-backdrop" onClick={onClose} role="presentation">
       <div
-        className={`project-modal${isLumira ? " project-modal--lumira" : ""}${isKincstarto ? " project-modal--kincstarto" : ""}${isDerengo ? " project-modal--derengo" : ""}${isSzarnyfeszito ? " project-modal--szarnyfeszito" : ""}`}
+        className={`project-modal${isLumira ? " project-modal--lumira" : ""}${isKincstarto ? " project-modal--kincstarto" : ""}${isDerengo ? " project-modal--derengo" : ""}${isSzarnyfeszito ? " project-modal--szarnyfeszito" : ""}${isNovira ? " project-modal--novira" : ""}`}
         style={
           isLumira
             ? lumiraStyle
@@ -141,6 +147,8 @@ function ProjectModal({
             <SzarnyfeszitoModalNarrative model={szarnyfeszitoModal} />
           ) : isUrbanEcoLab && urbanEcoLabModal ? (
             <UrbanEcoLabModalNarrative model={urbanEcoLabModal} />
+          ) : isNovira && noviraModal ? (
+            <NoviraModalNarrative model={noviraModal} />
           ) : isDerengo && derengoModal ? (
             <DerengoModalNarrative model={derengoModal} onRequestClose={onClose} />
           ) : (
@@ -226,6 +234,7 @@ export function ProjectGallery({
   derengoModal,
   szarnyfeszitoModal,
   urbanEcoLabModal,
+  noviraModal,
 }: ProjectGalleryProps) {
   const [selected, setSelected] = useState<Project | null>(null);
   const lumira = topFeatured.find((project) => project.slug === "lumira");
@@ -292,6 +301,7 @@ export function ProjectGallery({
           derengoModal={derengoModal}
           szarnyfeszitoModal={szarnyfeszitoModal}
           urbanEcoLabModal={urbanEcoLabModal}
+          noviraModal={noviraModal}
         />
       )}
     </>

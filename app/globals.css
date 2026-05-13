@@ -1002,6 +1002,10 @@ p {
   --card-bg-position: center;
 }
 
+.project-modal--novira {
+  --card-bg-position: center;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -2632,6 +2636,112 @@ strong {
 
 .urbanecolab-modal .lumira-modal__brand {
   padding: 42px 0 54px;
+}
+
+/* Novira modal */
+.project-modal--novira {
+  color: #1b2236;
+}
+
+.project-modal--novira .project-modal__close {
+  color: #1b2236;
+  border-color: rgba(27, 34, 54, 0.22);
+  background: rgba(255, 251, 241, 0.82);
+}
+
+.novira-modal {
+  font-family: var(--font-body), "Segoe UI", system-ui, sans-serif;
+  padding: 24px 8px 32px;
+}
+
+.novira-modal--dark-text,
+.novira-modal--dark-text .lumira-modal__brand-name,
+.novira-modal--dark-text .lumira-modal__brand-tagline,
+.novira-modal--dark-text .lumira-modal__icon-card,
+.novira-modal--dark-text .lumira-modal__icon,
+.novira-modal--dark-text .lumira-modal__mood,
+.novira-modal--dark-text h3,
+.novira-modal--dark-text p {
+  color: #1b2236;
+}
+
+.novira-modal .lumira-modal__brand img {
+  filter: none;
+  width: 128px;
+  height: 128px;
+}
+
+.novira-modal__intro-logo {
+  display: block;
+  margin: 0 auto 14px;
+  width: 128px;
+  height: 128px;
+  filter: none;
+}
+
+.novira-modal .lumira-modal__brand-name,
+.novira-modal .lumira-modal__brand-tagline {
+  text-transform: none;
+}
+
+.novira-modal .lumira-modal__brand-name,
+.novira-modal h3 {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+}
+
+.novira-modal .lumira-modal__icon-card,
+.novira-modal .lumira-modal__next-card {
+  background: rgba(255, 251, 241, 0.72);
+  border: 1px solid rgba(27, 34, 54, 0.16);
+  box-shadow: 0 10px 24px rgba(24, 34, 58, 0.08);
+}
+
+.novira-modal .lumira-modal__icon-grid-items {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  align-items: stretch;
+}
+
+.novira-modal .lumira-modal__icon-card {
+  align-content: start;
+  justify-items: center;
+  text-align: center;
+  min-height: 230px;
+  padding: 20px 16px;
+  gap: 10px;
+}
+
+.novira-modal .lumira-modal__icon svg {
+  width: 38px;
+  height: 38px;
+}
+
+.novira-modal .lumira-modal__icon-title {
+  font-size: 18px;
+}
+
+.novira-modal .lumira-modal__icon-card p {
+  margin: 0;
+  line-height: 1.65;
+}
+
+.novira-modal .lumira-modal__split-text {
+  text-align: left;
+}
+
+.novira-modal__hero-title {
+  margin: 0;
+  line-height: 1.18;
+  font-size: clamp(32px, 5.2vw, 56px);
+}
+
+.novira-modal__hero-line {
+  display: block;
+}
+
+.novira-modal > .lumira-modal__centered:first-child {
+  padding-top: 58px;
+  padding-bottom: 58px;
 }
 
 .urbanecolab-modal__section-title {
