@@ -61,3 +61,8 @@ To run locally:
 ```bash
 npm install
 npm run dev
+```
+
+### Studio Journal
+
+Set `JOURNAL_STUDIO_KEY` in `.env.local` to enable `/studio-login` and `/studio/journal`.
