@@ -16,6 +16,8 @@ import { CollaborationBlock } from "@/components/CollaborationBlock";
 import { ProjectGallery } from "@/components/ProjectGallery";
 import { ApproachBlock } from "@/components/ApproachBlock";
 import { AboutBlock } from "@/components/AboutBlock";
+import { JournalSection } from "@/components/journal/JournalSection";
+import { createDefaultJournalStore } from "@/lib/journal/store";
 
 export default function HomePage() {
   const content = loadContent();
@@ -27,6 +29,7 @@ export default function HomePage() {
   const urbanEcoLabModal = buildUrbanEcoLabModalModel(loadUrbanEcoLabModalContent());
   const noviraModal = buildNoviraModalModel();
   const mirachaiModal = buildMirachaiModalModel();
+  const journalEntries = createDefaultJournalStore().listPublished();
 
   const featured = content.featuredProjects;
   const other = content.otherProjects;
@@ -101,6 +104,8 @@ export default function HomePage() {
         noviraModal={noviraModal}
         mirachaiModal={mirachaiModal}
       />
+
+      <JournalSection entries={journalEntries} />
 
       <SectionBlock id="egyuttmukodes">
         <CollaborationBlock meta={content.meta} />
