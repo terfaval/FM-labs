@@ -1,0 +1,367 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+import {
+  JOURNAL_PROJECTS,
+  JOURNAL_TYPES,
+  type JournalEntry,
+  type JournalProject,
+  type JournalStatus,
+  type JournalType,
+} from "@/lib/journal/types";
+
+type EntryForm = JournalEntry;
+
+function createEmptyEntry(): EntryForm {
+  return {
+    id: "",
+    date: "",
+    project: "portfolio",
+    type: "planning",
+    status: "draft",
+    title: "",
+    summary: "",
+    body: "",
+    steps: [{ label: "", text: "" }],
+    nextStep: "",
+    featured: false,
+  };
+}
+
+function toFormEntry(input: Partial<JournalEntry>): EntryForm {
+  const base = createEmptyEntry();
+  return {
+    ...base,
+    ...input,
+    steps:
+      Array.isArray(input.steps) && input.steps.length > 0
+        ? input.steps
+        : base.steps,
+  };
+}
+
+export function StudioJournalClient() {
+  const [entries, setEntries] = useState<JournalEntry[]>([]);
+  const [form, setForm] = useState<EntryForm>(createEmptyEntry());
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [draftJson, setDraftJson] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function loadEntries() {
+    const response = await fetch("/api/studio/journal", { cache: "no-store" });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      setError(payload.error ?? "Nem sikerult a lista betoltese.");
+      return;
+    }
+    setEntries(Array.isArray(payload.entries) ? payload.entries : []);
+  }
+
+  useEffect(() => {
+    void loadEntries();
+  }, []);
+
+  function selectForEdit(entry: JournalEntry) {
+    setEditingId(entry.id);
+    setForm(toFormEntry(entry));
+    setError("");
+  }
+
+  function startNew() {
+    setEditingId(null);
+    setForm(createEmptyEntry());
+    setDraftJson("");
+    setError("");
+  }
+
+  function parseDraft() {
+    try {
+      const parsed = JSON.parse(draftJson) as Partial<JournalEntry>;
+      setForm(toFormEntry(parsed));
+      setEditingId(parsed.id ?? null);
+      setError("");
+    } catch {
+      setError("Ervenytelen JSON.");
+    }
+  }
+
+  async function save(status: JournalStatus) {
+    setLoading(true);
+    setError("");
+    try {
+      const payload = { ...form, status };
+      const isEdit = Boolean(editingId);
+      const endpoint = isEdit
+        ? `/api/studio/journal/${editingId}`
+        : "/api/studio/journal";
+      const method = isEdit ? "PUT" : "POST";
+      const response = await fetch(endpoint, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        if (data?.errors && typeof data.errors === "object") {
+          setError(Object.values(data.errors).join(" "));
+        } else {
+          setError(data?.error ?? "Mentesi hiba.");
+        }
+        return;
+      }
+      startNew();
+      await loadEntries();
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function logout() {
+    await fetch("/api/studio/logout", { method: "POST" });
+    window.location.href = "/studio-login";
+  }
+
+  const orderedEntries = useMemo(
+    () => [...entries].sort((a, b) => b.date.localeCompare(a.date)),
+    [entries]
+  );
+
+  return (
+    <main className="studio-journal">
+      <div className="studio-journal__header">
+        <h1>Project Journal Studio</h1>
+        <button type="button" onClick={() => void logout()}>
+          Kilepes
+        </button>
+      </div>
+
+      <section className="studio-journal__list">
+        <div className="studio-journal__list-header">
+          <h2>Korabbi bejegyzesek</h2>
+          <button type="button" onClick={startNew}>
+            Uj bejegyzes
+          </button>
+        </div>
+        {orderedEntries.length === 0 ? (
+          <p>Meg nincs bejegyzes.</p>
+        ) : (
+          <ul>
+            {orderedEntries.map((entry) => (
+              <li key={entry.id}>
+                <button
+                  type="button"
+                  onClick={() => selectForEdit(entry)}
+                  className="studio-journal__entry-button"
+                >
+                  <span>{entry.date}</span>
+                  <span>{entry.project}</span>
+                  <span>{entry.type}</span>
+                  <span>{entry.status}</span>
+                  <strong>{entry.title}</strong>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      <section className="studio-journal__editor">
+        <h2>{editingId ? "Bejegyzes szerkesztese" : "Uj bejegyzes"}</h2>
+
+        <label htmlFor="journal-draft-json">JSON draft beillesztese</label>
+        <textarea
+          id="journal-draft-json"
+          value={draftJson}
+          onChange={(event) => setDraftJson(event.target.value)}
+          rows={7}
+          placeholder='{"id":"..."}'
+        />
+        <button type="button" onClick={parseDraft}>
+          JSON parse
+        </button>
+
+        {error ? <p className="studio-journal__error">{error}</p> : null}
+
+        <label>
+          ID
+          <input
+            value={form.id}
+            onChange={(event) =>
+              setForm((prev) => ({ ...prev, id: event.target.value }))
+            }
+          />
+        </label>
+        <label>
+          Datum
+          <input
+            value={form.date}
+            onChange={(event) =>
+              setForm((prev) => ({ ...prev, date: event.target.value }))
+            }
+            placeholder="YYYY-MM-DD"
+          />
+        </label>
+        <label>
+          Projekt
+          <select
+            value={form.project}
+            onChange={(event) =>
+              setForm((prev) => ({
+                ...prev,
+                project: event.target.value as JournalProject,
+              }))
+            }
+          >
+            {JOURNAL_PROJECTS.map((project) => (
+              <option key={project} value={project}>
+                {project}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Tipus
+          <select
+            value={form.type}
+            onChange={(event) =>
+              setForm((prev) => ({
+                ...prev,
+                type: event.target.value as JournalType,
+              }))
+            }
+          >
+            {JOURNAL_TYPES.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Cim
+          <input
+            value={form.title}
+            onChange={(event) =>
+              setForm((prev) => ({ ...prev, title: event.target.value }))
+            }
+          />
+        </label>
+        <label>
+          Summary
+          <textarea
+            value={form.summary}
+            onChange={(event) =>
+              setForm((prev) => ({ ...prev, summary: event.target.value }))
+            }
+            rows={3}
+          />
+        </label>
+        <label>
+          Body
+          <textarea
+            value={form.body}
+            onChange={(event) =>
+              setForm((prev) => ({ ...prev, body: event.target.value }))
+            }
+            rows={6}
+          />
+        </label>
+
+        <fieldset>
+          <legend>Steps</legend>
+          {form.steps.map((step, index) => (
+            <div key={`${index}-${step.label}`} className="studio-journal__step-row">
+              <input
+                value={step.label}
+                placeholder="label"
+                onChange={(event) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    steps: prev.steps.map((current, currentIndex) =>
+                      currentIndex === index
+                        ? { ...current, label: event.target.value }
+                        : current
+                    ),
+                  }))
+                }
+              />
+              <input
+                value={step.text}
+                placeholder="text"
+                onChange={(event) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    steps: prev.steps.map((current, currentIndex) =>
+                      currentIndex === index
+                        ? { ...current, text: event.target.value }
+                        : current
+                    ),
+                  }))
+                }
+              />
+              <button
+                type="button"
+                onClick={() =>
+                  setForm((prev) => ({
+                    ...prev,
+                    steps:
+                      prev.steps.length > 1
+                        ? prev.steps.filter((_, currentIndex) => currentIndex !== index)
+                        : prev.steps,
+                  }))
+                }
+              >
+                Torles
+              </button>
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={() =>
+              setForm((prev) => ({
+                ...prev,
+                steps: [...prev.steps, { label: "", text: "" }],
+              }))
+            }
+          >
+            Step hozzaadas
+          </button>
+        </fieldset>
+
+        <label>
+          Kovetkezo lepes
+          <input
+            value={form.nextStep}
+            onChange={(event) =>
+              setForm((prev) => ({ ...prev, nextStep: event.target.value }))
+            }
+          />
+        </label>
+        <label className="studio-journal__checkbox">
+          <input
+            type="checkbox"
+            checked={Boolean(form.featured)}
+            onChange={(event) =>
+              setForm((prev) => ({ ...prev, featured: event.target.checked }))
+            }
+          />
+          Featured
+        </label>
+
+        <div className="studio-journal__actions">
+          <button type="button" onClick={() => void save("draft")} disabled={loading}>
+            Save Draft
+          </button>
+          <button
+            type="button"
+            onClick={() => void save("published")}
+            disabled={loading}
+          >
+            Publish
+          </button>
+        </div>
+      </section>
+    </main>
+  );
+}
