@@ -3388,3 +3388,157 @@ strong {
     gap: 20px;
   }
 }
+
+.journal-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.journal-filters label {
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.journal-filters select {
+  min-width: 180px;
+}
+
+.journal-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.journal-item {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.journal-item__head {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  text-align: left;
+  padding: 12px;
+  cursor: pointer;
+  color: inherit;
+}
+
+.journal-tag {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.journal-item__body {
+  padding: 0 12px 12px;
+}
+
+.journal-item__body ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.studio-login,
+.studio-journal {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+.studio-login__form,
+.studio-journal__editor {
+  display: grid;
+  gap: 10px;
+}
+
+.studio-login__error,
+.studio-journal__error {
+  color: #a12929;
+  font-weight: 500;
+}
+
+.studio-journal {
+  display: grid;
+  gap: 24px;
+}
+
+.studio-journal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.studio-journal__list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.studio-journal__entry-button {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 10px;
+  color: inherit;
+}
+
+.studio-journal__list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.studio-journal__editor textarea,
+.studio-journal__editor input,
+.studio-journal__editor select,
+.studio-login__form input {
+  width: 100%;
+}
+
+.studio-journal__editor fieldset {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.studio-journal__step-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr auto;
+  gap: 8px;
+}
+
+.studio-journal__actions {
+  display: flex;
+  gap: 10px;
+}
+
+.studio-journal__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
