@@ -31,6 +31,21 @@ const entries = [
 ] as const;
 
 describe("JournalSection", () => {
+  it("hides the section when there are no published entries", () => {
+    const { container } = render(
+      <JournalSection
+        entries={[
+          {
+            ...entries[0],
+            status: "draft",
+          },
+        ]}
+      />
+    );
+
+    expect(container.querySelector("#project-journal")).toBeNull();
+  });
+
   it("expands entry body on click", () => {
     render(<JournalSection entries={[...entries]} />);
     expect(screen.queryByText("Body A")).toBeNull();

@@ -3396,14 +3396,43 @@ strong {
   margin-bottom: 16px;
 }
 
+.journal-filters--panel {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.journal-filter {
+  display: grid;
+  gap: 6px;
+}
+
 .journal-filters label {
   display: grid;
   gap: 6px;
   font-size: 14px;
+  font-weight: 600;
 }
 
 .journal-filters select {
   min-width: 180px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  padding: 8px 12px;
+  font: inherit;
+}
+
+.journal-intro {
+  margin: 0 0 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.journal-intro p {
+  margin: 0;
+  color: var(--muted);
 }
 
 .journal-list {
@@ -3417,7 +3446,7 @@ strong {
 .journal-item {
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.76);
+  background: rgba(255, 255, 255, 0.88);
 }
 
 .journal-item__head {
@@ -3429,7 +3458,7 @@ strong {
   gap: 10px;
   align-items: center;
   text-align: left;
-  padding: 12px;
+  padding: 14px 12px;
   cursor: pointer;
   color: inherit;
 }
@@ -3437,9 +3466,10 @@ strong {
 .journal-tag {
   border: 1px solid var(--line);
   border-radius: 999px;
-  padding: 2px 8px;
+  padding: 3px 9px;
   font-size: 12px;
   color: var(--muted);
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .journal-item__body {
@@ -3488,6 +3518,47 @@ strong {
   padding: 0;
   display: grid;
   gap: 8px;
+}
+
+.studio-journal__prompt-box {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.82);
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.studio-journal__prompt-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.studio-journal__prompt-box h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.studio-journal__prompt-box p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.studio-journal__prompt-text {
+  font-family: var(--font-body), "Segoe UI", system-ui, sans-serif;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.studio-journal__prompt-status {
+  margin: 0;
+  color: var(--accent);
+  font-weight: 600;
 }
 
 .studio-journal__entry-button {

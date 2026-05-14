@@ -40,6 +40,42 @@ function toFormEntry(input: Partial<JournalEntry>): EntryForm {
   };
 }
 
+const JOURNAL_PROMPT_TEMPLATE = `Feladat:
+Az alábbi fejlesztési beszélgetés alapján keszits egyetlen publikus naplo-bejegyzes draftot.
+
+Fontos:
+- magyar, termeszetes, emberi hang
+- nem marketinges, nem commit-log stilus
+- konkretumok: mi valtozott, miert, mi lett jobb, mi maradt nyitva, mi a kovetkezo lepes
+- csak egy bejegyzest adj vissza
+- a valaszt CSAK nyers JSON objektumkent add vissza (ne markdown, ne magyarazat)
+
+Kotelezo schema:
+{
+  "id": "kebab-case-azonosito",
+  "date": "YYYY-MM-DD",
+  "project": "portfolio | lumira | szarnyfeszito | mirachai | novira | kincstarto | urbanecolab | desk-research",
+  "type": "planning | feature | visual | refinement | research | decision",
+  "status": "draft",
+  "title": "rovid cim",
+  "summary": "1-2 mondat",
+  "body": "3-6 mondat",
+  "steps": [
+    { "label": "rovid cim", "text": "1-2 mondat" }
+  ],
+  "nextStep": "1 mondat",
+  "featured": false
+}
+
+Tovabbi szabalyok:
+- steps: 2-5 elem
+- project es type csak a fent megadott ertek lehet
+- date legyen ISO formatum (YYYY-MM-DD)
+- status maradjon "draft"
+
+Forras-beszelgetes:
+[IDE ILLESZD BE A TELJES BESZELGETEST VAGY OSSZEFOGLALOT]`;
+
 export function StudioJournalClient() {
   const [entries, setEntries] = useState<JournalEntry[]>([]);
   const [form, setForm] = useState<EntryForm>(createEmptyEntry());
@@ -47,6 +83,7 @@ export function StudioJournalClient() {
   const [draftJson, setDraftJson] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<"" | "ok" | "error">("");
 
   async function loadEntries() {
     const response = await fetch("/api/studio/journal", { cache: "no-store" });
@@ -122,6 +159,15 @@ export function StudioJournalClient() {
     window.location.href = "/studio-login";
   }
 
+  async function copyPromptTemplate() {
+    try {
+      await navigator.clipboard.writeText(JOURNAL_PROMPT_TEMPLATE);
+      setCopyStatus("ok");
+    } catch {
+      setCopyStatus("error");
+    }
+  }
+
   const orderedEntries = useMemo(
     () => [...entries].sort((a, b) => b.date.localeCompare(a.date)),
     [entries]
@@ -137,6 +183,33 @@ export function StudioJournalClient() {
       </div>
 
       <section className="studio-journal__list">
+        <div className="studio-journal__prompt-box">
+          <div className="studio-journal__prompt-head">
+            <h2>Prompt sablon uj bejegyzeshez</h2>
+            <button type="button" onClick={() => void copyPromptTemplate()}>
+              Masolas
+            </button>
+          </div>
+          <p>
+            Ezt a promptot barmelyik Codex agentnek odaadhatod: a beszelgetes
+            alapjan keszit egy JSON draftot, amit csak visszateszel ide.
+          </p>
+          <textarea
+            readOnly
+            value={JOURNAL_PROMPT_TEMPLATE}
+            rows={16}
+            className="studio-journal__prompt-text"
+          />
+          {copyStatus === "ok" ? (
+            <p className="studio-journal__prompt-status">Prompt kimasolva.</p>
+          ) : null}
+          {copyStatus === "error" ? (
+            <p className="studio-journal__error">
+              A masolas nem sikerult, jelold ki es masold kezzel.
+            </p>
+          ) : null}
+        </div>
+
         <div className="studio-journal__list-header">
           <h2>Korabbi bejegyzesek</h2>
           <button type="button" onClick={startNew}>
