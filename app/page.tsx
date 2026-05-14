@@ -9,6 +9,7 @@ import { buildSzarnyfeszitoModalModel } from "@/lib/content/szarnyfeszitoModalMo
 import { loadUrbanEcoLabModalContent } from "@/lib/content/urbanEcoLabModal";
 import { buildUrbanEcoLabModalModel } from "@/lib/content/urbanEcoLabModalModel";
 import { buildNoviraModalModel } from "@/lib/content/noviraModalModel";
+import { buildMirachaiModalModel } from "@/lib/content/mirachaiModalModel";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SectionBlock } from "@/components/SectionBlock";
 import { CollaborationBlock } from "@/components/CollaborationBlock";
@@ -25,6 +26,7 @@ export default function HomePage() {
   const derengoModal = buildDerengoModalModel(loadDerengoModalContent());
   const urbanEcoLabModal = buildUrbanEcoLabModalModel(loadUrbanEcoLabModalContent());
   const noviraModal = buildNoviraModalModel();
+  const mirachaiModal = buildMirachaiModalModel();
 
   const featured = content.featuredProjects;
   const other = content.otherProjects;
@@ -97,6 +99,7 @@ export default function HomePage() {
         szarnyfeszitoModal={szarnyfeszitoModal}
         urbanEcoLabModal={urbanEcoLabModal}
         noviraModal={noviraModal}
+        mirachaiModal={mirachaiModal}
       />
 
       <SectionBlock id="egyuttmukodes">

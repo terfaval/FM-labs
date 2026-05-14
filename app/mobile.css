@@ -154,6 +154,27 @@
   .lumira-modal__mood {
     font-size: 18px;
   }
+
+  .mirachai-modal {
+    gap: 52px;
+  }
+
+  .mirachai-modal .lumira-modal__brand {
+    padding: 56px 0 64px;
+  }
+
+  .mirachai-modal__journey-track {
+    grid-auto-flow: row;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-template-columns: 1fr;
+    overflow: visible;
+    padding: 0;
+  }
+
+  .mirachai-modal__two-screen .lumira-modal__split-text,
+  .mirachai-modal__focus .lumira-modal__split-text {
+    text-align: center;
+  }
 }
 
 @media (max-width: 600px) {
@@ -194,5 +215,10 @@
     width: 32px;
     height: 32px;
     font-size: 18px;
+  }
+
+  .mirachai-modal .lumira-modal__brand img {
+    width: 136px;
+    height: 136px;
   }
 }

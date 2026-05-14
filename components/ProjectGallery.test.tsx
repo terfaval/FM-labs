@@ -3,6 +3,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { ProjectGallery } from "./ProjectGallery";
 import type { Project } from "@/lib/content/types";
+import type { MirachaiModalModel } from "@/lib/content/mirachaiModalModel";
 
 function project(partial: Partial<Project> & Pick<Project, "slug" | "title">): Project {
   return {
@@ -40,5 +41,52 @@ describe("ProjectGallery", () => {
     fireEvent.click(screen.getByRole("button", { name: /Derengő/i }));
     expect(screen.getByRole("dialog")).toBeInTheDocument();
   });
-});
 
+  it("renders Mirachai custom modal when Mirachai card is opened", () => {
+    const mirachai = project({ slug: "mirachai", title: "Mirachai" });
+    const mirachaiModal: MirachaiModalModel = {
+      brand: {
+        logo: "/mirachai/logo.svg",
+        name: "Mirachai",
+        tagline: "Digitális tearituálék",
+        appUrl: "https://mirachai.vercel.app",
+      },
+      hero: {
+        title: "Mirachai",
+        intro: "Egy lassabb teaböngészési tér.",
+      },
+      blocks: [
+        {
+          id: "BLOCK_01",
+          type: "cinematic-image",
+          title: "Lassabb böngészés",
+          text: "Atmoszférikus tér.",
+          media: ["/mirachai/screens/Slide1.PNG"],
+          layout: "single-screen-large",
+        },
+      ],
+      closing: {
+        title: "Tea mint felfedezés",
+        text: "Lezáró szöveg.",
+        layout: "featured-standard-closing",
+      },
+    };
+
+    render(
+      <ProjectGallery
+        topFeatured={[]}
+        kincstarto={undefined}
+        featuredRest={[]}
+        rest={[mirachai]}
+        lumiraModal={null}
+        kincstartoModal={null}
+        derengoModal={null}
+        mirachaiModal={mirachaiModal}
+      />
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: /Mirachai/i }));
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+    expect(screen.getByText("Tea mint felfedezés")).toBeInTheDocument();
+  });
+});

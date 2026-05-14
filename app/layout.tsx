@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
-import { Montserrat, Outfit, Roboto, Rubik, Space_Grotesk } from "next/font/google";
+import {
+  Montserrat,
+  Outfit,
+  Playfair_Display,
+  Roboto,
+  Rubik,
+  Space_Grotesk,
+} from "next/font/google";
 import "./globals.css";
 import "./mobile.css";
 
@@ -43,6 +50,14 @@ const urbanEcoLabDisplay = Montserrat({
   style: "normal",
 });
 
+const mirachaiDisplay = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-mirachai",
+  display: "swap",
+  weight: ["500", "600", "700"],
+  style: "normal",
+});
+
 export const metadata: Metadata = {
   title: "Térszövő",
   description: "Felfedezhető, bejárható digitális rendszereket építek komplex témákból. Ismerd meg mindet, merülj el bármelyikben!",
@@ -59,7 +74,7 @@ export default function RootLayout({
   return (
     <html
       lang="hu"
-      className={`${kincstartoBody.variable} ${kincstartoDisplay.variable} ${lumiraDisplay.variable} ${derengoDisplay.variable} ${urbanEcoLabDisplay.variable}`}
+      className={`${kincstartoBody.variable} ${kincstartoDisplay.variable} ${lumiraDisplay.variable} ${derengoDisplay.variable} ${urbanEcoLabDisplay.variable} ${mirachaiDisplay.variable}`}
     >
       <body>{children}</body>
     </html>

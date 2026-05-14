@@ -2744,6 +2744,202 @@ strong {
   padding-bottom: 58px;
 }
 
+/* Mirachai modal */
+.project-modal--mirachai {
+  color: #2e2218;
+  border: none;
+}
+
+.project-modal--mirachai::before {
+  background-image: var(--card-overlay), var(--card-bg);
+  background-size: cover;
+  background-position: center;
+}
+
+.project-modal--mirachai .project-modal__close {
+  color: #4a3528;
+  border-color: rgba(74, 53, 40, 0.24);
+  background: rgba(255, 251, 244, 0.84);
+}
+
+.project-modal--mirachai::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 14% 12%, rgba(255, 243, 221, 0.34) 0%, rgba(255, 243, 221, 0) 56%),
+    linear-gradient(165deg, rgba(255, 249, 240, 0.18), rgba(250, 241, 227, 0.26));
+  z-index: 0;
+  pointer-events: none;
+}
+
+.mirachai-modal {
+  font-family: var(--font-body), "Segoe UI", system-ui, sans-serif;
+  gap: 88px;
+  padding: 24px 8px 32px;
+}
+
+.mirachai-modal .lumira-modal__brand {
+  padding: 54px 0 64px;
+  max-width: 760px;
+}
+
+.mirachai-modal .lumira-modal__brand img {
+  filter: none;
+  width: 178px;
+  height: 178px;
+}
+
+.mirachai-modal--dark-text,
+.mirachai-modal--dark-text .lumira-modal__brand-tagline,
+.mirachai-modal--dark-text .lumira-modal__icon-card,
+.mirachai-modal--dark-text .lumira-modal__icon,
+.mirachai-modal--dark-text .lumira-modal__mood,
+.mirachai-modal--dark-text h3,
+.mirachai-modal--dark-text p,
+.mirachai-modal--dark-text li {
+  color: #2e2218;
+}
+
+.mirachai-modal h3 {
+  font-family: var(--font-mirachai), "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+}
+
+.mirachai-modal .lumira-modal__brand-tagline {
+  font-family: var(--font-mirachai), "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  text-transform: none;
+  font-size: 20px;
+  line-height: 1.4;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.mirachai-modal__hero-intro-primary,
+.mirachai-modal__hero-intro-secondary {
+  max-width: 760px;
+  margin: 0 auto;
+  display: grid;
+  gap: 14px;
+  text-align: center;
+}
+
+.mirachai-modal__hero-intro-primary p,
+.mirachai-modal__hero-intro-secondary p {
+  margin: 0;
+  line-height: 1.85;
+}
+
+.mirachai-modal__two-screen .lumira-modal__split-text,
+.mirachai-modal__focus .lumira-modal__split-text {
+  text-align: left;
+}
+
+.mirachai-modal__two-screen .lumira-modal__split-text h3,
+.mirachai-modal__focus .lumira-modal__split-text h3 {
+  margin: 0;
+}
+
+.mirachai-modal__split-text {
+  gap: 14px;
+}
+
+.mirachai-modal__split-text p {
+  margin: 0;
+  line-height: 1.82;
+}
+
+.mirachai-modal__inline-list {
+  margin: 0;
+  line-height: 1.82;
+  color: rgba(46, 34, 24, 0.84);
+}
+
+.mirachai-modal .kincstarto-modal__image-group {
+  gap: 20px;
+}
+
+.mirachai-modal .kincstarto-modal__image {
+  width: 78%;
+  max-width: 520px;
+  box-shadow: 0 16px 36px rgba(61, 42, 24, 0.16);
+}
+
+.mirachai-modal .kincstarto-modal__image--secondary {
+  width: 60%;
+  margin-top: -56px;
+  z-index: 10;
+}
+
+.mirachai-modal__journey {
+  display: grid;
+  gap: 30px;
+}
+
+.mirachai-modal__journey-copy {
+  max-width: 700px;
+}
+
+.mirachai-modal__journey-track {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.mirachai-modal__journey-step {
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.mirachai-modal__journey-step img {
+  width: 100%;
+  border-radius: 18px;
+  box-shadow: 0 18px 42px rgba(61, 42, 24, 0.16);
+}
+
+.mirachai-modal__journey-step figcaption {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(46, 34, 24, 0.72);
+}
+
+.mirachai-modal__journey-step p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(46, 34, 24, 0.78);
+}
+
+.mirachai-modal__text-block {
+  max-width: 760px;
+  margin: 0 auto;
+  display: grid;
+  gap: 14px;
+  line-height: 1.9;
+}
+
+.mirachai-modal__text-block h3 {
+  margin: 0;
+}
+
+.mirachai-modal__text-block p {
+  margin: 0;
+}
+
+.mirachai-modal__closing {
+  max-width: 700px;
+  display: grid;
+  gap: 14px;
+}
+
+.mirachai-modal__closing h3,
+.mirachai-modal__closing p {
+  margin: 0;
+}
+
 .urbanecolab-modal__section-title {
   font-size: 24px;
   margin: 0 0 36px;
