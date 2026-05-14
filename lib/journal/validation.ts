@@ -81,3 +81,7 @@ export function validateJournalEntryInput(input: unknown): ValidationResult {
     },
   };
 }
+
+export function ensureUniqueId(entries: { id: string }[], id: string): boolean {
+  return !entries.some((entry) => entry.id === id);
+}
