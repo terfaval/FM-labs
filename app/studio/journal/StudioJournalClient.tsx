@@ -10,6 +10,7 @@ import {
   type JournalType,
 } from "@/lib/journal/types";
 import { shouldUsePutForSave } from "@/lib/journal/saveMode";
+import { mergeJournalEntries } from "@/lib/journal/entryList";
 
 type EntryForm = JournalEntry;
 
@@ -86,14 +87,17 @@ export function StudioJournalClient() {
   const [loading, setLoading] = useState(false);
   const [copyStatus, setCopyStatus] = useState<"" | "ok" | "error">("");
 
-  async function loadEntries() {
+  async function loadEntries(options?: { preserveExisting?: boolean }) {
     const response = await fetch("/api/studio/journal", { cache: "no-store" });
     const payload = await response.json().catch(() => ({}));
     if (!response.ok) {
       setError(payload.error ?? "Nem sikerult a lista betoltese.");
       return;
     }
-    setEntries(Array.isArray(payload.entries) ? payload.entries : []);
+    const next = Array.isArray(payload.entries) ? payload.entries : [];
+    setEntries((prev) =>
+      options?.preserveExisting ? mergeJournalEntries(next, prev) : next
+    );
   }
 
   useEffect(() => {
@@ -149,8 +153,11 @@ export function StudioJournalClient() {
         }
         return;
       }
+      if (data?.entry && typeof data.entry === "object") {
+        setEntries((prev) => mergeJournalEntries([data.entry as JournalEntry], prev));
+      }
       startNew();
-      await loadEntries();
+      await loadEntries({ preserveExisting: true });
     } finally {
       setLoading(false);
     }
