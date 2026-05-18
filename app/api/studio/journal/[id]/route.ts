@@ -4,6 +4,8 @@ import { createDefaultJournalStore } from "@/lib/journal/store";
 import { validateJournalEntryInput } from "@/lib/journal/validation";
 import { STUDIO_COOKIE_NAME, verifyStudioSessionToken } from "@/lib/studio/session";
 
+export const dynamic = "force-dynamic";
+
 async function isAuthorized(): Promise<boolean> {
   const expected = process.env.JOURNAL_STUDIO_KEY ?? "";
   const cookieStore = await cookies();
