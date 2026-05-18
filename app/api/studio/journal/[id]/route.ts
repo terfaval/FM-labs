@@ -27,10 +27,10 @@ export async function PUT(
   }
 
   const store = createDefaultJournalStore();
-  if (!store.getById(id)) {
+  if (!(await store.getById(id))) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  const saved = store.upsert(validated.value);
+  const saved = await store.upsert(validated.value);
   return NextResponse.json({ entry: saved });
 }

@@ -19,7 +19,7 @@ import { AboutBlock } from "@/components/AboutBlock";
 import { JournalSection } from "@/components/journal/JournalSection";
 import { createDefaultJournalStore } from "@/lib/journal/store";
 
-export default function HomePage() {
+export default async function HomePage() {
   const content = loadContent();
   const lumiraModal = buildLumiraModalModel(loadLumiraModalContent());
   const kincstartoModal = buildKincstartoModalModel(
@@ -29,7 +29,7 @@ export default function HomePage() {
   const urbanEcoLabModal = buildUrbanEcoLabModalModel(loadUrbanEcoLabModalContent());
   const noviraModal = buildNoviraModalModel();
   const mirachaiModal = buildMirachaiModalModel();
-  const journalEntries = createDefaultJournalStore().listPublished();
+  const journalEntries = await createDefaultJournalStore().listPublished();
 
   const featured = content.featuredProjects;
   const other = content.otherProjects;

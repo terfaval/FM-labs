@@ -17,7 +17,7 @@ export async function GET() {
   }
 
   const store = createDefaultJournalStore();
-  return NextResponse.json({ entries: store.listAll() });
+  return NextResponse.json({ entries: await store.listAll() });
 }
 
 export async function POST(request: NextRequest) {
@@ -32,10 +32,10 @@ export async function POST(request: NextRequest) {
   }
 
   const store = createDefaultJournalStore();
-  if (!ensureUniqueId(store.listAll(), validated.value.id)) {
+  if (!ensureUniqueId(await store.listAll(), validated.value.id)) {
     return NextResponse.json({ errors: { id: "Az ID mar foglalt." } }, { status: 400 });
   }
 
-  const saved = store.upsert(validated.value);
+  const saved = await store.upsert(validated.value);
   return NextResponse.json({ entry: saved });
 }

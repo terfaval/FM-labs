@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { get, put } from "@vercel/blob";
 import {
   JOURNAL_SCHEMA_VERSION,
   type JournalDocument,
@@ -7,10 +8,10 @@ import {
 } from "./types";
 
 export type JournalStore = {
-  listAll: () => JournalEntry[];
-  listPublished: () => JournalEntry[];
-  getById: (id: string) => JournalEntry | null;
-  upsert: (entry: JournalEntry) => JournalEntry;
+  listAll: () => Promise<JournalEntry[]>;
+  listPublished: () => Promise<JournalEntry[]>;
+  getById: (id: string) => Promise<JournalEntry | null>;
+  upsert: (entry: JournalEntry) => Promise<JournalEntry>;
 };
 
 function sortEntries(entries: JournalEntry[]): JournalEntry[] {
@@ -38,16 +39,51 @@ function writeDocumentAtomic(filePath: string, doc: JournalDocument) {
   fs.renameSync(tempPath, filePath);
 }
 
+type BlobAccess = "private" | "public";
+
+function createEmptyDocument(): JournalDocument {
+  return { schemaVersion: JOURNAL_SCHEMA_VERSION, entries: [] };
+}
+
+async function readBlobDocument(
+  pathname: string,
+  access: BlobAccess
+): Promise<JournalDocument> {
+  const blob = await get(pathname, { access });
+  if (!blob?.stream) {
+    return createEmptyDocument();
+  }
+  const raw = await new Response(blob.stream).text();
+  if (!raw.trim()) {
+    return createEmptyDocument();
+  }
+  return JSON.parse(raw) as JournalDocument;
+}
+
+async function writeBlobDocument(
+  pathname: string,
+  access: BlobAccess,
+  doc: JournalDocument
+) {
+  await put(pathname, JSON.stringify(doc, null, 2), {
+    access,
+    addRandomSuffix: false,
+    allowOverwrite: true,
+    contentType: "application/json; charset=utf-8",
+    cacheControlMaxAge: 60,
+  });
+}
+
 export function createFileJournalStore(filePath: string): JournalStore {
   return {
-    listAll: () => sortEntries(readDocument(filePath).entries),
-    listPublished: () =>
+    listAll: async () => sortEntries(readDocument(filePath).entries),
+    listPublished: async () =>
       sortEntries(readDocument(filePath).entries).filter(
         (entry) => entry.status === "published"
       ),
-    getById: (id) =>
+    getById: async (id) =>
       readDocument(filePath).entries.find((entry) => entry.id === id) ?? null,
-    upsert: (entry) => {
+    upsert: async (entry) => {
       const doc = readDocument(filePath);
       const existingIndex = doc.entries.findIndex(
         (current) => current.id === entry.id
@@ -67,8 +103,42 @@ export function createFileJournalStore(filePath: string): JournalStore {
   };
 }
 
+export function createBlobJournalStore(
+  pathname: string,
+  access: BlobAccess = "private"
+): JournalStore {
+  return {
+    listAll: async () => sortEntries((await readBlobDocument(pathname, access)).entries),
+    listPublished: async () =>
+      sortEntries((await readBlobDocument(pathname, access)).entries).filter(
+        (entry) => entry.status === "published"
+      ),
+    getById: async (id) =>
+      (await readBlobDocument(pathname, access)).entries.find(
+        (entry) => entry.id === id
+      ) ?? null,
+    upsert: async (entry) => {
+      const doc = await readBlobDocument(pathname, access);
+      const existingIndex = doc.entries.findIndex(
+        (current) => current.id === entry.id
+      );
+      if (existingIndex >= 0) {
+        doc.entries[existingIndex] = entry;
+      } else {
+        doc.entries.push(entry);
+      }
+      doc.entries = sortEntries(doc.entries);
+      await writeBlobDocument(pathname, access, {
+        schemaVersion: JOURNAL_SCHEMA_VERSION,
+        entries: doc.entries,
+      });
+      return entry;
+    },
+  };
+}
+
 export function createDefaultJournalStore(): JournalStore {
-  return createFileJournalStore(
-    path.join(process.cwd(), "content", "journal", "journal.json")
-  );
+  const blobPath = process.env.JOURNAL_BLOB_PATH ?? "journal/journal.json";
+  const access = process.env.JOURNAL_BLOB_ACCESS === "public" ? "public" : "private";
+  return createBlobJournalStore(blobPath, access);
 }

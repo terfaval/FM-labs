@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest";
 import { createFileJournalStore } from "./store";
 
 describe("FileJournalStore", () => {
-  it("returns only published entries in listPublished", () => {
+  it("returns only published entries in listPublished", async () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "journal-"));
     const filePath = path.join(dir, "journal.json");
     fs.writeFileSync(
@@ -42,7 +42,7 @@ describe("FileJournalStore", () => {
       "utf8"
     );
     const store = createFileJournalStore(filePath);
-    const entries = store.listPublished();
+    const entries = await store.listPublished();
     expect(entries).toHaveLength(1);
     expect(entries[0]?.id).toBe("b");
   });
