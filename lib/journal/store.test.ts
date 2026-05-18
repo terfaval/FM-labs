@@ -1,8 +1,19 @@
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { describe, expect, it } from "vitest";
-import { createFileJournalStore } from "./store";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+const { mockGet, mockPut } = vi.hoisted(() => ({
+  mockGet: vi.fn(),
+  mockPut: vi.fn(),
+}));
+
+vi.mock("@vercel/blob", () => ({
+  get: mockGet,
+  put: mockPut,
+}));
+
+import { createBlobJournalStore, createFileJournalStore } from "./store";
 
 describe("FileJournalStore", () => {
   it("returns only published entries in listPublished", async () => {
@@ -45,5 +56,24 @@ describe("FileJournalStore", () => {
     const entries = await store.listPublished();
     expect(entries).toHaveLength(1);
     expect(entries[0]?.id).toBe("b");
+  });
+});
+
+describe("BlobJournalStore", () => {
+  beforeEach(() => {
+    mockGet.mockReset();
+    mockPut.mockReset();
+  });
+
+  it("reads journal document without CDN cache", async () => {
+    mockGet.mockResolvedValue(null);
+    const store = createBlobJournalStore("journal/journal.json", "private");
+
+    await store.listAll();
+
+    expect(mockGet).toHaveBeenCalledWith("journal/journal.json", {
+      access: "private",
+      useCache: false,
+    });
   });
 });

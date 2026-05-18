@@ -19,6 +19,8 @@ import { AboutBlock } from "@/components/AboutBlock";
 import { JournalSection } from "@/components/journal/JournalSection";
 import { createDefaultJournalStore } from "@/lib/journal/store";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const content = loadContent();
   const lumiraModal = buildLumiraModalModel(loadLumiraModalContent());

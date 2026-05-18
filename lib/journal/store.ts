@@ -49,11 +49,11 @@ async function readBlobDocument(
   pathname: string,
   access: BlobAccess
 ): Promise<JournalDocument> {
-  const blob = await get(pathname, { access });
-  if (!blob?.stream) {
+  const result = await get(pathname, { access, useCache: false });
+  if (!result?.stream) {
     return createEmptyDocument();
   }
-  const raw = await new Response(blob.stream).text();
+  const raw = await new Response(result.stream).text();
   if (!raw.trim()) {
     return createEmptyDocument();
   }
