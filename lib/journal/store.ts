@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { get, put } from "@vercel/blob";
+import { get, list, put } from "@vercel/blob";
 import {
   JOURNAL_SCHEMA_VERSION,
   type JournalDocument,
@@ -50,7 +50,14 @@ async function readBlobDocument(
   access: BlobAccess
 ): Promise<JournalDocument> {
   try {
-    const result = await get(pathname, { access, useCache: false });
+    let result = await get(pathname, { access, useCache: false });
+    if (!result?.stream) {
+      const listed = await list({ prefix: pathname, limit: 10 });
+      const exact = listed.blobs.find((blob) => blob.pathname === pathname);
+      if (exact) {
+        result = await get(exact.url, { access, useCache: false });
+      }
+    }
     if (!result?.stream) {
       return createEmptyDocument();
     }

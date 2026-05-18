@@ -3,14 +3,16 @@ import os from "node:os";
 import path from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { mockGet, mockPut } = vi.hoisted(() => ({
+const { mockGet, mockPut, mockList } = vi.hoisted(() => ({
   mockGet: vi.fn(),
   mockPut: vi.fn(),
+  mockList: vi.fn(),
 }));
 
 vi.mock("@vercel/blob", () => ({
   get: mockGet,
   put: mockPut,
+  list: mockList,
 }));
 
 import {
@@ -67,10 +69,12 @@ describe("BlobJournalStore", () => {
   beforeEach(() => {
     mockGet.mockReset();
     mockPut.mockReset();
+    mockList.mockReset();
   });
 
   it("reads journal document without CDN cache", async () => {
     mockGet.mockResolvedValue(null);
+    mockList.mockResolvedValue({ blobs: [], hasMore: false });
     const store = createBlobJournalStore("journal/journal.json", "private");
 
     await store.listAll();
@@ -93,6 +97,7 @@ describe("BlobJournalStore", () => {
     try {
       delete process.env.JOURNAL_BLOB_ACCESS;
       mockGet.mockResolvedValue(null);
+      mockList.mockResolvedValue({ blobs: [], hasMore: false });
 
       const store = createDefaultJournalStore();
       await store.listAll();
@@ -108,5 +113,53 @@ describe("BlobJournalStore", () => {
         process.env.JOURNAL_BLOB_ACCESS = previous;
       }
     }
+  });
+
+  it("falls back to URL lookup when pathname get misses", async () => {
+    mockGet
+      .mockResolvedValueOnce(null)
+      .mockResolvedValueOnce({
+        stream: new ReadableStream({
+          start(controller) {
+            controller.enqueue(
+              new TextEncoder().encode(
+                JSON.stringify({
+                  schemaVersion: "v1",
+                  entries: [
+                    {
+                      id: "x",
+                      date: "2026-05-18",
+                      project: "portfolio",
+                      type: "feature",
+                      status: "draft",
+                      title: "X",
+                      summary: "X",
+                      body: "X",
+                      steps: [{ label: "l", text: "t" }],
+                      nextStep: "n",
+                    },
+                  ],
+                })
+              )
+            );
+            controller.close();
+          },
+        }),
+      });
+    mockList.mockResolvedValue({
+      blobs: [
+        {
+          url: "https://example.public.blob.vercel-storage.com/journal/journal.json",
+          pathname: "journal/journal.json",
+        },
+      ],
+      hasMore: false,
+    });
+
+    const store = createBlobJournalStore("journal/journal.json", "public");
+    const entries = await store.listAll();
+
+    expect(entries).toHaveLength(1);
+    expect(entries[0]?.id).toBe("x");
   });
 });
