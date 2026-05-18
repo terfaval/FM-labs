@@ -9,6 +9,7 @@ import {
   type JournalStatus,
   type JournalType,
 } from "@/lib/journal/types";
+import { shouldUsePutForSave } from "@/lib/journal/saveMode";
 
 type EntryForm = JournalEntry;
 
@@ -116,7 +117,8 @@ export function StudioJournalClient() {
     try {
       const parsed = JSON.parse(draftJson) as Partial<JournalEntry>;
       setForm(toFormEntry(parsed));
-      setEditingId(parsed.id ?? null);
+      const parsedId = typeof parsed.id === "string" ? parsed.id : null;
+      setEditingId(shouldUsePutForSave(parsedId, entries) ? parsedId : null);
       setError("");
     } catch {
       setError("Ervenytelen JSON.");
@@ -128,7 +130,7 @@ export function StudioJournalClient() {
     setError("");
     try {
       const payload = { ...form, status };
-      const isEdit = Boolean(editingId);
+      const isEdit = shouldUsePutForSave(editingId, entries);
       const endpoint = isEdit
         ? `/api/studio/journal/${editingId}`
         : "/api/studio/journal";
