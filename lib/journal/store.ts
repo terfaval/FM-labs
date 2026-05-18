@@ -49,23 +49,69 @@ async function readBlobDocument(
   pathname: string,
   access: BlobAccess
 ): Promise<JournalDocument> {
-  try {
-    let result = await get(pathname, { access, useCache: false });
+  const accessOrder: BlobAccess[] =
+    access === "private" ? ["private", "public"] : ["public", "private"];
+  const normalizedPath = pathname.replace(/^\/+/, "");
+  const pathVariants = Array.from(
+    new Set([pathname, normalizedPath, `/${normalizedPath}`])
+  );
+
+  async function parseResult(
+    result:
+      | {
+          stream: ReadableStream<Uint8Array> | null;
+        }
+      | null
+      | undefined
+  ): Promise<JournalDocument | null> {
     if (!result?.stream) {
-      const listed = await list({ prefix: pathname, limit: 10 });
-      const exact = listed.blobs.find((blob) => blob.pathname === pathname);
-      if (exact) {
-        result = await get(exact.url, { access, useCache: false });
-      }
-    }
-    if (!result?.stream) {
-      return createEmptyDocument();
+      return null;
     }
     const raw = await new Response(result.stream).text();
     if (!raw.trim()) {
       return createEmptyDocument();
     }
     return JSON.parse(raw) as JournalDocument;
+  }
+
+  try {
+    for (const currentAccess of accessOrder) {
+      for (const candidatePath of pathVariants) {
+        const byPath = await parseResult(
+          await get(candidatePath, {
+            access: currentAccess,
+            useCache: false,
+          })
+        );
+        if (byPath) {
+          return byPath;
+        }
+      }
+
+      for (const candidatePath of pathVariants) {
+        const listed = await list({ prefix: candidatePath, limit: 25 });
+        const exact =
+          listed.blobs.find((blob) => blob.pathname === normalizedPath) ??
+          listed.blobs.find(
+            (blob) =>
+              blob.pathname === candidatePath ||
+              blob.pathname.endsWith(`/${normalizedPath}`)
+          );
+        if (!exact) {
+          continue;
+        }
+        const byUrl = await parseResult(
+          await get(exact.url, {
+            access: currentAccess,
+            useCache: false,
+          })
+        );
+        if (byUrl) {
+          return byUrl;
+        }
+      }
+    }
+    return createEmptyDocument();
   } catch (error) {
     console.error("[journal] Blob read failed, serving empty journal.", error);
     return createEmptyDocument();
