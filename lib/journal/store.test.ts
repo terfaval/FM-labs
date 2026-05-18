@@ -13,7 +13,11 @@ vi.mock("@vercel/blob", () => ({
   put: mockPut,
 }));
 
-import { createBlobJournalStore, createFileJournalStore } from "./store";
+import {
+  createBlobJournalStore,
+  createDefaultJournalStore,
+  createFileJournalStore,
+} from "./store";
 
 describe("FileJournalStore", () => {
   it("returns only published entries in listPublished", async () => {
@@ -75,5 +79,34 @@ describe("BlobJournalStore", () => {
       access: "private",
       useCache: false,
     });
+  });
+
+  it("returns an empty journal when blob read throws", async () => {
+    mockGet.mockRejectedValue(new Error("No token found."));
+    const store = createBlobJournalStore("journal/journal.json", "private");
+
+    await expect(store.listPublished()).resolves.toEqual([]);
+  });
+
+  it("uses public access by default when env is missing", async () => {
+    const previous = process.env.JOURNAL_BLOB_ACCESS;
+    try {
+      delete process.env.JOURNAL_BLOB_ACCESS;
+      mockGet.mockResolvedValue(null);
+
+      const store = createDefaultJournalStore();
+      await store.listAll();
+
+      expect(mockGet).toHaveBeenCalledWith("journal/journal.json", {
+        access: "public",
+        useCache: false,
+      });
+    } finally {
+      if (previous === undefined) {
+        delete process.env.JOURNAL_BLOB_ACCESS;
+      } else {
+        process.env.JOURNAL_BLOB_ACCESS = previous;
+      }
+    }
   });
 });

@@ -49,15 +49,20 @@ async function readBlobDocument(
   pathname: string,
   access: BlobAccess
 ): Promise<JournalDocument> {
-  const result = await get(pathname, { access, useCache: false });
-  if (!result?.stream) {
+  try {
+    const result = await get(pathname, { access, useCache: false });
+    if (!result?.stream) {
+      return createEmptyDocument();
+    }
+    const raw = await new Response(result.stream).text();
+    if (!raw.trim()) {
+      return createEmptyDocument();
+    }
+    return JSON.parse(raw) as JournalDocument;
+  } catch (error) {
+    console.error("[journal] Blob read failed, serving empty journal.", error);
     return createEmptyDocument();
   }
-  const raw = await new Response(result.stream).text();
-  if (!raw.trim()) {
-    return createEmptyDocument();
-  }
-  return JSON.parse(raw) as JournalDocument;
 }
 
 async function writeBlobDocument(
@@ -139,6 +144,6 @@ export function createBlobJournalStore(
 
 export function createDefaultJournalStore(): JournalStore {
   const blobPath = process.env.JOURNAL_BLOB_PATH ?? "journal/journal.json";
-  const access = process.env.JOURNAL_BLOB_ACCESS === "public" ? "public" : "private";
+  const access = process.env.JOURNAL_BLOB_ACCESS === "private" ? "private" : "public";
   return createBlobJournalStore(blobPath, access);
 }
