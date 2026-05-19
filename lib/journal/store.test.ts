@@ -3,14 +3,13 @@ import os from "node:os";
 import path from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { mockGet, mockPut, mockList } = vi.hoisted(() => ({
-  mockGet: vi.fn(),
+const { mockPut, mockList, mockFetch } = vi.hoisted(() => ({
   mockPut: vi.fn(),
   mockList: vi.fn(),
+  mockFetch: vi.fn(),
 }));
 
 vi.mock("@vercel/blob", () => ({
-  get: mockGet,
   put: mockPut,
   list: mockList,
 }));
@@ -67,26 +66,26 @@ describe("FileJournalStore", () => {
 
 describe("BlobJournalStore", () => {
   beforeEach(() => {
-    mockGet.mockReset();
     mockPut.mockReset();
     mockList.mockReset();
+    mockFetch.mockReset();
+    vi.stubGlobal("fetch", mockFetch);
   });
 
   it("reads journal document without CDN cache", async () => {
-    mockGet.mockResolvedValue(null);
     mockList.mockResolvedValue({ blobs: [], hasMore: false });
     const store = createBlobJournalStore("journal/journal.json", "private");
 
     await store.listAll();
 
-    expect(mockGet).toHaveBeenCalledWith("journal/journal.json", {
-      access: "private",
-      useCache: false,
+    expect(mockList).toHaveBeenCalledWith({
+      prefix: "journal/journal.json",
+      limit: 25,
     });
   });
 
   it("returns an empty journal when blob read throws", async () => {
-    mockGet.mockRejectedValue(new Error("No token found."));
+    mockList.mockRejectedValue(new Error("No token found."));
     const store = createBlobJournalStore("journal/journal.json", "private");
 
     await expect(store.listPublished()).resolves.toEqual([]);
@@ -96,15 +95,14 @@ describe("BlobJournalStore", () => {
     const previous = process.env.JOURNAL_BLOB_ACCESS;
     try {
       delete process.env.JOURNAL_BLOB_ACCESS;
-      mockGet.mockResolvedValue(null);
       mockList.mockResolvedValue({ blobs: [], hasMore: false });
 
       const store = createDefaultJournalStore();
       await store.listAll();
 
-      expect(mockGet).toHaveBeenCalledWith("journal/journal.json", {
-        access: "public",
-        useCache: false,
+      expect(mockList).toHaveBeenCalledWith({
+        prefix: "journal/journal.json",
+        limit: 25,
       });
     } finally {
       if (previous === undefined) {
@@ -116,36 +114,28 @@ describe("BlobJournalStore", () => {
   });
 
   it("falls back to URL lookup when pathname get misses", async () => {
-    mockGet
-      .mockResolvedValueOnce(null)
-      .mockResolvedValueOnce({
-        stream: new ReadableStream({
-          start(controller) {
-            controller.enqueue(
-              new TextEncoder().encode(
-                JSON.stringify({
-                  schemaVersion: "v1",
-                  entries: [
-                    {
-                      id: "x",
-                      date: "2026-05-18",
-                      project: "portfolio",
-                      type: "feature",
-                      status: "draft",
-                      title: "X",
-                      summary: "X",
-                      body: "X",
-                      steps: [{ label: "l", text: "t" }],
-                      nextStep: "n",
-                    },
-                  ],
-                })
-              )
-            );
-            controller.close();
-          },
+    mockFetch.mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          schemaVersion: "v1",
+          entries: [
+            {
+              id: "x",
+              date: "2026-05-18",
+              project: "portfolio",
+              type: "feature",
+              status: "draft",
+              title: "X",
+              summary: "X",
+              body: "X",
+              steps: [{ label: "l", text: "t" }],
+              nextStep: "n",
+            },
+          ],
         }),
-      });
+        { status: 200 }
+      )
+    );
     mockList.mockResolvedValue({
       blobs: [
         {
@@ -161,5 +151,9 @@ describe("BlobJournalStore", () => {
 
     expect(entries).toHaveLength(1);
     expect(entries[0]?.id).toBe("x");
+    expect(mockFetch).toHaveBeenCalledWith(
+      "https://example.public.blob.vercel-storage.com/journal/journal.json",
+      { cache: "no-store" }
+    );
   });
 });

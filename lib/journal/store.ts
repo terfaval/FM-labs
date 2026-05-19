@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { get, list, put } from "@vercel/blob";
+import { list, put } from "@vercel/blob";
 import {
   JOURNAL_SCHEMA_VERSION,
   type JournalDocument,
@@ -52,22 +52,23 @@ async function readBlobDocument(
   const accessOrder: BlobAccess[] =
     access === "private" ? ["private", "public"] : ["public", "private"];
   const normalizedPath = pathname.replace(/^\/+/, "");
+  const lastSlashIndex = normalizedPath.lastIndexOf("/");
+  const directoryPrefix =
+    lastSlashIndex >= 0 ? normalizedPath.slice(0, lastSlashIndex + 1) : "";
+  const fileName = lastSlashIndex >= 0 ? normalizedPath.slice(lastSlashIndex + 1) : normalizedPath;
+  const fileExtIndex = fileName.lastIndexOf(".");
+  const fileBase = fileExtIndex >= 0 ? fileName.slice(0, fileExtIndex) : fileName;
+  const fileExt = fileExtIndex >= 0 ? fileName.slice(fileExtIndex) : "";
   const pathVariants = Array.from(
     new Set([pathname, normalizedPath, `/${normalizedPath}`])
   );
 
-  async function parseResult(
-    result:
-      | {
-          stream: ReadableStream<Uint8Array> | null;
-        }
-      | null
-      | undefined
-  ): Promise<JournalDocument | null> {
-    if (!result?.stream) {
+  async function readBlobUrl(url: string): Promise<JournalDocument | null> {
+    const response = await fetch(url, { cache: "no-store" });
+    if (!response.ok) {
       return null;
     }
-    const raw = await new Response(result.stream).text();
+    const raw = await response.text();
     if (!raw.trim()) {
       return createEmptyDocument();
     }
@@ -77,35 +78,44 @@ async function readBlobDocument(
   try {
     for (const currentAccess of accessOrder) {
       for (const candidatePath of pathVariants) {
-        const byPath = await parseResult(
-          await get(candidatePath, {
-            access: currentAccess,
-            useCache: false,
-          })
-        );
-        if (byPath) {
-          return byPath;
-        }
-      }
-
-      for (const candidatePath of pathVariants) {
         const listed = await list({ prefix: candidatePath, limit: 25 });
+        const scoped = listed.blobs.filter((blob) =>
+          blob.url.includes(`.${currentAccess}.blob.vercel-storage.com`)
+        );
+        const candidates = scoped.length > 0 ? scoped : listed.blobs;
         const exact =
-          listed.blobs.find((blob) => blob.pathname === normalizedPath) ??
-          listed.blobs.find(
+          candidates.find((blob) => blob.pathname === normalizedPath) ??
+          candidates.find(
             (blob) =>
               blob.pathname === candidatePath ||
               blob.pathname.endsWith(`/${normalizedPath}`)
           );
-        if (!exact) {
+        let blobToRead = exact;
+        if (!blobToRead && directoryPrefix) {
+          const directoryList = await list({ prefix: directoryPrefix, limit: 200 });
+          const scopedDirectory = directoryList.blobs.filter((blob) =>
+            blob.url.includes(`.${currentAccess}.blob.vercel-storage.com`)
+          );
+          const directoryCandidates =
+            scopedDirectory.length > 0 ? scopedDirectory : directoryList.blobs;
+          const related = directoryCandidates
+            .filter((blob) => {
+              const name = blob.pathname.slice(directoryPrefix.length);
+              if (!name.endsWith(fileExt)) {
+                return false;
+              }
+              if (name === fileName) {
+                return true;
+              }
+              return name.startsWith(`${fileBase}-`);
+            })
+            .sort((a, b) => b.uploadedAt.getTime() - a.uploadedAt.getTime());
+          blobToRead = related[0];
+        }
+        if (!blobToRead) {
           continue;
         }
-        const byUrl = await parseResult(
-          await get(exact.url, {
-            access: currentAccess,
-            useCache: false,
-          })
-        );
+        const byUrl = await readBlobUrl(blobToRead.url);
         if (byUrl) {
           return byUrl;
         }
