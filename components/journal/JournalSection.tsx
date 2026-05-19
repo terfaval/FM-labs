@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { useMemo, useState } from "react";
 import { SectionBlock } from "@/components/SectionBlock";
 import {
@@ -12,6 +13,46 @@ import {
 
 type JournalSectionProps = {
   entries: JournalEntry[];
+};
+
+const projectLabels: Record<JournalProject, string> = {
+  portfolio: "Portfólió",
+  lumira: "Lumira",
+  szarnyfeszito: "Szárnyfeszítő",
+  mirachai: "Mirachai",
+  novira: "Novira",
+  kincstarto: "Kincstartó",
+  urbanecolab: "Urban EcoLab",
+  "desk-research": "Desk Research",
+};
+
+const projectPillColors: Record<JournalProject, string> = {
+  portfolio: "#2A9DAF",
+  lumira: "#3A78D6",
+  szarnyfeszito: "#BE2D12",
+  mirachai: "#AF6A2A",
+  novira: "#5A5BD6",
+  kincstarto: "#2F9A67",
+  urbanecolab: "#2F6F5E",
+  "desk-research": "#6A6A74",
+};
+
+const typeLabels: Record<JournalType, string> = {
+  planning: "Tervezés",
+  feature: "Fejlesztés",
+  visual: "Vizuál",
+  refinement: "Finomítás",
+  research: "Kutatás",
+  decision: "Döntés",
+};
+
+const typePillColors: Record<JournalType, string> = {
+  planning: "#2F6F5E",
+  feature: "#2A9DAF",
+  visual: "#824FB5",
+  refinement: "#D96A43",
+  research: "#3A78D6",
+  decision: "#B34D8A",
 };
 
 export function JournalSection({ entries }: JournalSectionProps) {
@@ -40,19 +81,12 @@ export function JournalSection({ entries }: JournalSectionProps) {
   }
 
   return (
-    <SectionBlock title="Fejlesztesi naplo" id="project-journal">
+    <SectionBlock title="Fejlesztési napló" id="project-journal">
       <div className="journal-intro">
         <p>
-          Itt roviden osszegzem, min dolgozom eppen, es merre mozdulnak a
-          projektek.
-        </p>
-        <p>
-          Nem keszre csiszolt beszamolok ezek, inkabb pillanatkepek: dontesek,
-          iranyvaltasok, aprankenti elorelepesek.
-        </p>
-        <p>
-          Ha egy konkret szal erdekel, a projekt- es tipuscimkekkel gyorsan
-          ratalalsz.
+          Itt röviden összegzem, min dolgozom éppen, merre mozdulnak a projektek, és milyen döntések,
+          irányváltások vagy apró, de fontos előrelépések történnek közben; ha egy konkrét szál érdekel,
+          a projekt- és típuscímkékkel gyorsan rátalálsz.
         </p>
       </div>
 
@@ -76,7 +110,7 @@ export function JournalSection({ entries }: JournalSectionProps) {
         </div>
 
         <div className="journal-filter">
-          <label htmlFor="journal-type-filter">Tipus</label>
+          <label htmlFor="journal-type-filter">Típus</label>
           <select
             id="journal-type-filter"
             value={typeFilter}
@@ -84,10 +118,10 @@ export function JournalSection({ entries }: JournalSectionProps) {
               setTypeFilter(event.target.value as "all" | JournalType)
             }
           >
-            <option value="all">Minden tipus</option>
+            <option value="all">Minden típus</option>
             {JOURNAL_TYPES.map((type) => (
               <option key={type} value={type}>
-                {type}
+                {typeLabels[type]}
               </option>
             ))}
           </select>
@@ -98,7 +132,7 @@ export function JournalSection({ entries }: JournalSectionProps) {
         {filteredEntries.length === 0 ? (
           <li className="journal-item">
             <div className="journal-item__body">
-              <p>Nincs talalat erre a szuro-kombinaciora.</p>
+              <p>Nincs találat erre a szűrőkombinációra.</p>
             </div>
           </li>
         ) : null}
@@ -110,26 +144,46 @@ export function JournalSection({ entries }: JournalSectionProps) {
                 type="button"
                 className="journal-item__head"
                 onClick={() => setExpandedId(expanded ? null : entry.id)}
+                aria-expanded={expanded}
               >
-                <span>{entry.date}</span>
-                <span className="journal-tag">{entry.project}</span>
-                <span className="journal-tag">{entry.type}</span>
-                <strong>{entry.title}</strong>
+                <span className="journal-item__meta">
+                  <span className="journal-item__date">{entry.date}</span>
+                  <span
+                    className="journal-tag journal-tag--project"
+                    style={
+                      { "--journal-tag-color": projectPillColors[entry.project] } as CSSProperties
+                    }
+                  >
+                    {projectLabels[entry.project]}
+                  </span>
+                  <span
+                    className="journal-tag journal-tag--type"
+                    style={
+                      { "--journal-tag-color": typePillColors[entry.type] } as CSSProperties
+                    }
+                  >
+                    {typeLabels[entry.type]}
+                  </span>
+                </span>
+                <strong className="journal-item__title">{entry.title}</strong>
+                {!expanded ? <p className="journal-item__summary">{entry.summary}</p> : null}
               </button>
               {expanded ? (
                 <div className="journal-item__body">
-                  <p>{entry.summary}</p>
                   <p>{entry.body}</p>
-                  <ul>
+                  <ul className="journal-steps">
                     {entry.steps.map((step, index) => (
-                      <li key={`${entry.id}-${index}`}>
-                        <strong>{step.label}</strong>
-                        <p>{step.text}</p>
+                      <li key={`${entry.id}-${index}`} className="journal-step">
+                        <span className="journal-step__index">{index + 1}</span>
+                        <div className="journal-step__content">
+                          <strong className="journal-step__label">{step.label}</strong>
+                          <p>{step.text}</p>
+                        </div>
                       </li>
                     ))}
                   </ul>
-                  <p>
-                    <strong>Kovetkezo:</strong> {entry.nextStep}
+                  <p className="journal-item__next-step">
+                    <strong>Következő:</strong> {entry.nextStep}
                   </p>
                 </div>
               ) : null}
