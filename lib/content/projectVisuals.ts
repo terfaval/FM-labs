@@ -70,4 +70,13 @@ export const projectVisuals: Record<
     ctaFrom: "#2f6f5e",
     ctaTo: "#2f6f5e",
   },
+  deskresearch: {
+    background: "/deskresearch/feature%20card.png",
+    logo: "/deskresearch/logo.svg",
+    overlay:
+      "linear-gradient(135deg, rgba(255, 251, 245, 0.88), rgba(245, 248, 252, 0.7))",
+    appUrl: "",
+    ctaFrom: "#2a5f8c",
+    ctaTo: "#4b84b0",
+  },
 };

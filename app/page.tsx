@@ -10,6 +10,7 @@ import { loadUrbanEcoLabModalContent } from "@/lib/content/urbanEcoLabModal";
 import { buildUrbanEcoLabModalModel } from "@/lib/content/urbanEcoLabModalModel";
 import { buildNoviraModalModel } from "@/lib/content/noviraModalModel";
 import { buildMirachaiModalModel } from "@/lib/content/mirachaiModalModel";
+import { buildDeskResearchModalModel } from "@/lib/content/deskResearchModalModel";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SectionBlock } from "@/components/SectionBlock";
 import { CollaborationBlock } from "@/components/CollaborationBlock";
@@ -28,6 +29,7 @@ export default async function HomePage() {
     loadKincstartoModalContent()
   );
   const derengoModal = buildDerengoModalModel(loadDerengoModalContent());
+  const deskResearchModal = buildDeskResearchModalModel();
   const urbanEcoLabModal = buildUrbanEcoLabModalModel(loadUrbanEcoLabModalContent());
   const noviraModal = buildNoviraModalModel();
   const mirachaiModal = buildMirachaiModalModel();
@@ -51,7 +53,7 @@ export default async function HomePage() {
     (project) =>
       !topFeaturedSlugs.has(project.slug) && project.slug !== "kincstarto"
   );
-  const featuredWithDerengo = [...featuredRest, derengoModal.project];
+  const featuredWithDerengo = [...featuredRest, derengoModal.project, deskResearchModal.project];
   const rest = other.filter((project) => project.slug !== "kincstarto");
   const approachItems = content.meta.approachItems.map((item) => {
     const match = item.match(/\s+(—|–|-)\s+/);
@@ -101,6 +103,7 @@ export default async function HomePage() {
         lumiraModal={lumiraModal}
         kincstartoModal={kincstartoModal}
         derengoModal={derengoModal}
+        deskResearchModal={deskResearchModal}
         szarnyfeszitoModal={szarnyfeszitoModal}
         urbanEcoLabModal={urbanEcoLabModal}
         noviraModal={noviraModal}

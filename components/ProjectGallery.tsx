@@ -20,6 +20,8 @@ import { NoviraModalNarrative } from "@/components/novira/NoviraModalNarrative";
 import type { NoviraModalModel } from "@/lib/content/noviraModalModel";
 import { MirachaiModalNarrative } from "@/components/mirachai/MirachaiModalNarrative";
 import type { MirachaiModalModel } from "@/lib/content/mirachaiModalModel";
+import { DeskResearchModalNarrative } from "@/components/deskresearch/DeskResearchModalNarrative";
+import type { DeskResearchModalModel } from "@/lib/content/deskResearchModalModel";
 
 type ProjectGalleryProps = {
   topFeatured: Project[];
@@ -29,6 +31,7 @@ type ProjectGalleryProps = {
   lumiraModal?: LumiraModalModel | null;
   kincstartoModal?: KincstartoModalModel | null;
   derengoModal?: DerengoModalModel | null;
+  deskResearchModal?: DeskResearchModalModel | null;
   szarnyfeszitoModal?: SzarnyfeszitoModalModel | null;
   urbanEcoLabModal?: UrbanEcoLabModalModel | null;
   noviraModal?: NoviraModalModel | null;
@@ -47,6 +50,7 @@ function ProjectModal({
   lumiraModal,
   kincstartoModal,
   derengoModal,
+  deskResearchModal,
   szarnyfeszitoModal,
   urbanEcoLabModal,
   noviraModal,
@@ -57,6 +61,7 @@ function ProjectModal({
   lumiraModal?: LumiraModalModel | null;
   kincstartoModal?: KincstartoModalModel | null;
   derengoModal?: DerengoModalModel | null;
+  deskResearchModal?: DeskResearchModalModel | null;
   szarnyfeszitoModal?: SzarnyfeszitoModalModel | null;
   urbanEcoLabModal?: UrbanEcoLabModalModel | null;
   noviraModal?: NoviraModalModel | null;
@@ -99,6 +104,7 @@ function ProjectModal({
   const directionStyle = {
     gridTemplateColumns: `repeat(${project.direction.length}, minmax(0, 1fr))`,
   };
+  const isDeskResearch = project.slug === "deskresearch";
 
   useEffect(() => {
     if (isDerengo) {
@@ -118,7 +124,7 @@ function ProjectModal({
   return (
     <div className="modal-backdrop" onClick={onClose} role="presentation">
       <div
-        className={`project-modal${isLumira ? " project-modal--lumira" : ""}${isKincstarto ? " project-modal--kincstarto" : ""}${isDerengo ? " project-modal--derengo" : ""}${isSzarnyfeszito ? " project-modal--szarnyfeszito" : ""}${isNovira ? " project-modal--novira" : ""}${isMirachai ? " project-modal--mirachai" : ""}`}
+        className={`project-modal${isLumira ? " project-modal--lumira" : ""}${isKincstarto ? " project-modal--kincstarto" : ""}${isDerengo ? " project-modal--derengo" : ""}${isSzarnyfeszito ? " project-modal--szarnyfeszito" : ""}${isNovira ? " project-modal--novira" : ""}${isMirachai ? " project-modal--mirachai" : ""}${isDeskResearch ? " project-modal--deskresearch" : ""}`}
         style={
           isLumira
             ? lumiraStyle
@@ -157,6 +163,8 @@ function ProjectModal({
             <NoviraModalNarrative model={noviraModal} />
           ) : isMirachai && mirachaiModal ? (
             <MirachaiModalNarrative model={mirachaiModal} />
+          ) : isDeskResearch && deskResearchModal ? (
+            <DeskResearchModalNarrative model={deskResearchModal} />
           ) : isDerengo && derengoModal ? (
             <DerengoModalNarrative model={derengoModal} onRequestClose={onClose} />
           ) : (
@@ -240,6 +248,7 @@ export function ProjectGallery({
   lumiraModal,
   kincstartoModal,
   derengoModal,
+  deskResearchModal,
   szarnyfeszitoModal,
   urbanEcoLabModal,
   noviraModal,
@@ -251,10 +260,11 @@ export function ProjectGallery({
     (project) => project.slug === "szarnyfeszito"
   );
   const derengo = featuredRest.find((project) => project.slug === "derengo");
+  const deskResearch = featuredRest.find((project) => project.slug === "deskresearch");
   const otherFeaturedRest = featuredRest.filter(
-    (project) => project.slug !== "derengo"
+    (project) => project.slug !== "derengo" && project.slug !== "deskresearch"
   );
-  const featuredOrder = [lumira, kincstarto, derengo, szarnyfeszito].filter(
+  const featuredOrder = [lumira, kincstarto, derengo, szarnyfeszito, deskResearch].filter(
     Boolean
   ) as Project[];
 
@@ -308,6 +318,7 @@ export function ProjectGallery({
           lumiraModal={lumiraModal}
           kincstartoModal={kincstartoModal}
           derengoModal={derengoModal}
+          deskResearchModal={deskResearchModal}
           szarnyfeszitoModal={szarnyfeszitoModal}
           urbanEcoLabModal={urbanEcoLabModal}
           noviraModal={noviraModal}
