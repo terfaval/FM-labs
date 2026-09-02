@@ -59,7 +59,7 @@ export const deskResearchSampleOutput: DeskResearchSampleOutput = {
     "A preview capability-demó célból szűrt mezőket mutat; érzékeny reviewer mezők és belső jegyzetek nincsenek publikálva.",
   pipelines: {
     quantity: {
-      label: "Quantity pipeline",
+      label: "Ecosystem mapping",
       subtitle: "Longlist, scoring, shortlist preparation",
       sourceFile: "master_quantity.xlsx (repo: quantity_data.xlsx)",
       rows: [
@@ -282,7 +282,7 @@ export const deskResearchSampleOutput: DeskResearchSampleOutput = {
 ]
     },
     quality: {
-      label: "Quality pipeline",
+      label: "Qualification intelligence",
       subtitle: "Deeper profiling, evidence summaries, research-ready records",
       sourceFile: "master.xlsx (repo: quality_data.xlsx)",
       rows: [

@@ -201,6 +201,32 @@ p {
   color: rgba(245, 248, 252, 0.7);
 }
 
+.project-card--lumira-glass .project-card__notice {
+  display: grid;
+  gap: 4px;
+  width: min(100%, 440px);
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  border-left: 4px solid #f2c94c;
+  border-radius: 8px;
+  background: rgba(10, 24, 44, 0.68);
+  color: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 12px 28px rgba(5, 12, 24, 0.24);
+}
+
+.project-card--lumira-glass .project-card__notice strong {
+  font-size: 13px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.project-card--lumira-glass .project-card__notice span {
+  font-size: 14px;
+  line-height: 1.45;
+  color: rgba(245, 248, 252, 0.82);
+}
+
 .project-card--lumira-glass .project-card__logo {
   filter: brightness(0) invert(1);
 }
@@ -4108,6 +4134,13 @@ strong {
 
 .deskresearch-preview-modal__head h4 {
   margin: 0;
+}
+
+.deskresearch-preview-modal__helper {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(31, 38, 48, 0.72);
 }
 
 .deskresearch-preview-modal__head button {

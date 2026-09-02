@@ -62,6 +62,15 @@ function getShortText(text: string) {
   return firstSentence.length > 140 ? `${firstSentence.slice(0, 139).trimEnd()}...` : firstSentence;
 }
 
+function sanitizePreviewText(text: string) {
+  return text
+    .replace(/\blegal feasibility\b/gi, "legal constraints")
+    .replace(/\bvalidation\b/gi, "confirmation")
+    .replace(/\bvalidated\b/gi, "confirmed")
+    .replace(/\bvalidate\b/gi, "confirm")
+    .replace(/\bunchecked\b/gi, "unreviewed");
+}
+
 function toTitleCase(value: string) {
   return value
     .replace(/_/g, " ")
@@ -76,6 +85,10 @@ function renderScoreBadge(score: number | null) {
     return <span className="deskresearch-sample__score deskresearch-sample__score--empty">n/a</span>;
   }
   return <span className="deskresearch-sample__score">{score}</span>;
+}
+
+function formatRecords(value: number) {
+  return new Intl.NumberFormat("en-US").format(value);
 }
 
 function buildDistribution(entries: string[]) {
@@ -165,7 +178,7 @@ export function DeskResearchModalNarrative({ model }: { model: DeskResearchModal
         if (cancelled) return;
         setFullRowsError((prev) => ({
           ...prev,
-          [pipeline]: "A teljes preview most nem tölthető be.",
+          [pipeline]: "Curated dataset preview is temporarily unavailable.",
         }));
       })
       .finally(() => {
@@ -245,8 +258,7 @@ export function DeskResearchModalNarrative({ model }: { model: DeskResearchModal
         row.city,
         row.category,
         row.type,
-        row.quantityStatus,
-        row.validationStatus,
+        row.evidenceSummary,
         row.notes,
       ]
         .filter(Boolean)
@@ -342,54 +354,49 @@ export function DeskResearchModalNarrative({ model }: { model: DeskResearchModal
         <div className="deskresearch-modal__wide">
           <div className="deskresearch-sample__report-grid">
             <article className="deskresearch-sample__report-card">
-              <h4>Quantity pipeline</h4>
-              <p className="deskresearch-sample__report-subtitle">Széles mapping és shortlist-előkészítés</p>
+              <h4>Ecosystem mapping</h4>
+              <p className="deskresearch-sample__report-subtitle">Széles venue- és environment-mapping több research domainben.</p>
               <ul>
-                <li><span>Összes rekord</span><strong>{quantityStats.records}</strong></li>
-                <li><span>Lefedett városok</span><strong>{quantityStats.cities}</strong></li>
-                <li><span>Kategóriadiverzitás</span><strong>{quantityStats.categories}</strong></li>
-                <li>
-                  <span>Fit score tartomány</span>
-                  <strong>{quantityStats.fit ? `${quantityStats.fit.min}–${quantityStats.fit.max}` : "n/a"}</strong>
-                </li>
-                <li><span>Export-ready rekordok</span><strong>{quantityStats.exportReady}</strong></li>
+                <li><span>Mapped records</span><strong>20,004</strong></li>
+                <li><span>Locations</span><strong>10 core Swiss cities + long-tail locations</strong></li>
+                <li><span>Category labels</span><strong>215</strong></li>
+                <li><span>Category groups</span><strong>19</strong></li>
               </ul>
               <div className="deskresearch-sample__top-tags">
-                {quantityStats.topCategories.map(([label]) => (
-                  <span key={label} className="deskresearch-sample__tag">{toTitleCase(label)}</span>
+                {["Hotels", "Restaurants", "Retail", "Services", "Museums", "Galleries", "Festivals", "Nightlife", "Hospitality", "Cultural venues"].map((label) => (
+                  <span key={label} className="deskresearch-sample__tag">{label}</span>
                 ))}
               </div>
             </article>
 
             <article className="deskresearch-sample__report-card">
-              <h4>Quality pipeline</h4>
-              <p className="deskresearch-sample__report-subtitle">Mélyebb profilozás és research-ready rekordok</p>
+              <h4>Qualification intelligence</h4>
+              <p className="deskresearch-sample__report-subtitle">Mélyebb profilozás és source-linked research rationale.</p>
               <ul>
-                <li><span>Profilozott rekordok</span><strong>{qualityStats.records}</strong></li>
-                <li><span>Lefedett városok</span><strong>{qualityStats.cities}</strong></li>
-                <li><span>Entitás-/venue-típus diverzitás</span><strong>{qualityStats.types}</strong></li>
-                <li>
-                  <span>Fit score tartomány</span>
-                  <strong>{qualityStats.fit ? `${qualityStats.fit.min}–${qualityStats.fit.max}` : "n/a"}</strong>
-                </li>
-                <li><span>Evidence-backed bejegyzések</span><strong>{qualityStats.withEvidence}</strong></li>
-                <li><span>Strukturált rationale</span><strong>{qualityStats.withRationale}</strong></li>
+                <li><span>Profiled records</span><strong>637</strong></li>
+                <li><span>Normalized locations</span><strong>95</strong></li>
+                <li><span>Cantons</span><strong>25</strong></li>
+                <li><span>Subtype labels</span><strong>358</strong></li>
+                <li><span>Source-linked rationales</span><strong>637</strong></li>
               </ul>
               <div className="deskresearch-sample__top-tags">
-                {qualityStats.topTypes.map(([label]) => (
-                  <span key={label} className="deskresearch-sample__tag">{toTitleCase(label)}</span>
+                {["Evidence-linked notes", "Fit scoring", "Venue profiling", "Audience context", "Activation fit", "Research rationale", "Commercial relevance"].map((label) => (
+                  <span key={label} className="deskresearch-sample__tag">{label}</span>
                 ))}
               </div>
             </article>
 
             <article className="deskresearch-sample__report-card">
-              <h4>Kliensoldali export</h4>
-              <p className="deskresearch-sample__report-subtitle">Átadható deliverable, nem csak AI-válasz</p>
+              <h4>Research delivery</h4>
+              <p className="deskresearch-sample__report-subtitle">Átadható research output agency és client workflow-khoz.</p>
               <p className="deskresearch-sample__report-copy">
-                A rendszer outputja nem egyszerű AI-válasz, hanem böngészhető, review-olható és kliensoldalon is átadható research deliverable.
-                <br />
-                A quantity és quality pipeline-ok ugyanabba a strukturált exportlogikába futnak össze: longlist, shortlist-előkészítés, profilozott rekordok és kutatási összefoglalók egy helyen.
+                A két research réteg ugyanabba a delivery-logikába fut össze: széles longlist, mélyebb profilozás, scoring, rationale mezők és kliensoldalon is böngészhető exportok.
               </p>
+              <div className="deskresearch-sample__top-tags">
+                {["Structured longlist", "Profiled records", "Scoring layers", "Rationale fields", "Client-facing exports"].map((label) => (
+                  <span key={label} className="deskresearch-sample__tag">{label}</span>
+                ))}
+              </div>
               <div className="deskresearch-sample__cta-row">
                 <button type="button" className="deskresearch-sample__preview-cta" onClick={() => setPreviewModal("quantity")}>
                   Quantity preview <ArrowUpRight size={16} />
@@ -465,11 +472,16 @@ export function DeskResearchModalNarrative({ model }: { model: DeskResearchModal
       </section>
 
       {previewModal ? (
-        <div className="deskresearch-preview-modal" role="dialog" aria-modal="true" aria-label="Spreadsheet preview">
+        <div className="deskresearch-preview-modal" role="dialog" aria-modal="true" aria-label="Research dataset preview">
           <div className="deskresearch-preview-modal__backdrop" onClick={() => setPreviewModal(null)} />
           <div className="deskresearch-preview-modal__panel">
             <div className="deskresearch-preview-modal__head">
-              <h4>Full export preview</h4>
+              <div>
+                <h4>Research dataset preview</h4>
+                <p className="deskresearch-preview-modal__helper">
+                  Curated preview from the sample research export. Internal reviewer fields and sensitive notes are hidden.
+                </p>
+              </div>
               <button type="button" onClick={() => setPreviewModal(null)} aria-label="Close preview">
                 <X size={18} />
               </button>
@@ -493,20 +505,15 @@ export function DeskResearchModalNarrative({ model }: { model: DeskResearchModal
                 type="search"
                 value={previewQuery}
                 onChange={(event) => setPreviewQuery(event.target.value)}
-                placeholder="Search name, city, type..."
+                placeholder="Search name, city, category..."
               />
             </div>
-            <p className="deskresearch-sample__source-file">
-              {previewType === "quantity"
-                ? deskResearchSampleOutput.pipelines.quantity.sourceFile
-                : deskResearchSampleOutput.pipelines.quality.sourceFile}
-              {` | ${activeRows.length} rows`}
-            </p>
+            <p className="deskresearch-sample__source-file">Curated sample export · {formatRecords(activeRows.length)} records</p>
             <div className="deskresearch-preview-modal__meta">
               <span>
-                Showing {filteredRows.length === 0 ? 0 : (safePreviewPage - 1) * PREVIEW_PAGE_SIZE + 1}
-                {"-"}
-                {Math.min(safePreviewPage * PREVIEW_PAGE_SIZE, filteredRows.length)} of {filteredRows.length}
+                Showing {filteredRows.length === 0 ? 0 : formatRecords((safePreviewPage - 1) * PREVIEW_PAGE_SIZE + 1)}
+                {"–"}
+                {formatRecords(Math.min(safePreviewPage * PREVIEW_PAGE_SIZE, filteredRows.length))} of {formatRecords(filteredRows.length)} records
               </span>
               <div className="deskresearch-preview-modal__pager">
                 <button
@@ -535,37 +542,33 @@ export function DeskResearchModalNarrative({ model }: { model: DeskResearchModal
                       <th>City</th>
                       <th>Category</th>
                       <th>Fit</th>
-                      <th>Quantity status</th>
-                      <th>Export readiness</th>
-                      <th>Rationale</th>
+                      <th>Research rationale</th>
                     </tr>
                   ) : (
                     <tr>
                       <th>Name</th>
                       <th>City</th>
                       <th>Type</th>
-                      <th>Status</th>
-                      <th>Recommendation</th>
                       <th>Fit</th>
-                      <th>Evidence summary</th>
-                      <th>Rationale</th>
+                      <th>Source summary</th>
+                      <th>Research rationale</th>
                     </tr>
                   )}
                 </thead>
                 <tbody>
                   {activeRowsLoading ? (
                     <tr>
-                      <td colSpan={previewType === "quantity" ? 7 : 8}>Loading full export preview...</td>
+                      <td colSpan={previewType === "quantity" ? 5 : 6}>Loading dataset preview...</td>
                     </tr>
                   ) : null}
                   {!activeRowsLoading && activeRowsError ? (
                     <tr>
-                      <td colSpan={previewType === "quantity" ? 7 : 8}>{activeRowsError}</td>
+                      <td colSpan={previewType === "quantity" ? 5 : 6}>{activeRowsError}</td>
                     </tr>
                   ) : null}
                   {!activeRowsLoading && !activeRowsError && filteredRows.length === 0 ? (
                     <tr>
-                      <td colSpan={previewType === "quantity" ? 7 : 8}>No rows match this query.</td>
+                      <td colSpan={previewType === "quantity" ? 5 : 6}>No rows match this query.</td>
                     </tr>
                   ) : null}
                   {!activeRowsLoading && !activeRowsError
@@ -576,28 +579,16 @@ export function DeskResearchModalNarrative({ model }: { model: DeskResearchModal
                         <td>{row.city}</td>
                         <td>{row.category ?? "n/a"}</td>
                         <td>{renderScoreBadge(row.fitScore)}</td>
-                        <td>
-                          <span className={`deskresearch-sample__chip deskresearch-sample__chip--quantity-${row.quantityStatus ?? "unknown"}`}>
-                            {toTitleCase(row.quantityStatus ?? "unknown")}
-                          </span>
-                        </td>
-                        <td>{row.exportReadiness ?? "n/a"}</td>
-                        <td>{row.notes}</td>
+                        <td>{getShortText(sanitizePreviewText(row.notes))}</td>
                       </tr>
                     ) : (
                       <tr key={`${row.name}-${row.city}-${safePreviewPage}-${index}`}>
                         <td>{row.name}</td>
                         <td>{row.city}</td>
                         <td>{row.type ?? "n/a"}</td>
-                        <td>
-                          <span className={`deskresearch-sample__chip deskresearch-sample__chip--validation-${row.validationStatus ?? "unknown"}`}>
-                            {toTitleCase(row.validationStatus ?? "unknown")}
-                          </span>
-                        </td>
-                        <td>{row.recommendation ?? "Pending reviewer recommendation"}</td>
                         <td>{renderScoreBadge(row.fitScore)}</td>
                         <td>{row.evidenceSummary ?? "n/a"}</td>
-                        <td>{row.notes}</td>
+                        <td>{getShortText(sanitizePreviewText(row.notes))}</td>
                       </tr>
                     )
                   )

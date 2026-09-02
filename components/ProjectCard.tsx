@@ -99,6 +99,14 @@ export function ProjectCard({
             ) : null}
           </div>
           <div className="project-card__content">
+            {project.slug === "lumira" ? (
+              <div className="project-card__notice" aria-label="Lumira állapot">
+                <strong>Újratervezés alatt</strong>
+                <span>
+                  Elérhető és kipróbálható, de az oldal még átalakítás alatt áll.
+                </span>
+              </div>
+            ) : null}
             <p className="project-card__hero">
               {project.slug === "szarnyfeszito" ? project.card : project.hero}
             </p>
